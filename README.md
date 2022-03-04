@@ -53,7 +53,7 @@ origin 只是一個遠端的代名詞，會取這個名字是因為如果從 Ser
 10. $ git push -u origin master
 將本地端檔案庫（local repo）推上一個叫做 origin 的遠端檔案庫（remote repo）master 分支
 
-https://w3c.hexschool.com/img/%E8%9E%A2%E5%B9%95%E6%88%AA%E5%9C%96_2019-11-16_22.03.067qvx7.png
+![image](https://github.com/we1tingyu/AIEN16Team2FaceMesh/blob/main/images_%E8%9E%A2%E5%B9%95%E6%88%AA%E5%9C%96_2019-11-16_22.03.067qvx7.png)
 
 
 
