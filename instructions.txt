@@ -1,0 +1,21 @@
+
+python -m venv venv
+venv\Scripts\activate.bat
+pip install flask
+pip list
+
+
+c:/my-flask/venv/Scripts/activate.bat
+start.bat
+
+
+pip install mysql-connector
+pip install dataclasses
+pip install importlib-metadata
+pip install typing-extensions
+pip install mysql-connector-python
+
+
+to end venv
+C:\my-flask\venv\Scripts>deactivate.bat
+

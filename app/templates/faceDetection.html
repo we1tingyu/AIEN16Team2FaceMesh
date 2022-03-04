@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="css/fontawesome-free-5.15.4-web/css/all.min.css"> -->
+    <title>Face Detection Team 2</title>
+    <style>
+        .image1 {
+            height: 360px;
+            width: 640px;
+            border: 10px ridge orange;
+            float: left;
+        }
+        .image2 {
+            height: 360px;
+            width: 640px;
+            border: 10px ridge blue;
+        }
+        .p1 {
+            /* text-align: center; */
+            text-size-adjust: auto;
+        }
+        .p2 {
+            text-align: center;
+            text-size-adjust: auto;
+            margin-top: -38px;
+        }
+    </style>
+</head>
+<body>
+    <!-- use url_for to reciceve media binary data abd push dynamically updated content to the web browser -->
+    <p class="p1">臉部特徵網格圖</p>
+    <img class="image1" src="{{ url_for('video_feed') }}">
+    <p class="p2">臉部面相算命特徵圖</p>
+    <img class="image2" src="{{ url_for('video_feed_1') }}">
+
+<!-- <script src="js/jquery-3.6.0.min.js"></script> -->
+<script>
+    // write code here to dynamically create jquery object with json data retreived from mySQL.
+</script>
+</body>
+</html>
