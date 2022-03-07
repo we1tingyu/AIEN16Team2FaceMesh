@@ -44,7 +44,7 @@ class FaceMeshDetector():
         # there are 468 points.
         self.drawSpec = self.mpDraw.DrawingSpec(color=(30,144,255), thickness=1, circle_radius=1) 
 
-    def findFaceMesh(self, img, drawFaceLms=True, drawID=False, drawFortuneTelling=0):
+    def findFaceMesh(self, img, drawFaceLms=True, drawID=False, drawFortuneTelling=0,takePicture=False):
         # 左右相反，for camera
         #self.imgRGB = cv2.cvtColor(cv2.flip(img, 1), cv2.COLOR_BGR2RGB) # opposite right/left for actual face sync-up detection when face turns left/right.
         self.imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -115,13 +115,15 @@ class FaceMeshDetector():
 
                             sum+=lineDistance
                             
-                            print(f'FACE_OVAL (目前累積里程):{sum}')    
+                            # print(f'FACE_OVAL (目前累積里程):{sum}')    
                             # append into distance[]
                             distance.append(lineDistance)
 
-                    print('------')
-                    print(f'FACE_OVAL (總里程):{sum}')
-                    print('------------')
+                    # print('------')
+                    # print(f'FACE_OVAL (總里程):{sum}')
+                    # print('------------')
+                    if takePicture :
+                        return sum
 
                 elif drawFortuneTelling == 2:
                     # draw specific IDs for fortune telling(畫出上面自行定義的各點)
