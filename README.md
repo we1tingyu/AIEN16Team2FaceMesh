@@ -9,7 +9,7 @@
  google MediaPipe github 
  https://github.com/google/mediapipe
  
- ![image](https://imgur.com/e3ffd289-1b47-42b9-bf00-a391350d44f3)
+ ![image](https://i.imgur.com/5PvuFlq.png)
 
 
 
