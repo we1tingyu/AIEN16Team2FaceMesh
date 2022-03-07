@@ -23,8 +23,11 @@ import facialFeatures
 lock = threading.Lock()
 
 
-BLUE = (255, 106 , 90)
+BLUE_XXX = (255, 106 , 90)
 BLACK = (0, 0, 0)
+GREEN = (0, 106 , 90)
+RED = (0, 0, 255)
+BLUE = (255, 0, 0)
 
 # COLOR 可以由前端按按鈕切換
 DEFAULT_COLOR = BLUE
@@ -54,6 +57,15 @@ class FaceMeshDetector():
         distance = []
         FACE_OVAL=facialFeatures.FACE_OVAL
         READ_FACE=facialFeatures.READ_FACE
+
+        EDGE=facialFeatures.EDGE
+        THREE_COURT=facialFeatures.THREE_COURT
+        three_court_y = []
+        three_court_ratio = []
+
+        FIVE_EYE=facialFeatures.FIVE_EYE
+        five_eye_x = []
+        five_eye_ratio = []
         sum=0  
         # multi_face_landmarks :臉上作完正規化的xyz座標
         if self.results.multi_face_landmarks:
@@ -72,9 +84,11 @@ class FaceMeshDetector():
                     # self.mpDraw.draw_landmarks(img, faceLms, self.mpFaceMesh.FACEMESH_CONTOURS,
                     #                             self.drawSpec, self.mpDrawingStyles.get_default_face_mesh_contours_style())
                 
+                # 什麼都不畫
                 if drawFortuneTelling == 0:
                     pass
                 
+                # 臉的外框
                 elif drawFortuneTelling == 1:
                     # draw specific IDs for fortune telling(畫出上面自行定義的各點)
                     # for idx1,value in enumerate(FACE_OVAL):
@@ -120,11 +134,12 @@ class FaceMeshDetector():
                             distance.append(lineDistance)
 
                     # print('------')
-                    # print(f'FACE_OVAL (總里程):{sum}')
-                    # print('------------')
+                    print(f'FACE_OVAL (總里程):{sum}')
+                    print('------------')
                     if takePicture :
                         return sum
 
+                # 五官
                 elif drawFortuneTelling == 2:
                     # draw specific IDs for fortune telling(畫出上面自行定義的各點)
                     # READ_FACE=facialFeatures.READ_FACE
@@ -169,7 +184,120 @@ class FaceMeshDetector():
                         distance.append(sum)                     
                     if distance:
                         print(f'RIGHT_EYEBROW:{distance[0]}, LEFT_EYEBROW:{distance[1]}, RIGHT_EYE:{distance[2]}, LEFT_EYE{distance[3]}, NOSE_LENGTH:{distance[4]}, NOSE_WIDTH:{distance[5]}, FOREHEAD:{distance[6]}, PHILTRUM:{distance[7]}, MOUTH:{distance[8]}')
+                        print('------------')
+
+                # 三庭
+                elif drawFortuneTelling == 3:
+                    for idx1,value in enumerate(THREE_COURT):
+                        top_ID = EDGE['top']
+                        bottom_ID = EDGE['bottom']
+                        left_ID = EDGE['left']
+                        right_ID = EDGE['right']
+
+                        # print(top_ID)
+
+                        ih, iw, ic = img.shape
+
+                        top_y = faceLms.landmark[top_ID].y*ih
+                        # print(top_y)
+
+                        bottom_y = faceLms.landmark[bottom_ID].y*ih
+                        # print(bottom_y)
+
+                        left_x = faceLms.landmark[left_ID].x*iw
+                        # print(left_x)
+
+                        right_x = faceLms.landmark[right_ID].x*iw
+                        # print(right_x)
+
+                        # print(value)
+                        ID = value
+
+                        lm = faceLms.landmark[ID]
+                        # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
+                        x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
+
+                        # 起點的 2D int 座標 (給 cv2 用)
+                        startAddress2D = int(left_x), int(y)
+                        # 終點的 2D int 座標 (給 cv2 用)
+                        endAddress2D = int(right_x), int(y)
+
+                        self.drawSpecificLine(img, startAddress2D, endAddress2D, RED)
+
+                        three_court_y.append(y)
+
+                    if three_court_y:
+                        print(f'y1:{three_court_y[0]}, y2:{three_court_y[1]}, y3:{three_court_y[2]}, y4:{three_court_y[3]}')
+
+                        total_y = three_court_y[3] - three_court_y[0]
                         
+                        print(f'total_y:{total_y}')
+
+                        for i in range(len(THREE_COURT) - 1):
+                            y_distance = three_court_y[i+1] - three_court_y[i]
+                            ratio = y_distance / total_y
+                            # print(ratio)
+                            three_court_ratio.append(ratio)
+
+                        print(f'三庭比例為-> {three_court_ratio[0]}:{three_court_ratio[1]}:{three_court_ratio[2]}')
+                        print('------------')
+                
+                # 五眼
+                elif drawFortuneTelling == 4:
+                    for idx1,value in enumerate(FIVE_EYE):
+                        top_ID = EDGE['top']
+                        bottom_ID = EDGE['bottom']
+                        left_ID = EDGE['left']
+                        right_ID = EDGE['right']
+
+                        # print(top_ID)
+
+                        ih, iw, ic = img.shape
+
+                        top_y = faceLms.landmark[top_ID].y*ih
+                        # print(top_y)
+
+                        bottom_y = faceLms.landmark[bottom_ID].y*ih
+                        # print(bottom_y)
+
+                        left_x = faceLms.landmark[left_ID].x*iw
+                        # print(left_x)
+
+                        right_x = faceLms.landmark[right_ID].x*iw
+                        # print(right_x)
+
+                        # print(value)
+                        ID = value
+
+                        lm = faceLms.landmark[ID]
+                        # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
+                        x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
+
+                        # 起點的 2D int 座標 (給 cv2 用)
+                        startAddress2D = int(x), int(top_y)
+                        # 終點的 2D int 座標 (給 cv2 用)
+                        endAddress2D = int(x), int(bottom_y)
+
+                        self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
+                        five_eye_x.append(x)
+
+                    if five_eye_x:
+                        print(f'x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
+
+                        total_x = five_eye_x[5] - five_eye_x[0]
+                        
+                        print(f'total_x:{total_x}')
+
+                        for i in range(len(FIVE_EYE) - 1):
+                            x_distance = five_eye_x[i+1] - five_eye_x[i]
+                            ratio = x_distance / total_x
+                            # print(ratio)
+                            five_eye_ratio.append(ratio)
+
+                        print(f'五眼比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
+                        print('------------')
+
                 face = []
                 for id, lm in enumerate(faceLms.landmark):   # use enumerate to get index and values 
                     ih, iw, ic = img.shape
@@ -182,7 +310,7 @@ class FaceMeshDetector():
                     #face.append([x,y])  # save x, y without id. 
                     face.append([id,x,y,z])
                 faces.append(face)
-        return img, faces, distance
+        return img, faces, distance, sum
     
     # https://google.github.io/mediapipe/solutions/iris.html
     
@@ -209,7 +337,7 @@ class FaceMeshDetector():
         self.startAddress = startAddress
         self.endAddress= endAddress        
         # using cv2.line to draw line 畫出指定點到點的線
-        cv2.line(img, self.startAddress, self.endAddress, color, 3)        
+        cv2.line(img, self.startAddress, self.endAddress, color, 3)
 
         # 就不在這裡算距離了 !!!
         # Euclaidean Distance 計算出距離
@@ -238,7 +366,7 @@ def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLm
             img = cv2.imread(filePath)
         # In order to make all video_feed sources working at the same fps, we need to use threading lock. 
         with lock:                  # acquire threading lock, set the output frame, and release threading lock.  
-            img, faces, distance = detector.findFaceMesh(img, drawFaceLms, drawID, drawFortuneTelling)      
+            img, faces, distance, sum = detector.findFaceMesh(img, drawFaceLms, drawID, drawFortuneTelling)      
                     
             # time.time():1970年之後經過的秒数
             cTime = time.time()
@@ -255,7 +383,7 @@ def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLm
     if videoMode:    
         cap.release()   
     cv2.destroyAllWindows()
-    return img, faces, distance
+    return img, faces, distance, sum
 
 if __name__ == "__main__":
     faceMeshDetection()
