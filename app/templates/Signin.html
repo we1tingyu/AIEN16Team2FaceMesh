@@ -1,0 +1,83 @@
+
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Signin</title>
+
+
+    <style>
+
+    </style>
+
+</head>
+
+<body>
+
+    <header class="header">
+
+    </header>  
+
+    <div id="mainContent">
+        <main class="content">
+            <div class="editorA">
+                <h1 class="heading-h1 editorA-heading">登入</h1>
+            </div>
+            <div id="content_wuc_login">
+                <div class="content-form">
+                    <div class="content-bg content-bg--green">
+                    <div id="wuc_Error" class="message message--error margin-b-3 js-validationSummary" tabindex="-1"></div>
+            
+                        <div class="form">
+                            <p class="form-note" aria-hidden="true">
+                                <strong class="form-required">*</strong>
+                                必填欄位
+                            </p>
+                            <div class="editor form-information">
+                                <p class="margin-b-7">
+                                    還沒有帳號？<a class="link link--arrow color-green" href="dada_signup.html" target="_top">前往註冊</a>
+                                </p>
+                            </div>
+                            <div class="margin-b-4">
+                                <label class="form-label" for="content_wuc_login_Account">
+                                    會員帳號
+                                    <strong class="form-required" aria-hidden="true">*</strong>
+                                </label>
+                                <input id="content_wuc_login_Account" class="form-inputText" value="" aria-invalid="false" maxlength="45" required="" data-required="您所輸入的會員帳號不完整，請再試一次。" aria-describedby="note-0">
+                            </div>
+                            <div class="margin-b-4">
+                                <label class="form-label" for="content_wuc_login_Password">
+                                    密碼
+                                    <strong class="form-required" aria-hidden="true">*</strong>
+                                </label>
+                                <input type="password" id="content_wuc_login_Password" class="form-inputText" aria-invalid="false" maxlength="40" required="" data-required="請輸入您的密碼。">
+                            </div>
+                            <div class="margin-b-4">
+                                <div class="form-checkbox">
+                                    <input type="checkbox" id="content_wuc_login_Remember" class="form-inputCheckbox">
+                                    <label class="form-labelCheckbox" for="content_wuc_login_Remember">
+                                        <span class="form-labelText">記住我的登入方式與帳號 </span>
+                                    </label>
+                                </div>
+                            </div>    
+                            <div class="form-btnBlock">
+                                <button type="button" class="btn btn--lg btn--green" onclick="of_login()">
+                                    登入
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+        
+    <footer class="footer">
+
+    </footer>
+
+</body>
+
+</html>
