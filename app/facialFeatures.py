@@ -20,3 +20,7 @@ FACE_OVAL = [[(10, 338), (338, 297), (297, 332), (332, 284), (284, 251), (251, 3
 EDGE = {'top':10, 'bottom':152, 'left':234, 'right':454}
 THREE_COURT = [10, 168, 94, 152]
 FIVE_EYE = [234, 130, 243, 463, 359, 454]
+
+Beauty_Corner_left = [(130,61)]
+Beauty_Corner_right = [(359,291)]
+Beauty_Corner = [Beauty_Corner_left,Beauty_Corner_right]

@@ -58,6 +58,7 @@
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_2()">臉部面相算命特徵圖</button>
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_3()">三庭</button>
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_4()">五眼</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_5()">美人角</button>
                                     </div>
                                 </div>
                                 </br>
@@ -114,6 +115,9 @@
             }
             function Function_video_feed_4() {
               document.getElementById("image2").src = "{{ url_for('video_feed', style=4) }}";
+            }
+            function Function_video_feed_5() {
+              document.getElementById("image2").src = "{{ url_for('video_feed', style=5) }}";
             }
       
           </script>
