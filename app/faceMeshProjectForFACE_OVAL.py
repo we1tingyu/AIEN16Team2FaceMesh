@@ -63,6 +63,11 @@ class FaceMeshDetector():
         BEAUTY_CORNER=facialFeatures.BEAUTY_CORNER 
 
         EDGE=facialFeatures.EDGE
+        # 取得四個邊界ID
+        top_ID = EDGE['top']
+        bottom_ID = EDGE['bottom']
+        left_ID = EDGE['left']
+        right_ID = EDGE['right']
 
         THREE_COURT=facialFeatures.THREE_COURT
         
@@ -90,12 +95,6 @@ class FaceMeshDetector():
                     # goolge劃出的範例線條
                     # self.mpDraw.draw_landmarks(img, faceLms, self.mpFaceMesh.FACEMESH_CONTOURS,
                     #                             self.drawSpec, self.mpDrawingStyles.get_default_face_mesh_contours_style())
-
-                    # 取得四個邊界ID
-                    top_ID = EDGE['top']
-                    bottom_ID = EDGE['bottom']
-                    left_ID = EDGE['left']
-                    right_ID = EDGE['right']
 
                     # 取得四個邊界的 x 和 y
                     top_y = faceLms.landmark[top_ID].y*ih
