@@ -306,7 +306,7 @@ class FaceMeshDetector():
                             beauty_corner_coordinate.append(y1)
                             beauty_corner_coordinate.append(x2)
                             beauty_corner_coordinate.append(y2)
-
+                            print(beauty_corner_coordinate)
                             
 
                     AB = [beauty_corner_coordinate[0],beauty_corner_coordinate[1],beauty_corner_coordinate[2],beauty_corner_coordinate[3]]
