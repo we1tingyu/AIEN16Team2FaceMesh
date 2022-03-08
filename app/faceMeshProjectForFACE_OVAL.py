@@ -91,16 +91,20 @@ class FaceMeshDetector():
                     # self.mpDraw.draw_landmarks(img, faceLms, self.mpFaceMesh.FACEMESH_CONTOURS,
                     #                             self.drawSpec, self.mpDrawingStyles.get_default_face_mesh_contours_style())
 
-                    # 取得最斯個
+                    # 取得四個邊界ID
                     top_ID = EDGE['top']
                     bottom_ID = EDGE['bottom']
                     left_ID = EDGE['left']
                     right_ID = EDGE['right']
 
+                    # 取得四個邊界的 x 和 y
                     top_y = faceLms.landmark[top_ID].y*ih
                     bottom_y = faceLms.landmark[bottom_ID].y*ih
                     left_x = faceLms.landmark[left_ID].x*iw
                     right_x = faceLms.landmark[right_ID].x*iw
+
+                    total_y = bottom_y - top_y
+                    total_x = right_x - left_x
                 
                 # 臉部特徵網格圖, 什麼都不畫
                 if drawFortuneTelling == "臉部特徵網格圖":
@@ -229,8 +233,6 @@ class FaceMeshDetector():
                     if three_court_y:
                         print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]}, y2:{three_court_y[1]}, y3:{three_court_y[2]}, y4:{three_court_y[3]}')
 
-                        total_y = three_court_y[3] - three_court_y[0]
-                        
                         print(f'上到下的 y 距離:{total_y}')
 
                         for i in range(len(THREE_COURT) - 1):
@@ -264,8 +266,6 @@ class FaceMeshDetector():
                     if five_eye_x:
                         print(f'由左到右的 x 座標分別是 x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
 
-                        total_x = five_eye_x[5] - five_eye_x[0]
-                        
                         print(f'左到右的 x 距離:{total_x}')
 
                         for i in range(len(FIVE_EYE) - 1):
@@ -341,8 +341,6 @@ class FaceMeshDetector():
                     if five_eye_x:
                         print(f'x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
 
-                        total_x = five_eye_x[5] - five_eye_x[0]
-                        
                         print(f'total_x:{total_x}')
 
                         for i in range(len(FIVE_EYE) - 1):
