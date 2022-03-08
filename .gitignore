@@ -38,4 +38,4 @@ deploy_key_rsa
 /.vscode/settings.json
 
 #忽略環境資料夾
-/venv/*
+/venv/*.*
