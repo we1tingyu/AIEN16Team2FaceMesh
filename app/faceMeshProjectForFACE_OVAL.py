@@ -322,35 +322,55 @@ class FaceMeshDetector():
         
                 # 臉部黃金比例
                 elif drawFortuneTelling == "臉部黃金比例":
-                    for idx1,value in enumerate(FIVE_EYE):
-                        ID = value
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(left_x), int(top_y)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(top_y)
 
-                        lm = faceLms.landmark[ID]
-                        # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
-                        x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                        # 起點的 2D int 座標 (給 cv2 用)
-                        startAddress2D = int(x), int(top_y)
-                        # 終點的 2D int 座標 (給 cv2 用)
-                        endAddress2D = int(x), int(bottom_y)
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(right_x), int(top_y)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(bottom_y)
 
-                        self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+                    middle_x = (int(left_x) + int(right_x)) / 2
+                    middle_y = (int(top_y) + int(bottom_y)) / 2
 
-                        five_eye_x.append(x)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                    if five_eye_x:
-                        print(f'x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
+                    # cv2.putText(img, f'FPS: {int(fps)}', (middle_x, top_y), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
+                    cv2.putText(img, '12345', (middle_x, int(top_y)), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
 
-                        print(f'total_x:{total_x}')
+                    # for idx1,value in enumerate(FIVE_EYE):
+                    #     ID = value
 
-                        for i in range(len(FIVE_EYE) - 1):
-                            x_distance = five_eye_x[i+1] - five_eye_x[i]
-                            ratio = x_distance / total_x
-                            # print(ratio)
-                            five_eye_ratio.append(ratio)
+                    #     lm = faceLms.landmark[ID]
+                    #     # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
+                    #     x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
 
-                        print(f'臉部比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
-                        print('------------')
+                    #     # 起點的 2D int 座標 (給 cv2 用)
+                    #     startAddress2D = int(x), int(top_y)
+                    #     # 終點的 2D int 座標 (給 cv2 用)
+                    #     endAddress2D = int(x), int(bottom_y)
+
+                    #     self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
+                    #     five_eye_x.append(x)
+
+                    # if five_eye_x:
+                    #     print(f'x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
+
+                    #     print(f'total_x:{total_x}')
+
+                    #     for i in range(len(FIVE_EYE) - 1):
+                    #         x_distance = five_eye_x[i+1] - five_eye_x[i]
+                    #         ratio = x_distance / total_x
+                    #         # print(ratio)
+                    #         five_eye_ratio.append(ratio)
+
+                    #     print(f'臉部比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
+                    #     print('------------')
 
                 face = []
                 for id, lm in enumerate(faceLms.landmark):   # use enumerate to get index and values 
