@@ -60,7 +60,10 @@ class FaceMeshDetector():
 
         FACE_OVAL=facialFeatures.FACE_OVAL
         READ_FACE=facialFeatures.READ_FACE
-        BEAUTY_CORNER=facialFeatures.BEAUTY_CORNER 
+        BEAUTY_CORNER=facialFeatures.BEAUTY_CORNER
+        #美人角用的座標 
+        beauty_corner_coordinate = []
+        
 
         EDGE=facialFeatures.EDGE
         # 取得四個邊界ID
@@ -277,16 +280,15 @@ class FaceMeshDetector():
                         print(f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
                         print('------------')
                 #美人角
-                elif drawFortuneTelling == "5":
+                elif drawFortuneTelling == "美人角":
+                    beauty_corner_temp = []
                     for idx1,ff in enumerate(BEAUTY_CORNER):
                         sum=0
                         for idx2,value in enumerate(BEAUTY_CORNER[idx1]):
                             startID, endID = value
-                            # print(f'startID:{startID} endID:{endID} ')
-                            # faceID to xyz                            
-                            # ih, iw, ic = img.shape
+                           
                             lm_start = faceLms.landmark[startID]
-                            # x, y, z = int(lm_start.x*iw), int(lm_start.y*ih), int(lm_start.z*ic)
+                            
                             x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
                             # 起點的 2D int 座標 (給 cv2 用)
                             startAddress2D = int(x1), int(y1)
@@ -294,31 +296,29 @@ class FaceMeshDetector():
                             x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                             # 終點的 2D int 座標 (給 cv2 用)
                             endAddress2D = int(x2), int(y2)
-                            # print(f'startAddress:{startAddress},endAddress:{endAddress}')
-
+                            
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
                             
-                            # 起點的 3D int 座標
-                            startAddress3D = x1, y1, z1
-                            # 終點的 3D int 座標
-                            endAddress3D = x2, y2, z2
+                            
 
-                            # Euclaidean Distance 計算出距離
-                            # 計算 2D 距離
-                            # lineDistance = self.euclaideanDistance(startAddress2D, endAddress2D)
-                            # 計算 3D 距離
-                            lineDistance = self.angle(startAddress2D, endAddress2D)
+                            beauty_corner_coordinate.append(x1)
+                            beauty_corner_coordinate.append(y1)
+                            beauty_corner_coordinate.append(x2)
+                            beauty_corner_coordinate.append(y2)
 
-                            # lineDistance = self.drawSpecificLine(img, startAddress, endAddress)
-                            # lineDistance = int(lineDistance)
-                            # sum+=lineDistance
-                            # print(lineDistance)
-                            # print(sum)
-                        # append into distance[]                           
-                        distance.append(sum)                     
-                    # if distance:
-                    #     print(f'RIGHT_EYEBROW:{distance[0]}, LEFT_EYEBROW:{distance[1]}, RIGHT_EYE:{distance[2]}, LEFT_EYE{distance[3]}, NOSE_LENGTH:{distance[4]}, NOSE_WIDTH:{distance[5]}, FOREHEAD:{distance[6]}, PHILTRUM:{distance[7]}, MOUTH:{distance[8]}')
+                            
+
+                    AB = [beauty_corner_coordinate[0],beauty_corner_coordinate[1],beauty_corner_coordinate[2],beauty_corner_coordinate[3]]
+                    CD = [beauty_corner_coordinate[4],beauty_corner_coordinate[5],beauty_corner_coordinate[6],beauty_corner_coordinate[7]]
+
+
+                    
+                    ang1 = self.angle(AB, CD)
+                    print(f"美人角角度是{ang1}")
+                    
+                    
+                    
         
                 # 臉部黃金比例
                 elif drawFortuneTelling == "臉部黃金比例":
@@ -390,27 +390,52 @@ class FaceMeshDetector():
     
         
     #美人角
-    def angle(self, startPoint, endPoint):
-        x1, y1 = startPoint
-        x2, y2 = endPoint
-        return
-        # dx1 = v1[2] - v1[0]
-        # dy1 = v1[3] - v1[1]
-        # dx2 = v2[2] - v2[0]
-        # dy2 = v2[3] - v2[1]
-        # angle1 = math.atan2(dy1, dx1)
-        # angle1 = int(angle1 * 180/math.pi)
-        # # print(angle1)
-        # angle2 = math.atan2(dy2, dx2)
-        # angle2 = int(angle2 * 180/math.pi)
-        # # print(angle2)
-        # if angle1*angle2 >= 0:
-        #     included_angle = abs(angle1-angle2)
-        # else:
-        #     included_angle = abs(angle1) + abs(angle2)
-        #     if included_angle > 180:
-        #         included_angle = 360 - included_angle
-        # return included_angle
+    
+    # def angle(self, startPoint, endPoint):
+    #     x1, y1 = startPoint
+    #     x2, y2 = endPoint
+        
+
+    
+        
+         
+    #     dx1 = endPoint[0] - startPoint[0]
+    #     dy1 = endPoint[1] - startPoint[1]
+    #     dx2 = endPoint[0] - startPoint[0]
+    #     dy2 = endPoint[1] - startPoint[1]
+    #     angle1 = math.atan2(dy1, dx1)
+    #     angle1 = int(angle1 * 180/math.pi)
+    #     # print(angle1)
+    #     angle2 = math.atan2(dy2, dx2)
+    #     angle2 = int(angle2 * 180/math.pi)
+    #     # print(angle2)
+    #     if angle1*angle2 >= 0:
+    #         distance = abs(angle1-angle2)
+    #     else:
+    #         distance = abs(angle1) + abs(angle2)
+    #         if distance > 180:
+    #             distance = 360 - distance
+    #     return distance
+
+    def angle(self, v1, v2):
+        dx1 = v1[2] - v1[0]
+        dy1 = v1[3] - v1[1]
+        dx2 = v2[2] - v2[0]
+        dy2 = v2[3] - v2[1]
+        angle1 = math.atan2(dy1, dx1)
+        angle1 = int(angle1 * 180/math.pi)
+        #print(angle1)
+        angle2 = math.atan2(dy2, dx2)
+        angle2 = int(angle2 * 180/math.pi)
+        #print(angle2)
+        if angle1*angle2 >= 0:
+            included_angle = abs(angle1-angle2)
+        else:
+            included_angle = abs(angle1) + abs(angle2)
+            if included_angle > 180:
+                included_angle = 360 - included_angle
+        return included_angle
+
 
 
     # Euclaidean Distance
