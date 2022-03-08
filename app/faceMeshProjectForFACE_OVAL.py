@@ -284,7 +284,7 @@ class FaceMeshDetector():
                             startID, endID = value
                             # print(f'startID:{startID} endID:{endID} ')
                             # faceID to xyz                            
-                            ih, iw, ic = img.shape
+                            # ih, iw, ic = img.shape
                             lm_start = faceLms.landmark[startID]
                             # x, y, z = int(lm_start.x*iw), int(lm_start.y*ih), int(lm_start.z*ic)
                             x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
