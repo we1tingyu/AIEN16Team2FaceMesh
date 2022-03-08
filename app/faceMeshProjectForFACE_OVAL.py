@@ -103,6 +103,7 @@ class FaceMeshDetector():
                     left_x = faceLms.landmark[left_ID].x*iw
                     right_x = faceLms.landmark[right_ID].x*iw
 
+                    # 算出臉的長(total_y)寬(total_x)
                     total_y = bottom_y - top_y
                     total_x = right_x - left_x
                 
