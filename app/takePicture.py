@@ -4,7 +4,10 @@ from faceMeshProjectForFACE_OVAL import FaceMeshDetector
 
 def faceCondition():
     cap = cv2.VideoCapture(0) #建立一個 VideoCapture 物件 0號設備
+    msg =''
     while cap.isOpened(): #迴圈讀取每一幀
+        if k == ord('q'): #若檢測到按鍵 ‘q’，退出q
+            break   
         ret, img = cap.read()
         if not ret:
             print("error")
@@ -21,23 +24,27 @@ def faceCondition():
         if type(distance) is float:  
             distance= int(distance)
             # print(distance)
-        
+
+            msgnew =''
             if distance<700 :
-                print('請將臉部靠近鏡頭')
+                msgnew ='請將臉部靠近鏡頭'
             elif distance>900:
-                print('幹你老蘇哩 靠太近啦!')
+                msgnew ='幹你老蘇哩 靠太近啦!'
             else:
-                print('已符合測量條件,請按S拍照')
+                msgnew ='已符合測量條件,請按S拍照'
             
-            if k == ord('s'):  #若檢測到按鍵 ‘s’，列印字串
+            if msg!=msgnew:
+                msg==msgnew
+                print(msg)
+
+            if msgnew =='已符合測量條件,請按S拍照' and k == ord('s'):  #若檢測到按鍵 ‘s’，列印字串
                 print('請輸入姓名:')
                 str=input()
                 cv2.imencode('.jpg', img)[1].tofile("C:/Users/Student/Desktop/"+ str + ".jpg")
                 print(cap.get(3)); #得到長寬
                 print(cap.get(4))
                 print("success to save:"+str+".jpg")
-                print("-------------------------")
-                                
+                print("-------------------------")                                
 
             elif k == ord('q'): #若檢測到按鍵 ‘q’，退出q
                 break
@@ -45,9 +52,7 @@ def faceCondition():
         
         else : 
             print('人哩?') 
-
-        if k == ord('q'): #若檢測到按鍵 ‘q’，退出q
-            break         
+      
             
     cap.release()  #釋放攝像頭
     cv2.destoryAllWindows() #刪除建立的全部視窗
