@@ -47,7 +47,7 @@ class FaceMeshDetector():
         # there are 468 points.
         self.drawSpec = self.mpDraw.DrawingSpec(color=(30,144,255), thickness=1, circle_radius=1) 
 
-    def findFaceMesh(self, img, drawFaceLms=True, drawID=False, drawFortuneTelling=0,takePicture=False):
+    def findFaceMesh(self, img, drawFaceLms=True, drawID=False, drawFortuneTelling="0",takePicture=False):
         # 左右相反，for camera
         #self.imgRGB = cv2.cvtColor(cv2.flip(img, 1), cv2.COLOR_BGR2RGB) # opposite right/left for actual face sync-up detection when face turns left/right.
         self.imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -85,11 +85,11 @@ class FaceMeshDetector():
                     #                             self.drawSpec, self.mpDrawingStyles.get_default_face_mesh_contours_style())
                 
                 # 什麼都不畫
-                if drawFortuneTelling == 0:
+                if drawFortuneTelling == "0":
                     pass
                 
                 # 臉的外框
-                elif drawFortuneTelling == 1:
+                elif drawFortuneTelling == "1":
                     # draw specific IDs for fortune telling(畫出上面自行定義的各點)
                     # for idx1,value in enumerate(FACE_OVAL):
                     for idx1,ff in enumerate(FACE_OVAL):
@@ -140,7 +140,7 @@ class FaceMeshDetector():
                         return sum
 
                 # 五官
-                elif drawFortuneTelling == 2:
+                elif drawFortuneTelling == "2":
                     # draw specific IDs for fortune telling(畫出上面自行定義的各點)
                     # READ_FACE=facialFeatures.READ_FACE
                     for idx1,ff in enumerate(READ_FACE):
@@ -187,7 +187,7 @@ class FaceMeshDetector():
                         print('------------')
 
                 # 三庭
-                elif drawFortuneTelling == 3:
+                elif drawFortuneTelling == "3":
                     for idx1,value in enumerate(THREE_COURT):
                         top_ID = EDGE['top']
                         bottom_ID = EDGE['bottom']
@@ -243,7 +243,7 @@ class FaceMeshDetector():
                         print('------------')
                 
                 # 五眼
-                elif drawFortuneTelling == 4:
+                elif drawFortuneTelling == "4":
                     for idx1,value in enumerate(FIVE_EYE):
                         top_ID = EDGE['top']
                         bottom_ID = EDGE['bottom']
@@ -345,7 +345,7 @@ class FaceMeshDetector():
         # LineDistance = self.euclaideanDistance3D(self.startAddress, self.endAddress)
         # return LineDistance
 
-def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLms=True, drawID=False, drawFortuneTelling=0):
+def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLms=True, drawID=False, drawFortuneTelling="0"):
     #cap = cv2.VideoCapture(0)                         # From camera capture real time 
     #cap = cv2.VideoCapture("../videos/2-1080p.mp4")   # required AV1 hardware decoding
     #cap = cv2.VideoCapture("../videos/2-720pL.mp4")

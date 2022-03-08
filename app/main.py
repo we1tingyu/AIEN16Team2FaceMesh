@@ -29,7 +29,7 @@ def index():
 
 # feed a video stream as a source
 # 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖 (0 不畫, 1 畫臉框, 2 畫五官)
-@app.route('/video_feed/<int:style>')
+@app.route('/video_feed/<string:style>')
 def video_feed(style):
     # multipart/x-mixed-replace is an HTTP header. Your server can use it to push dynamically updated content to the web browser.
     # It works by telling the browser to keep the connection open and replace the web page or piece of media it is displaying with another when it receives a special token.
