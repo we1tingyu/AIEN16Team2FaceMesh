@@ -340,7 +340,7 @@ class FaceMeshDetector():
                     self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                     # cv2.putText(img, f'FPS: {int(fps)}', (middle_x, top_y), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
-                    cv2.putText(img, '12345', (middle_x, int(top_y)), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
+                    # cv2.putText(img, '12345', (middle_x, int(top_y)), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
 
                     # for idx1,value in enumerate(FIVE_EYE):
                     #     ID = value
