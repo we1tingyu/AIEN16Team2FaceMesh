@@ -279,9 +279,10 @@ class FaceMeshDetector():
 
                         print(f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
                         print('------------')
+
                 #美人角
                 elif drawFortuneTelling == "美人角":
-                    beauty_corner_temp = []
+                    
                     for idx1,ff in enumerate(BEAUTY_CORNER):
                         sum=0
                         for idx2,value in enumerate(BEAUTY_CORNER[idx1]):
