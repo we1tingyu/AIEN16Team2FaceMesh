@@ -33,3 +33,6 @@ deploy_key_rsa
 
 #忽略影片
 *.mp4
+
+#忽略vscode檔案
+/.vscode/settings.json
