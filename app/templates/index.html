@@ -51,14 +51,14 @@
                                         <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
                                         <div class="h2 fw-bolder">臉部面相算命特徵圖</div>
                                         <p>在面相學中男人長相倘若面帶紅潤氣色亮，屬於大喜或大財之相，男人臉色紅潤，膚色白而不黑的人多是身體健康，血液循環好，這實在是天生的福氣相呀。這樣的男性朋友也會找到一位優秀的女人為妻，也會因妻得祿，這樣的男人就是屬於金龜婿呀。...</p>
-
-                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed(0)">臉部特徵網格圖</button>
-                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed(1)">臉部外框</button>
-                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed(2)">臉部面相算命特徵圖</button>
-                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed(3)">三庭</button>
-                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed(4)">五眼</button>
-                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed(5)">美人角</button>
-
+                                        
+                                        
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed()">臉部特徵網格圖</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_1()">臉部外框</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_2()">臉部面相算命特徵圖</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_3()">三庭</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_4()">五眼</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed_5()">美人角</button>
                                     </div>
                                 </div>
                                 </br>
@@ -102,6 +102,9 @@
         <script>
             function Function_video_feed(style) {
               document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+            }
+            function Function_video_feed_5() {
+              document.getElementById("image2").src = "{{ url_for('video_feed', style=5) }}";
             }
       
           </script>
