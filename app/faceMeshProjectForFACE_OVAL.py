@@ -57,10 +57,11 @@ class FaceMeshDetector():
         distance = []
         FACE_OVAL=facialFeatures.FACE_OVAL
         READ_FACE=facialFeatures.READ_FACE
+        BEAUTY_CORNER=facialFeatures.BEAUTY_CORNER 
 
         EDGE=facialFeatures.EDGE
         THREE_COURT=facialFeatures.THREE_COURT
-        Beauty_Corner=facialFeatures.Beauty_Corner
+        
 
         three_court_y = []
         three_court_ratio = []
@@ -299,11 +300,11 @@ class FaceMeshDetector():
 
                         print(f'五眼比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
                         print('------------')
-
-                elif drawFortuneTelling == 5:
-                    for idx1,ff in enumerate(Beauty_Corner):
+                #美人角
+                elif drawFortuneTelling == "5":
+                    for idx1,ff in enumerate(BEAUTY_CORNER):
                         sum=0
-                        for idx2,value in enumerate(Beauty_Corner[idx1]):
+                        for idx2,value in enumerate(BEAUTY_CORNER[idx1]):
                             startID, endID = value
                             # print(f'startID:{startID} endID:{endID} ')
                             # faceID to xyz                            

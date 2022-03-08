@@ -21,6 +21,6 @@ EDGE = {'top':10, 'bottom':152, 'left':234, 'right':454}
 THREE_COURT = [10, 168, 94, 152]
 FIVE_EYE = [234, 130, 243, 463, 359, 454]
 
-Beauty_Corner_left = [(130,61)]
-Beauty_Corner_right = [(359,291)]
-Beauty_Corner = [Beauty_Corner_left,Beauty_Corner_right]
+BEAUTY_CORNER_LEFT = [(130,61)]
+BEAUTY_CORNER_RIGHT = [(359,291)]
+BEAUTY_CORNER = [BEAUTY_CORNER_LEFT,BEAUTY_CORNER_RIGHT]

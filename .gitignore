@@ -13,7 +13,7 @@ config/database.yml
 *.tmp
 
 #忽略python
-*.pyc
+/app/__pycache__/*.pyc
 
 *.so
 
