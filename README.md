@@ -11,7 +11,8 @@
  </br>
  https://github.com/google/mediapipe
  
- #install
+ # install
+ 
  1. 建一個資料夾videos
  2. 放進人臉影片並命名1-720p.mp4
  3. 安裝instructions.txt的相依性套件
