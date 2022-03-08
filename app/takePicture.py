@@ -32,11 +32,12 @@ def faceCondition():
             if k == ord('s'):  #若檢測到按鍵 ‘s’，列印字串
                 print('請輸入姓名:')
                 str=input()
-                cv2.imencode('.jpg', img)[1].tofile("C:/Users/Student/Desktop/Project/"+ str + ".jpg")
+                cv2.imencode('.jpg', img)[1].tofile("C:/Users/Student/Desktop/"+ str + ".jpg")
                 print(cap.get(3)); #得到長寬
                 print(cap.get(4))
                 print("success to save:"+str+".jpg")
                 print("-------------------------")
+                                
 
             elif k == ord('q'): #若檢測到按鍵 ‘q’，退出q
                 break
