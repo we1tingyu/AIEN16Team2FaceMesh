@@ -4,13 +4,14 @@ from faceMeshProjectForFACE_OVAL import FaceMeshDetector
 
 
 def faceCondition(photograph):
-       
+          
     if photograph =='啟動':
-        # print(photograph) 
-        cap = cv2.VideoCapture(0) #建立一個 VideoCapture 物件 0號設備
+        global msg    
+        global msgnew 
         msg =''
-        msgnew ='' 
-        # w='啟動'
+        msgnew =''
+         
+        cap = cv2.VideoCapture(0) #建立一個 VideoCapture 物件 0號設備                
         while cap.isOpened(): #迴圈讀取每一幀
             
             k = cv2.waitKey(1) & 0xFF  #每幀資料延時 1ms，延時不能為 0，否則讀取的結果會是靜態幀
@@ -46,33 +47,25 @@ def faceCondition(photograph):
                 elif distance>900:
                     msgnew ='幹你老蘇哩 靠太近啦!'
                 else:
-                    msgnew ='已符合測量條件,請按下拍照'
-
-
-                    
-                print(w)
-                print("==============")           
-                print(photograph)
-                print("================================")  
+                    msgnew ='已符合測量條件,請按下拍照'                 
+                 
 
                 # if msgnew =='已符合測量條件,請按S拍照' and  k == ord('s'):  #若檢測到按鍵 ‘s’，列印字串
-                if w!=photograph:                                        
-                    w=photograph                                        
-                    # w = cv2.waitKey(1) & 0xFF 
+                 
                     
 
-                    if msgnew =='已符合測量條件,請按下拍照' and w=='拍照':  #若檢測到前端傳來的訊號，則執行
-                        print('請輸入姓名:')
-                        str=input()
-                        time=datetime.now().strftime('%Y%m%d%H%M%S')
-                        cv2.imencode('.jpg', img)[1].tofile("C:/Users/Student/Desktop/"+ time +" "+ str + ".jpg")
-                        print(cap.get(3)); #得到長寬
-                        print(cap.get(4))
-                        print("success to save:"+ time +" "+str+".jpg")
-                        print("-------------------------")                                
+                    # if msgnew =='已符合測量條件,請按下拍照' and k=='拍照':  #若檢測到前端傳來的訊號，則執行
+                    #     print('請輸入姓名:')
+                    #     str=input()
+                    #     time=datetime.now().strftime('%Y%m%d%H%M%S')
+                    #     cv2.imencode('.jpg', img)[1].tofile("C:/Users/Student/Desktop/"+ time +" "+ str + ".jpg")
+                    #     print(cap.get(3)); #得到長寬
+                    #     print(cap.get(4))
+                    #     print("success to save:"+ time +" "+str+".jpg")
+                    #     print("-------------------------")                                
 
-                    elif k == ord('q'): #若檢測到按鍵 ‘q’，退出q
-                        break
+                    # elif k == ord('q'): #若檢測到按鍵 ‘q’，退出q
+                    #     break
 
             
             else :              
@@ -83,13 +76,35 @@ def faceCondition(photograph):
                 msg=msgnew
                 print(msg)
                 
+                  
         
-                
-        cap.release()  #釋放攝像頭
-        cv2.destoryAllWindows() #刪除建立的全部視窗
     
-    if photograph =='拍照' :
+    elif photograph =='拍照' :
+        cap = cv2.VideoCapture(0)
+        ret, img = cap.read()
+        img=cv2.flip(img,1)  # 解決鏡頭左右相反的問題
+        
+        # 傳送至前端
+        frame = cv2.imencode('.jpg', img)[1].tobytes()
+        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+        print('===========================')
+        print(msgnew)
+        if msgnew =='已符合測量條件,請按下拍照' :  #若檢測到前端傳來的訊號，則執行
+            print('請輸入姓名:')
+            str=input()
+            time=datetime.now().strftime('%Y%m%d%H%M%S')
+            cv2.imencode('.jpg', img)[1].tofile("C:/Users/Student/Desktop/"+ time +" "+ str + ".jpg")
+            print(cap.get(3)); #得到長寬
+            print(cap.get(4))
+            print("success to save:"+ time +" "+str+".jpg")
+            print("-------------------------")    
+
+        cap.release()  #釋放攝像頭
+        cv2.destoryAllWindows() #刪除建立的全部視窗                      
+
+      
+    
     else :
         print('請啟動相機')
         pass
