@@ -21,8 +21,11 @@ def faceCondition(drawFortuneTelling="相機"):
             
             
             img=cv2.flip(img,1)  # 解決鏡頭左右相反的問題
-            cv2.imshow("CameraLive (^.<) ",img)  #視窗顯示，顯示名為 CameraLive
-            
+            # cv2.imshow("CameraLive (^.<) ",img)  #視窗顯示，顯示名為 CameraLive
+
+            # 傳送至前端
+            frame = cv2.imencode('.jpg', img)[1].tobytes()
+            yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
             detector = FaceMeshDetector(maxFaces=10)
             distance = detector.findFaceMesh(img, drawFaceLms=True, drawID=False, drawFortuneTelling="臉部外框",takePicture=True)  
