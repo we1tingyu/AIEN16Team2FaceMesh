@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+
+        <title>Demo</title>
+
+        <!-- Favicon-->
+        <link type="image/x-icon" rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}"/>
+        
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    
+        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+
+        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+        <link rel="stylesheet" href="assets/css/fontawesome.css">
+        <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
+        <link rel="stylesheet" href="assets/css/owl.css">
+    
+        <style>
+    
+        </style>
+    </head>
+
+    <body class="d-flex flex-column">
+
+        <!-- ***** Preloader Start ***** 頁面跳轉-->
+        <div id="preloader">
+            <div class="jumper">
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        </div>  
+        <!-- ***** Preloader End ***** -->
+        <header class="">
+            <nav class="navbar navbar-expand-lg">
+              <div class="container">
+                <a class="navbar-brand" href="Home.html"><h2>AIEN16-2 <em>面相分析</em></h2></a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarResponsive">
+                    <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                        <a class="nav-link" href="Home.html">首頁</a>
+                        </li> 
+                        <li class="nav-item active">
+                        <a class="nav-link" href="Demo.html">功能體驗</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="Test.html">面相數據</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="Analysis.html">面相分析</a>
+                        </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="Aesthetics.html">美學標準</a>
+                        </li>
+                    </ul>
+                    <ul class="toolbar-menu toolbar-menu--member">
+                      <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
+                      <li class="toolbar-item"><a class="text-underline-none" href="Signup.html">註冊</a></li>
+                    </ul>
+                </div>
+              </div>
+            </nav>
+        </header>
+
+        <main class="flex-shrink-0">
+            <!-- Navigation-->
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <div class="container px-5">
+                    <a class="navbar-brand" href="index.html">AIEN16算命</a>
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+                            <li class="nav-item"><a class="nav-link" href="index.html">首頁</a></li>
+                            <li class="nav-item"><a class="nav-link" href="about.html">關於</a></li>
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" id="navbarDropdownBlog" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">算命知識</a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownBlog">
+                                    <li><a class="dropdown-item" href="blog-home.html">面相</a></li>
+                                    <li><a class="dropdown-item" href="blog-home.html">手相</a></li>
+                                    
+                                </ul>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <!-- Page Content-->
+            <section class="py-5">
+                <div class="container px-5">
+                    <h1 class="fw-bolder fs-5 mb-4">AINE16第二組算命</h1>
+                    <div class="card border-0 shadow rounded-3 overflow-hidden">
+                        <div class="card-body p-0">
+                            <div class="row gx-0">
+                                <div class="col-lg-6 col-xl-5 py-lg-5">
+                                    <div class="p-4 p-md-5">
+                                        <div class="badge bg-primary bg-gradient rounded-pill mb-2">New</div>
+                                        <div class="h2 fw-bolder">臉部面相算命特徵圖</div>
+                                        <p>在面相學中男人長相倘若面帶紅潤氣色亮，屬於大喜或大財之相，男人臉色紅潤，膚色白而不黑的人多是身體健康，血液循環好，這實在是天生的福氣相呀。這樣的男性朋友也會找到一位優秀的女人為妻，也會因妻得祿，這樣的男人就是屬於金龜婿呀。...</p>
+                                        
+                                        
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('臉部特徵網格圖')">臉部特徵網格圖</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('臉部外框')">臉部外框</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('臉部面相算命特徵圖')">臉部面相算命特徵圖</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('三庭')">三庭</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('五眼')">五眼</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('美人角')">美人角</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('臉部黃金比例')">臉部黃金比例</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('四角比例')">四角比例</button>
+                                    </div>
+                                </div>
+                                </br>
+                                <div class="col-lg-6 col-xl-7" style="height: auto;width: auto;">
+                                    <div class="bg-featured-blog" >
+                                        <img id="image2" src="">
+                                    </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="py-5 bg-light">
+                
+            </section>
+            
+            <section class="py-5">
+                
+            </section>
+        </main>
+
+        <footer>
+            <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                <div class="inner-content">
+                    <p>AIEN16 &copy; 2022 Second Group
+                </div>
+                </div>
+            </div>
+            </div>
+        </footer>
+
+
+        <!-- Bootstrap core JavaScript -->
+        <script src="vendor/jquery/jquery.min.js"></script>
+        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+
+        <!-- Additional Scripts -->
+        <script src="assets/js/custom.js"></script>
+        <script src="assets/js/owl.js"></script>
+        <script src="assets/js/slick.js"></script>
+        <script src="assets/js/isotope.js"></script>
+        <script src="assets/js/accordions.js"></script>
+
+
+        <script language = "text/Javascript"> 
+            cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+            function clearField(t){                   //declaring the array outside of the
+            if(! cleared[t.id]){                      // function makes it static and global
+                cleared[t.id] = 1;  // you could use true and false, but that's more typing
+                t.value='';         // with more chance of typos
+                t.style.color='#fff';
+                }
+            }
+        </script>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script>
+            function Function_video_feed(style) {
+              document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+            }
+      
+          </script>
+    </body>
+</html>
