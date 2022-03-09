@@ -8,10 +8,32 @@
   
     <title>Test</title>
 
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/owl.css"> -->
+    <!-- <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}"/> -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-sixteen.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}"/>
+    
+
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/custom.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/isotope.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/accordions.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/slick.js') }}"/>
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://code.jquery.com/jquery-3.6.0.slim.js" rel="stylesheet" /> -->
+
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"/>
+
+    
+
+
+   
 
     <style>
 
@@ -21,115 +43,40 @@
 
 <body>
 
-    <!-- ***** Preloader Start ***** -->
-    <div id="preloader">
-        <div class="jumper">
-            <div></div>
-            <div></div>
-            <div></div>
-        </div>
-    </div>  
-    <!-- ***** Preloader End ***** -->
 
-    <!-- Header -->
-    <header class="">
-        <nav class="navbar navbar-expand-lg">
-          <div class="container">
-            <a class="navbar-brand" href="index.html"><h2>AIEN16-2 <em>面相分析</em></h2></a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-              <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navbarResponsive">
-                <ul class="navbar-nav ml-auto">
-                    <li class="nav-item active">
-                    <a class="nav-link" href="Home.html">首頁</a>
-                    </li> 
-                    <li class="nav-item">
-                    <a class="nav-link" href="index.html">分析</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="Physiognomy.html">面相</a>
-                    </li>
-                    <li class="nav-item">
-                    <a class="nav-link" href="Medical_aesthetics.html">醫美</a>
-                    </li>
-                </ul>
-                <ul class="toolbar-menu toolbar-menu--member">
-                  <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
-                  <li class="toolbar-item"><a class="text-underline-none" href="Signup.html">註冊</a></li>
-                </ul>
-            </div>
-          </div>
-        </nav>
-    </header>
-
- <!-- Page Content -->
-  <!-- Banner Starts Here -->
-  <div class="banner header-text">
-    <div class="owl-banner owl-carousel">
-      <div class="banner-item-01">
-        <div class="text-content">
-          <h4>面相分析</h4>
-          <h2>New Arrivals On Sale</h2>
-        </div>
+  <!-- ***** Preloader Start ***** 頁面跳轉-->
+  <!-- <div id="preloader">
+      <div class="jumper">
+          <div></div>
+          <div></div>
+          <div></div>
       </div>
-      <div class="banner-item-02">
-        <div class="text-content">
-          <h4>Flash Deals</h4>
-          <h2>Get your best products</h2>
-        </div>
-      </div>
-      <div class="banner-item-03">
-        <div class="text-content">
-          <h4>Last Minute</h4>
-          <h2>Grab last minute deals</h2>
-        </div>
-      </div>
-      <div class="banner-item-01">
-        <div class="text-content">
-          <h4>面相分析</h4>
-          <h2>New Arrivals On Sale</h2>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!-- Banner Ends Here -->
+  </div>   -->
+  <!-- ***** Preloader End ***** -->
 
+  <!-- Header -->
+  <header class="">
+      <nav class="navbar navbar-expand-lg">
+        <div class="container">
+          <a class="navbar-brand" href="Home.html"><h2>AIEN16-2 <em>面相分析</em></h2></a>
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarResponsive">
+              <ul class="navbar-nav ml-auto">
+                <li class="nav-item">
+                <a class="nav-link" href="Home.html">首頁</a>
+                </li> 
+                <li class="nav-item">
+                <a class="nav-link active" href="Test.html">功能體驗</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="Physiognomy.html">面相學</a>
+                </li>
+                <li class="nav-item">
+                <a class="nav-link" href="Medical_aesthetics.html">醫美學</a>
+                </li>
 
-
-
-  
-
-
-
-
-
-
-
-  <!--Mediapipe Face Sart-->
-  <div class="latest-products">
-    <div class="container">
-      <div class="row">
-
-        <div class="col-md-12">
-          <div class="section-heading">
-            <h2>Mediapipe Face</h2>
-            <a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/facemesh1.png" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>原始</h4></a>
-              <h6>Demo</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
               </ul>
               <span>Reviews (24)</span>
             </div>
@@ -206,41 +153,28 @@
               <span>Reviews (24)</span>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/三才六府.PNG" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>三才六府</h4></a>
-              <h6>$30.25</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (21)</span>
+
+          <div class="col-md-6">
+            <div class="right-image">
+              <img id="image2" src="{{ url_for('static', filename='images/臉譜.png') }}" alt="">
+              
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/三停五眼.PNG" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>三停五眼</h4></a>
-              <h6>$20.45</h6>
-              <p>Sixteen Clothing is free CSS template provided by TemplateMo.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (36)</span>
+          <div class="col-md-6">
+            <div class="left-content">
+              <h4>利用即時影像圖像分析面相及完美比例</h4>
+              <button type="button" class="btn btn-outline-primary" onclick="Function_video_feed('臉部特徵網格圖')">臉部特徵網格圖</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('臉部外框')">臉部外框</button>
+              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('臉部面相算命特徵圖')">臉部面相算命特徵圖</button>
+              <button type="button" class="btn btn-outline-danger" onclick="Function_video_feed('三庭')">三庭</button>
+              <button type="button" class="btn btn-outline-warning" onclick="Function_video_feed('五眼')">五眼</button>
+              <button type="button" class="btn btn-outline-info" onclick="Function_video_feed('美人角')">美人角</button>
+              <button type="button" class="btn btn-outline-light" onclick="Function_video_feed('臉部黃金比例')">臉部黃金比例</button>
+              <button type="button" class="btn btn-outline-dark" onclick="Function_video_feed('四角比例')">四角比例</button>
+
             </div>
+            <button type="button" class="btn btn-primary btn-lg">拍照</button>
+            <button type="button" class="btn btn-secondary btn-lg">重拍</button>
           </div>
         </div>
       </div>
@@ -275,146 +209,33 @@
               <span>Reviews (24)</span>
             </div>
           </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/四角比例.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>Tittle goes here</h4></a>
-              <h6>$30.25</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (21)</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/四高三低.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>Tittle goes here</h4></a>
-              <h6>$20.45</h6>
-              <p>Sixteen Clothing is free CSS template provided by TemplateMo.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (36)</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/四高三低.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>Tittle goes here</h4></a>
-              <h6>$15.25</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (48)</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/美人尖.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>Tittle goes here</h4></a>
-              <h6>$12.50</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (16)</span>
-            </div>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/黃金比例.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>Tittle goes here</h4></a>
-              <h6>$22.50</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (32)</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-  <!--醫美 End-->
 
-  <div class="best-features">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="section-heading">
-            <h2>TEST</h2>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="left-content">
-            <h4>Looking for the best products?</h4>
-            <p><a rel="nofollow" href="https://templatemo.com/tm-546-sixteen-clothing" target="_parent">This template</a> is free to use for your business websites. However, you have no permission to redistribute the downloadable ZIP file on any template collection website. <a rel="nofollow" href="https://templatemo.com/contact">Contact us</a> for more info.</p>
-            <ul class="featured-list">
-              <li><a href="#">Lorem ipsum dolor sit amet</a></li>
-              <li><a href="#">Consectetur an adipisicing elit</a></li>
-              <li><a href="#">It aquecorporis nulla aspernatur</a></li>
-              <li><a href="#">Corporis, omnis doloremque</a></li>
-              <li><a href="#">Non cum id reprehenderit</a></li>
-            </ul>
-            <a href="about.html" class="filled-button">Read More</a>
-          </div>
-        </div>
-        <div class="col-md-6">
-          <div class="right-image">
-            <img src="assets/images/feature-image.jpg" alt="">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-  <div class="call-to-action">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="inner-content">
-            <div class="row">
-              <div class="col-md-8">
-                <h4>Creative &amp; Unique <em>Sixteen</em> Products</h4>
-                <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Itaque corporis amet elite author nulla.</p>
+          <div class="col-md-12">
+            <div class="owl-clients owl-carousel">
+              <div class="client-item">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="1">
               </div>
-              <div class="col-md-4">
-                <a href="#" class="filled-button">Purchase Now</a>
+              
+              <div class="client-item">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="2">
+              </div>
+              
+              <div class="client-item">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="3">
+              </div>
+              
+              <div class="client-item">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="4">
+              </div>
+              
+              <div class="client-item">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="5">
+              </div>
+              
+              <div class="client-item">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="6">
+
+
               </div>
             </div>
           </div>
@@ -440,16 +261,24 @@
 
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+  <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
   <!-- Additional Scripts -->
-  <script src="assets/js/custom.js"></script>
-  <script src="assets/js/owl.js"></script>
+  <!-- <script src="assets/js/custom.js"></script> -->
+  <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/owl.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/isotope.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/accordions.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/slick.js') }}"></script>
+
+  <!-- <script src="assets/js/owl.js"></script>
   <script src="assets/js/slick.js"></script>
   <script src="assets/js/isotope.js"></script>
-  <script src="assets/js/accordions.js"></script>
+  <script src="assets/js/accordions.js"></script> -->
 
 
   <script language = "text/Javascript"> 
@@ -461,6 +290,12 @@
         t.style.color='#fff';
         }
     }
+  </script>
+  <script>
+            function Function_video_feed(style) {
+              document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+            }
+      
   </script>
 
   
