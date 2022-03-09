@@ -4,7 +4,7 @@ from flask import Flask, render_template, Response
 
 from faceMeshProjectForFACE_OVAL import faceMeshDetection
 # from app3 import faceMeshDetection
-from TakePicture import faceCondition
+from takePicture import faceCondition
 # from faceMeshProjectForFlask import faceMeshDetection_test
 #
 # Flask 類別 初始化時 傳入的 __name__ 參數，代表當前模組的名稱。

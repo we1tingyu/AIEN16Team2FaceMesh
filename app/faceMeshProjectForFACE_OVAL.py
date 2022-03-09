@@ -68,11 +68,11 @@ class FaceMeshDetector():
         
         # 四角比例
         # 四角ID
-        SQUARE=facialFeatures.SQUARE
-        leye_ID = SQUARE['leye']
-        reye_ID = SQUARE['reye']
-        SQUARE_POINT=facialFeatures.SQUARE_POINT
-        square_point_y = []
+        # SQUARE=facialFeatures.SQUARE
+        # leye_ID = SQUARE['leye']
+        # reye_ID = SQUARE['reye']
+        # SQUARE_POINT=facialFeatures.SQUARE_POINT
+        # square_point_y = []
 
         EDGE=facialFeatures.EDGE
         # 取得四個邊界ID
