@@ -413,8 +413,8 @@ class FaceMeshDetector():
                     ang3 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[2], endAddressForAngle[2], ignore_clockwise_direction=False)
                     print(f"左眉尾、左眼尾和左鼻翼夾角角度是{ang3} (若為 0 表示連成一直線, 負數表示眉毛較短, 正數表示眉毛較長)")
 
-                    # 計算(右眉-右眼)和(右眼-右鼻)夾角, (負數)逆時鐘旋轉表示眉毛較短, 故取絕對值
-                    ang4 = abs(self.angle(startAddressForAngle[1], endAddressForAngle[1], startAddressForAngle[3], endAddressForAngle[3], ignore_clockwise_direction=False))
+                    # 計算(右眉-右眼)和(右眼-右鼻)夾角, (負數)逆時鐘旋轉表示眉毛較短, 故取負數
+                    ang4 = -self.angle(startAddressForAngle[1], endAddressForAngle[1], startAddressForAngle[3], endAddressForAngle[3], ignore_clockwise_direction=False)
                     print(f"右眉尾、右眼尾和右鼻翼夾角角度是{ang4} (若為 0 表示連成一直線, 負數表示眉毛較短, 正數表示眉毛較長)")
                     print('------------')
 
