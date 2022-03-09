@@ -78,6 +78,9 @@
                 <li class="nav-item">
                 <a class="nav-link" href="Aesthetics.html">美學標準</a>
                 </li>
+                <li class="nav-item">
+                <a class="nav-link" href="About.html">關於我們</a>
+                </li>
             </ul>
             <ul class="toolbar-menu toolbar-menu--member">
               <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
@@ -120,74 +123,59 @@
           <div class="col-md-6">
             <div class="left-content">
               <h4>利用即時影像圖像分析面相及完美比例</h4>
-              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('臉部面相算命特徵圖')">臉部面相算命特徵圖</button>
-              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('臉部特徵網格圖')">臉部特徵網格圖</button>
-              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('臉部黃金比例')">臉部黃金比例</button>
-              <br />
-              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('臉部外框')">臉部外框</button>
-              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('四角比例')">四角比例</button>
+              <p></p>
+              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('臉部網格圖')">臉部特徵網格圖</button>
+              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('臉部外框圖')">臉部外框圖</button>
+              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('五官特徵圖')">臉部五官特徵圖</button>
               <br/>
-              <button type="button" class="btn btn-outline-warning" onclick="Function_video_feed('美人角')">美人角</button>
               <button type="button" class="btn btn-outline-warning" onclick="Function_video_feed('三庭')">三庭</button>
               <button type="button" class="btn btn-outline-warning" onclick="Function_video_feed('五眼')">五眼</button>
+              <button type="button" class="btn btn-outline-warning" onclick="Function_video_feed('黃金比例')">黃金比例</button>
+              <br/>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('四角比例')">四角比例</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('美人角')">美人角</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('三點線')">三點線</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('側臉線')">側臉線</button>
+              <br/>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('四高三低')">四高三低</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
             </div>
           </div>
         </div>
       </div>
     </div>
 
-
-    <div class="happy-clients">
+    <div class="call-to-action">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
-            <div class="section-heading">
-              <h2>Happy Partners</h2>
+            <div class="inner-content">
+              <div class="row">
+                <div class="col-md-8">
+                  <h4>體驗 <em>面相</em> 分析</h4>
+                  <p>利用即時影像圖像分析面相及完美比例</p>
+                </div>
+                <div class="col-md-4">
+                  <a href="Data.html" class="filled-button">開始測試</a>
+                </div>
+              </div>
             </div>
           </div>
+        </div>
+      </div>
+    </div>
+    
+    <footer>
+      <div class="container">
+        <div class="row">
           <div class="col-md-12">
-            <div class="owl-clients owl-carousel">
-              <div class="client-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" alt="1">
-              </div>
-              
-              <div class="client-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" alt="2">
-              </div>
-              
-              <div class="client-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" alt="3">
-              </div>
-              
-              <div class="client-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" alt="4">
-              </div>
-              
-              <div class="client-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" alt="5">
-              </div>
-              
-              <div class="client-item">
-                <img src="{{ url_for('static', filename='images/client-01.png') }}" alt="6">
-              </div>
+            <div class="inner-content">
+              <p>AIEN16 &copy; 2022 Second Group
             </div>
           </div>
         </div>
       </div>
-    </div>
-
-  
-  <footer>
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="inner-content">
-            <p>AIEN16 &copy; 2022 Second Group
-          </div>
-        </div>
-      </div>
-    </div>
-  </footer>
+    </footer>
 
 
   <!-- Bootstrap core JavaScript -->
