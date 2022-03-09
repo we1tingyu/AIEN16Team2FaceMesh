@@ -47,9 +47,9 @@ def video_feed(style):
 
 # stream live
 @app.route('/stream_live/<string:style>')
-def stream_live(style):      
-    photograph = style
-    return Response(faceCondition(photograph),
+def stream_live(style):          
+    # photograph = style
+    return Response(faceCondition(style),
                 mimetype='multipart/x-mixed-replace; boundary=frame')
     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
 
