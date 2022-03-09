@@ -43,7 +43,6 @@
 
 <body>
 
-
   <!-- ***** Preloader Start ***** 頁面跳轉-->
   <!-- <div id="preloader">
       <div class="jumper">
@@ -76,84 +75,39 @@
                 <li class="nav-item">
                 <a class="nav-link" href="Medical_aesthetics.html">醫美學</a>
                 </li>
-
               </ul>
-              <span>Reviews (24)</span>
+              <ul class="toolbar-menu toolbar-menu--member">
+                <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
+                <li class="toolbar-item"><a class="text-underline-none" href="Signup.html">註冊</a></li>
+              </ul>
+          </div>
+        </div>
+      </nav>
+  </header>
+
+    <!-- Page Content -->
+    <div class="page-heading about-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>體驗面相分析</h4>
+              <h2>AI Face Analysis</h2>
             </div>
           </div>
         </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/facemesh2.png" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>標號</h4></a>
-              <h6>Mark</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (21)</span>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/facemesh3.png" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>畫線</h4></a>
-              <h6>$15.25</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (48)</span>
-            </div>
-          </div>
-        </div>
-
       </div>
     </div>
-  </div>
-  <!--Mediapipe Face End-->
 
 
-  <!--面相 Sart-->
-  <div class="latest-products">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="section-heading">
-            <h2>面相</h2>
-            <a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/面相.PNG" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>面相</h4></a>
-              <h6>$25.75</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (24)</span>
+    <div class="best-features about-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>功能體驗</h2>
             </div>
           </div>
-
           <div class="col-md-6">
             <div class="right-image">
               <img id="image2" src="{{ url_for('static', filename='images/臉譜.png') }}" alt="">
@@ -171,7 +125,6 @@
               <button type="button" class="btn btn-outline-info" onclick="Function_video_feed('美人角')">美人角</button>
               <button type="button" class="btn btn-outline-light" onclick="Function_video_feed('臉部黃金比例')">臉部黃金比例</button>
               <button type="button" class="btn btn-outline-dark" onclick="Function_video_feed('四角比例')">四角比例</button>
-
             </div>
             <button type="button" class="btn btn-primary btn-lg">拍照</button>
             <button type="button" class="btn btn-secondary btn-lg">重拍</button>
@@ -179,37 +132,16 @@
         </div>
       </div>
     </div>
-  </div>
-  <!--面相 End-->
 
-  <!--醫美 Sart-->
-  <div class="latest-products">
-    <div class="container">
-      <div class="row">
-        <div class="col-md-12">
-          <div class="section-heading">
-            <h2>醫美</h2>
-            <a href="products.html">view all products <i class="fa fa-angle-right"></i></a>
-          </div>
-        </div>
-        <div class="col-md-4">
-          <div class="product-item">
-            <a href="#"><img src="images/五眼.jpg" alt=""></a>
-            <div class="down-content">
-              <a href="#"><h4>Tittle goes here</h4></a>
-              <h6>$25.75</h6>
-              <p>Lorem ipsume dolor sit amet, adipisicing elite. Itaque, corporis nulla aspernatur.</p>
-              <ul class="stars">
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-                <li><i class="fa fa-star"></i></li>
-              </ul>
-              <span>Reviews (24)</span>
+
+    <div class="happy-clients">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>Happy Partners</h2>
             </div>
           </div>
-
           <div class="col-md-12">
             <div class="owl-clients owl-carousel">
               <div class="client-item">
@@ -234,15 +166,12 @@
               
               <div class="client-item">
                 <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="6">
-
-
               </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
 
   
   <footer>
@@ -250,9 +179,7 @@
       <div class="row">
         <div class="col-md-12">
           <div class="inner-content">
-            <p>Copyright &copy; 2020 Sixteen Clothing Co., Ltd.
-          
-          - Design: <a rel="nofollow noopener" href="https://templatemo.com" target="_blank">TemplateMo</a></p>
+            <p>AIEN16 &copy; 2022 Second Group
           </div>
         </div>
       </div>
