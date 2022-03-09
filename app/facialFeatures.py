@@ -21,6 +21,10 @@ EDGE = {'top':10, 'bottom':152, 'left':234, 'right':454}
 THREE_COURT = [10, 9, 94, 152]
 FIVE_EYE = [234, 130, 243, 463, 359, 454]
 
+# 四角比例 左眼角130 右眼角359 左嘴角61 右嘴角291
+SQUARE = {'leye':130, 'reye':359, 'lmouth':61, 'rmouth':291}
+SQUARE_POINT = [130, 359, 61, 291]
+
 BEAUTY_CORNER_LEFT = [(130,61)]
 BEAUTY_CORNER_RIGHT = [(359,291)]
 BEAUTY_CORNER = [BEAUTY_CORNER_LEFT,BEAUTY_CORNER_RIGHT]
