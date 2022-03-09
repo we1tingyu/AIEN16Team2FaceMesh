@@ -66,6 +66,13 @@ class FaceMeshDetector():
         startAddressForAngle = []
         endAddressForAngle = []
         
+        # 四角比例
+        # 四角ID
+        SQUARE=facialFeatures.SQUARE
+        leye_ID = SQUARE['leye']
+        reye_ID = SQUARE['reye']
+        SQUARE_POINT=facialFeatures.SQUARE_POINT
+        square_point_y = []
 
         EDGE=facialFeatures.EDGE
         # 取得四個邊界ID
@@ -75,7 +82,7 @@ class FaceMeshDetector():
         right_ID = EDGE['right']
 
         THREE_COURT=facialFeatures.THREE_COURT
-        
+
 
         three_court_y = []
         three_court_ratio = []
@@ -276,6 +283,36 @@ class FaceMeshDetector():
                             five_eye_ratio.append(ratio)
 
                         print(f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
+                        print('------------')
+
+                # 四角比例
+                elif drawFortuneTelling == "四角比例":
+                    for idx1,value in enumerate(SQUARE):
+                        ID = value
+
+                        lm = faceLms.landmark[ID]
+                        # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
+                        x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
+
+                        leye_x = faceLms.landmark[leye_ID].x*iw
+                        reye_x = faceLms.landmark[reye_ID].x*iw
+
+                        # 起點的 2D int 座標 (給 cv2 用)
+                        startAddress2D = int(leye_x), int(y)
+                        # 終點的 2D int 座標 (給 cv2 用)
+                        endAddress2D = int(reye_x), int(y)
+
+                        self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
+
+                        square_point_y.append(y)
+
+                        print(f'y1:{square_point_y[0]}, y2:{square_point_y[1]}, y3:{square_point_y[2]}, y4:{square_point_y[3]}')
+
+                        width_x = reye_x - leye_x
+
+                        ratio = width_x / 5
+
+                        print(f'四角比例 {ratio}')
                         print('------------')
 
                 #美人角
