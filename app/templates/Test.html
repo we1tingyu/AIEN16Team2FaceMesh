@@ -8,10 +8,32 @@
   
     <title>Test</title>
 
-    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/fontawesome.css">
+    <!-- <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet"> -->
+    <!-- <link rel="stylesheet" href="assets/css/fontawesome.css">
     <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
-    <link rel="stylesheet" href="assets/css/owl.css">
+    <link rel="stylesheet" href="assets/css/owl.css"> -->
+    <!-- <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}"/> -->
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/css/fontawesome.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/css/templatemo-sixteen.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/css/owl.css') }}"/>
+    
+
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/custom.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/isotope.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/accordions.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='assets/js/slick.js') }}"/>
+
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+    <link href="https://code.jquery.com/jquery-3.6.0.slim.js" rel="stylesheet" /> -->
+
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.min.js') }}"/>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='vendor/jquery/jquery.min.js') }}"/>
+
+    
+
+
+   
 
     <style>
 
@@ -22,13 +44,13 @@
 <body>
 
   <!-- ***** Preloader Start ***** 頁面跳轉-->
-  <div id="preloader">
+  <!-- <div id="preloader">
       <div class="jumper">
           <div></div>
           <div></div>
           <div></div>
       </div>
-  </div>  
+  </div>   -->
   <!-- ***** Preloader End ***** -->
 
   <!-- Header -->
@@ -88,14 +110,24 @@
           </div>
           <div class="col-md-6">
             <div class="right-image">
-              <img src="images/臉譜.png" alt="">
+              <img id="image2" src="{{ url_for('static', filename='images/臉譜.png') }}" alt="">
+              
             </div>
           </div>
           <div class="col-md-6">
             <div class="left-content">
               <h4>利用即時影像圖像分析面相及完美比例</h4>
-              <p>Test......</p>
+              <button type="button" class="btn btn-outline-primary" onclick="Function_video_feed('臉部特徵網格圖')">臉部特徵網格圖</button>
+              <button type="button" class="btn btn-outline-secondary" onclick="Function_video_feed('臉部外框')">臉部外框</button>
+              <button type="button" class="btn btn-outline-success" onclick="Function_video_feed('臉部面相算命特徵圖')">臉部面相算命特徵圖</button>
+              <button type="button" class="btn btn-outline-danger" onclick="Function_video_feed('三庭')">三庭</button>
+              <button type="button" class="btn btn-outline-warning" onclick="Function_video_feed('五眼')">五眼</button>
+              <button type="button" class="btn btn-outline-info" onclick="Function_video_feed('美人角')">美人角</button>
+              <button type="button" class="btn btn-outline-light" onclick="Function_video_feed('臉部黃金比例')">臉部黃金比例</button>
+              <button type="button" class="btn btn-outline-dark" onclick="Function_video_feed('四角比例')">四角比例</button>
             </div>
+            <button type="button" class="btn btn-primary btn-lg">拍照</button>
+            <button type="button" class="btn btn-secondary btn-lg">重拍</button>
           </div>
         </div>
       </div>
@@ -113,27 +145,27 @@
           <div class="col-md-12">
             <div class="owl-clients owl-carousel">
               <div class="client-item">
-                <img src="assets/images/client-01.png" alt="1">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="1">
               </div>
               
               <div class="client-item">
-                <img src="assets/images/client-01.png" alt="2">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="2">
               </div>
               
               <div class="client-item">
-                <img src="assets/images/client-01.png" alt="3">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="3">
               </div>
               
               <div class="client-item">
-                <img src="assets/images/client-01.png" alt="4">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="4">
               </div>
               
               <div class="client-item">
-                <img src="assets/images/client-01.png" alt="5">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="5">
               </div>
               
               <div class="client-item">
-                <img src="assets/images/client-01.png" alt="6">
+                <img src="{{ url_for('static', filename='assets/images/client-01.png') }}" alt="6">
               </div>
             </div>
           </div>
@@ -156,16 +188,24 @@
 
 
   <!-- Bootstrap core JavaScript -->
-  <script src="vendor/jquery/jquery.min.js"></script>
-  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- <script src="vendor/jquery/jquery.min.js"></script> -->
+  <!-- <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script> -->
+  <script src="https://code.jquery.com/jquery-3.6.0.slim.js" integrity="sha256-HwWONEZrpuoh951cQD1ov2HUK5zA5DwJ1DNUXaM6FsY=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
 
 
   <!-- Additional Scripts -->
-  <script src="assets/js/custom.js"></script>
-  <script src="assets/js/owl.js"></script>
+  <!-- <script src="assets/js/custom.js"></script> -->
+  <script src="{{ url_for('static', filename='assets/js/custom.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/owl.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/isotope.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/accordions.js') }}"></script>
+  <script src="{{ url_for('static', filename='assets/js/slick.js') }}"></script>
+
+  <!-- <script src="assets/js/owl.js"></script>
   <script src="assets/js/slick.js"></script>
   <script src="assets/js/isotope.js"></script>
-  <script src="assets/js/accordions.js"></script>
+  <script src="assets/js/accordions.js"></script> -->
 
 
   <script language = "text/Javascript"> 
@@ -177,6 +217,12 @@
         t.style.color='#fff';
         }
     }
+  </script>
+  <script>
+            function Function_video_feed(style) {
+              document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+            }
+      
   </script>
 
   
