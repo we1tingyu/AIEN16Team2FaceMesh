@@ -60,7 +60,19 @@ class FaceMeshDetector():
 
         FACE_OVAL=facialFeatures.FACE_OVAL
         READ_FACE=facialFeatures.READ_FACE
-        BEAUTY_CORNER=facialFeatures.BEAUTY_CORNER 
+        BEAUTY_CORNER=facialFeatures.BEAUTY_CORNER
+        #美人角用的座標 
+        # beauty_corner_coordinate = []
+        startAddressForAngle = []
+        endAddressForAngle = []
+        
+        # 四角比例
+        # 四角ID
+        SQUARE=facialFeatures.SQUARE
+        leye_ID = SQUARE['leye']
+        reye_ID = SQUARE['reye']
+        SQUARE_POINT=facialFeatures.SQUARE_POINT
+        square_point_y = []
 
         EDGE=facialFeatures.EDGE
         # 取得四個邊界ID
@@ -70,7 +82,7 @@ class FaceMeshDetector():
         right_ID = EDGE['right']
 
         THREE_COURT=facialFeatures.THREE_COURT
-        
+
 
         three_court_y = []
         three_court_ratio = []
@@ -117,7 +129,6 @@ class FaceMeshDetector():
                     for idx1,ff in enumerate(FACE_OVAL):
                         sum=0
                         for idx2,value in enumerate(FACE_OVAL[idx1]):
-
                             startID, endID = value
                             # print(f'startID:{startID} endID:{endID} ')
                             # faceID to xyz                            
@@ -136,9 +147,9 @@ class FaceMeshDetector():
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D)
 
-                            # 起點的 3D int 座標
+                            # 起點的 3D float 座標
                             startAddress3D = x1, y1, z1
-                            # 終點的 3D int 座標
+                            # 終點的 3D float 座標
                             endAddress3D = x2, y2, z2
 
                             # Euclaidean Distance 計算出距離
@@ -190,9 +201,9 @@ class FaceMeshDetector():
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
                             
-                            # 起點的 3D int 座標
+                            # 起點的 3D float 座標
                             startAddress3D = x1, y1, z1
-                            # 終點的 3D int 座標
+                            # 終點的 3D float 座標
                             endAddress3D = x2, y2, z2
 
                             # Euclaidean Distance 計算出距離
@@ -200,12 +211,8 @@ class FaceMeshDetector():
                             # lineDistance = self.euclaideanDistance(startAddress2D, endAddress2D)
                             # 計算 3D 距離
                             lineDistance = self.euclaideanDistance3D(startAddress3D, endAddress3D)
-
-                            # lineDistance = self.drawSpecificLine(img, startAddress, endAddress)
-                            # lineDistance = int(lineDistance)
                             sum+=lineDistance
-                            # print(lineDistance)
-                            # print(sum)
+
                         # append into distance[]                           
                         distance.append(sum)                     
                     if distance:
@@ -226,6 +233,7 @@ class FaceMeshDetector():
                         # 終點的 2D int 座標 (給 cv2 用)
                         endAddress2D = int(right_x), int(y)
 
+                        # 畫線
                         self.drawSpecificLine(img, startAddress2D, endAddress2D, RED)
 
                         three_court_y.append(y)
@@ -247,7 +255,6 @@ class FaceMeshDetector():
                 # 五眼
                 elif drawFortuneTelling == "五眼":
                     for idx1,value in enumerate(FIVE_EYE):
-                        # print(value)
                         ID = value
 
                         lm = faceLms.landmark[ID]
@@ -259,6 +266,7 @@ class FaceMeshDetector():
                         # 終點的 2D int 座標 (給 cv2 用)
                         endAddress2D = int(x), int(bottom_y)
 
+                        # 畫線
                         self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                         five_eye_x.append(x)
@@ -276,17 +284,45 @@ class FaceMeshDetector():
 
                         print(f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
                         print('------------')
+
+                # 四角比例
+                elif drawFortuneTelling == "四角比例":
+                    for idx1,value in enumerate(SQUARE):
+                        ID = value
+
+                        lm = faceLms.landmark[ID]
+                        # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
+                        x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
+
+                        leye_x = faceLms.landmark[leye_ID].x*iw
+                        reye_x = faceLms.landmark[reye_ID].x*iw
+
+                        # 起點的 2D int 座標 (給 cv2 用)
+                        startAddress2D = int(leye_x), int(y)
+                        # 終點的 2D int 座標 (給 cv2 用)
+                        endAddress2D = int(reye_x), int(y)
+
+                        self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
+
+                        square_point_y.append(y)
+
+                        print(f'y1:{square_point_y[0]}, y2:{square_point_y[1]}, y3:{square_point_y[2]}, y4:{square_point_y[3]}')
+
+                        width_x = reye_x - leye_x
+
+                        ratio = width_x / 5
+
+                        print(f'四角比例 {ratio}')
+                        print('------------')
+
                 #美人角
-                elif drawFortuneTelling == "5":
+                elif drawFortuneTelling == "美人角":
                     for idx1,ff in enumerate(BEAUTY_CORNER):
-                        sum=0
                         for idx2,value in enumerate(BEAUTY_CORNER[idx1]):
                             startID, endID = value
-                            # print(f'startID:{startID} endID:{endID} ')
-                            # faceID to xyz                            
-                            # ih, iw, ic = img.shape
+                           
                             lm_start = faceLms.landmark[startID]
-                            # x, y, z = int(lm_start.x*iw), int(lm_start.y*ih), int(lm_start.z*ic)
+                            
                             x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
                             # 起點的 2D int 座標 (給 cv2 用)
                             startAddress2D = int(x1), int(y1)
@@ -294,63 +330,44 @@ class FaceMeshDetector():
                             x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                             # 終點的 2D int 座標 (給 cv2 用)
                             endAddress2D = int(x2), int(y2)
-                            # print(f'startAddress:{startAddress},endAddress:{endAddress}')
-
+                            
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
                             
-                            # 起點的 3D int 座標
-                            startAddress3D = x1, y1, z1
-                            # 終點的 3D int 座標
-                            endAddress3D = x2, y2, z2
+                            # 起點的 3D float 座標
+                            startAddressForAngle.append([x1, y1])
+                            # 終點的 3D float 座標
+                            endAddressForAngle.append([x2, y2])
 
-                            # Euclaidean Distance 計算出距離
-                            # 計算 2D 距離
-                            # lineDistance = self.euclaideanDistance(startAddress2D, endAddress2D)
-                            # 計算 3D 距離
-                            lineDistance = self.angle(startAddress2D, endAddress2D)
-
-                            # lineDistance = self.drawSpecificLine(img, startAddress, endAddress)
-                            # lineDistance = int(lineDistance)
-                            # sum+=lineDistance
-                            # print(lineDistance)
-                            # print(sum)
-                        # append into distance[]                           
-                        distance.append(sum)                     
-                    # if distance:
-                    #     print(f'RIGHT_EYEBROW:{distance[0]}, LEFT_EYEBROW:{distance[1]}, RIGHT_EYE:{distance[2]}, LEFT_EYE{distance[3]}, NOSE_LENGTH:{distance[4]}, NOSE_WIDTH:{distance[5]}, FOREHEAD:{distance[6]}, PHILTRUM:{distance[7]}, MOUTH:{distance[8]}')
-        
+                    # 計算夾角
+                    ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
+                    print(f"美人角角度是{ang1}")
+                    
                 # 臉部黃金比例
                 elif drawFortuneTelling == "臉部黃金比例":
-                    for idx1,value in enumerate(FIVE_EYE):
-                        ID = value
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(left_x), int(top_y)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(top_y)
 
-                        lm = faceLms.landmark[ID]
-                        # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
-                        x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
+                    # 畫線
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                        # 起點的 2D int 座標 (給 cv2 用)
-                        startAddress2D = int(x), int(top_y)
-                        # 終點的 2D int 座標 (給 cv2 用)
-                        endAddress2D = int(x), int(bottom_y)
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(right_x), int(top_y)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(bottom_y)
 
-                        self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+                    middle_x = (int(left_x) + int(right_x)) / 2
+                    middle_y = (int(top_y) + int(bottom_y)) / 2
 
-                        five_eye_x.append(x)
+                    # 畫線
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                    if five_eye_x:
-                        print(f'x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
+                    face_ratio = total_y / total_x
 
-                        print(f'total_x:{total_x}')
-
-                        for i in range(len(FIVE_EYE) - 1):
-                            x_distance = five_eye_x[i+1] - five_eye_x[i]
-                            ratio = x_distance / total_x
-                            # print(ratio)
-                            five_eye_ratio.append(ratio)
-
-                        print(f'臉部比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
-                        print('------------')
+                    print(f'臉部比例為-> 1:{face_ratio}')
+                    print('------------')
 
                 face = []
                 for id, lm in enumerate(faceLms.landmark):   # use enumerate to get index and values 
@@ -369,29 +386,25 @@ class FaceMeshDetector():
     # https://google.github.io/mediapipe/solutions/iris.html
     
         
-    #美人角
-    def angle(self, startPoint, endPoint):
-        x1, y1 = startPoint
-        x2, y2 = endPoint
-        return
-        # dx1 = v1[2] - v1[0]
-        # dy1 = v1[3] - v1[1]
-        # dx2 = v2[2] - v2[0]
-        # dy2 = v2[3] - v2[1]
-        # angle1 = math.atan2(dy1, dx1)
-        # angle1 = int(angle1 * 180/math.pi)
-        # # print(angle1)
-        # angle2 = math.atan2(dy2, dx2)
-        # angle2 = int(angle2 * 180/math.pi)
-        # # print(angle2)
-        # if angle1*angle2 >= 0:
-        #     included_angle = abs(angle1-angle2)
-        # else:
-        #     included_angle = abs(angle1) + abs(angle2)
-        #     if included_angle > 180:
-        #         included_angle = 360 - included_angle
-        # return included_angle
-
+    # 給四個座標點(起始點1, 終止點1, 起始點2, 終止點2)計算夾角
+    def angle(self, startAddress1, endAddress1, startAddress2, endAddress2):
+        dx1 = endAddress1[0] - startAddress1[0]
+        dy1 = endAddress1[1] - startAddress1[1]
+        dx2 = endAddress2[0] - startAddress2[0]
+        dy2 = endAddress2[1] - startAddress2[1]
+        angle1 = math.atan2(dy1, dx1)
+        angle1 = int(angle1 * 180/math.pi)
+        #print(angle1)
+        angle2 = math.atan2(dy2, dx2)
+        angle2 = int(angle2 * 180/math.pi)
+        #print(angle2)
+        if angle1*angle2 >= 0:
+            included_angle = abs(angle1-angle2)
+        else:
+            included_angle = abs(angle1) + abs(angle2)
+            if included_angle > 180:
+                included_angle = 360 - included_angle
+        return included_angle
 
     # Euclaidean Distance
     def euclaideanDistance(self, startPoint, endPoint):
