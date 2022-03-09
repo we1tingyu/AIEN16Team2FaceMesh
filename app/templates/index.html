@@ -60,6 +60,7 @@
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('五眼')">五眼</button>
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('美人角')">美人角</button>
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('臉部黃金比例')">臉部黃金比例</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed1('相機')">相機</button>
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('四角比例')">四角比例</button>
                                     </div>
                                 </div>
@@ -104,6 +105,9 @@
         <script>
             function Function_video_feed(style) {
               document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+            }
+            function Function_video_feed1(style) {
+              document.getElementById("image2").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
             }
       
           </script>

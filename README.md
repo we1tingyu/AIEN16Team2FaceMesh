@@ -10,7 +10,8 @@
  google MediaPipe github
  </br>
  https://github.com/google/mediapipe
- 
+
+  
  # install
  
  1. 建一個資料夾videos
@@ -18,10 +19,7 @@
  3. 安裝instructions.txt的相依性套件
  4. $ start.bat
  
- 
  ![image](https://i.imgur.com/5PvuFlq.png)
- 
- 
 
 
 
