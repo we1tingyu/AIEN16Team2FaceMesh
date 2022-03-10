@@ -23,6 +23,63 @@
         <link rel="stylesheet" href="assets/css/owl.css">
 
         <style>
+          .table-c {
+            height: 80px;
+          }
+
+          .table-roll tbody {
+            display:block;
+            height:450px;
+            overflow-y:scroll;
+          }
+
+          .table-roll thead, tbody tr {
+            display:table;
+            width:60%;
+            table-layout:fixed;
+          }
+
+          .table-roll thead {
+            width: calc( 100% )
+          }
+          
+          .table-roll thead th{ background:#ccc;}
+
+          .button-camera {
+            float: left;
+            border-radius: 50%;
+            position: relative;
+            border: none;
+            font-size: 28px;
+            color: #FFFFFF;
+            text-align: center;
+            -webkit-transition-duration: 0.4s; /* Safari */
+            transition-duration: 0.4s;
+            text-decoration: none;
+            overflow: hidden;
+            cursor: pointer;
+          }
+
+          .button-camera:after {
+            content: "";
+            background: #ee9090;
+            display: block;
+            position: absolute;
+            padding-top: 300%;
+            padding-left: 350%;
+            margin-left: -20px!important;
+            margin-top: -120%;
+            opacity: 0;
+            transition: all 0.8s
+          }
+
+          .button-camera:active:after {
+            padding: 0;
+            margin: 0;
+            opacity: 1;
+            transition: 0s
+          }
+
           .button {
             display: inline-block;
             border-radius: 4px;
@@ -64,6 +121,14 @@
             right: 0;
           }
           </style>
+
+          <script>
+            x=1;
+            function change(){
+              x++;
+              document.getElementById("photo").src="images/camera-wait.png";
+            }
+          </script>
 
     </head>
 
@@ -134,7 +199,15 @@
             <div class="row">
               <div class="col-md-12">
                 <div class="section-heading">
-                  <h2>面相數據</h2>
+                  <h2>開始測試 : 面相數據</h2>
+                </div>
+                <div class="col-md-4">
+                  <table class="table-c">
+                    <tr>
+                      <td><img src="images/camera.png"></td>
+                      <td><img id="photo" src="images/camera-open.png" onclick="change()"></td>
+                    </tr>
+                  </table>
                 </div>
               </div>
               <div class="col-md-6">
@@ -142,11 +215,58 @@
                   <img src="images/臉譜.png" alt="">
                 </div>
               </div>
+
               <div class="col-md-6">
                 <div class="left-content">
                   <h4>利用即時影像圖像分析面相及完美比例</h4>
+                  <table class="table-roll">
+                    <thead>
+                        <tr>
+                            <th colspan="2">各項指標數據</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><img src="images/三庭.jpg"></td>
+                        <td>三庭</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/五眼.jpg"></td>
+                        <td>五眼</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/黃金比例.jpg"></td>
+                        <td>黃金比例</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/四角比例.jpg"></td>
+                        <td>四角比例</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/美人角.jpg"></td>
+                        <td>美人角</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/三點線.jpg"></td>
+                        <td>三點線</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/側臉線.jpg"></td>
+                        <td>側臉線</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/四高三低.jpg"></td>
+                        <td>四高三低</td>
+                      </tr>
+                      <tr>
+                        <td><img src="images/鼻子大小.jpg"></td>
+                        <td>三庭</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
                   <p></p>
-                  <p>Test......</p>
+
                   <a href="Analysis.html"><button class="button" style="vertical-align:middle"><span>分析結果 </span></button></a>
 
                 </div>
