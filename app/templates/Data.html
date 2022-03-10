@@ -7,7 +7,7 @@
         <meta name="description" content="" />
         <meta name="author" content="" />
 
-        <title>Demo</title>
+        <title>Data</title>
 
         <!-- Favicon-->
         <link type="image/x-icon" rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}"/>
@@ -21,10 +21,50 @@
         <link rel="stylesheet" href="assets/css/fontawesome.css">
         <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
         <link rel="stylesheet" href="assets/css/owl.css">
-    
+
         <style>
-    
-        </style>
+          .button {
+            display: inline-block;
+            border-radius: 4px;
+            background-color: #ee2424;
+            border: none;
+            color: #FFFFFF;
+            text-align: center;
+            font-size: 20px;
+            padding: 15px;
+            width: 150px;
+            border-radius: 20px;
+            transition: all 0.5s;
+            cursor: pointer;
+            margin: 5px;
+            float: right;
+          }
+          
+          .button span {
+            cursor: pointer;
+            display: inline-block;
+            position: relative;
+            transition: 0.5s;
+          }
+          
+          .button span:after {
+            content: '»';
+            position: absolute;
+            opacity: 0;
+            top: 0;
+            transition: 0.5s;
+          }
+          
+          .button:hover span {
+            padding-right: 25px;
+          }
+          
+          .button:hover span:after {
+            opacity: 1;
+            right: 0;
+          }
+          </style>
+
     </head>
 
     <body class="d-flex flex-column">
@@ -62,6 +102,9 @@
                         <li class="nav-item">
                         <a class="nav-link" href="Aesthetics.html">美學標準</a>
                         </li>
+                        <li class="nav-item">
+                        <a class="nav-link" href="About.html">關於我們</a>
+                         </li>
                     </ul>
                     <ul class="toolbar-menu toolbar-menu--member">
                       <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
@@ -87,67 +130,75 @@
         </div>
 
         <div class="best-features about-features">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="section-heading">
-                    <h2>功能體驗</h2>
-                  </div>
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section-heading">
+                  <h2>面相數據</h2>
                 </div>
-                <div class="col-md-6">
-                  <div class="right-image">
-                    <img src="images/臉譜.png" alt="">
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="right-image">
+                  <img src="images/臉譜.png" alt="">
                 </div>
-                <div class="col-md-6">
-                  <div class="left-content">
-                    <h4>利用即時影像圖像分析面相及完美比例</h4>
-                    <p>Test......</p>
-                  </div>
+              </div>
+              <div class="col-md-6">
+                <div class="left-content">
+                  <h4>利用即時影像圖像分析面相及完美比例</h4>
+                  <p></p>
+                  <p>Test......</p>
+                  <a href="Analysis.html"><button class="button" style="vertical-align:middle"><span>分析結果 </span></button></a>
+
                 </div>
               </div>
             </div>
           </div>
-      
-      
-          <div class="happy-clients">
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                  <div class="section-heading">
-                    <h2>Happy Partners</h2>
-                  </div>
+        </div>
+
+        <div class="latest-products">
+          <div class="container">
+            <div class="row">
+  
+              <div class="col-md-12">
+                <div class="section-heading">
+                  <h2>實際應用</h2>
                 </div>
-                <div class="col-md-12">
-                  <div class="owl-clients owl-carousel">
-                    <div class="client-item">
-                      <img src="assets/images/client-01.png" alt="1">
-                    </div>
-                    
-                    <div class="client-item">
-                      <img src="assets/images/client-01.png" alt="2">
-                    </div>
-                    
-                    <div class="client-item">
-                      <img src="assets/images/client-01.png" alt="3">
-                    </div>
-                    
-                    <div class="client-item">
-                      <img src="assets/images/client-01.png" alt="4">
-                    </div>
-                    
-                    <div class="client-item">
-                      <img src="assets/images/client-01.png" alt="5">
-                    </div>
-                    
-                    <div class="client-item">
-                      <img src="assets/images/client-01.png" alt="6">
-                    </div>
+              </div>
+              <div class="col-md-4">
+                <div class="product-item">
+                  <a href="#"><img src="images/cut.jpg" alt=""></a>
+                  <div class="down-content">
+                    <a href="#"><h4>整形</h4></a>
+                    <h6>Plastic surgery</h6>
+                    <p>EX : 開眼頭 墊下巴 削骨</p>
                   </div>
                 </div>
               </div>
+              <div class="col-md-4">
+                <div class="product-item">
+                  <a href="#"><img src="images/eyebrow.PNG" alt=""></a>
+                  <div class="down-content">
+                    <a href="#"><h4>化妝</h4></a>
+                    <h6>Make up</h6>
+                    <p>EX : 畫眉三點定位法</p>
+                  </div>
+                </div>
+              </div>
+  
+              <div class="col-md-4">
+                <div class="product-item">
+                  <a href="#"><img src="images/hair.jpg" alt=""></a>
+                  <div class="down-content">
+                    <a href="#"><h4>髮型</h4></a>
+                    <h6>Hairstyle</h6>
+                    <p>EX : 高額頭適合留瀏海</p>
+                  </div>
+                </div>
+              </div>
+  
             </div>
           </div>
+        </div>
 
         <footer>
             <div class="container">
