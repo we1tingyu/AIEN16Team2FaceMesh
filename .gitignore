@@ -172,3 +172,6 @@ dmypy.json
 .pyre/
 
  __pycache__/ 
+
+# 忽略測試照片
+/app/static/images/*.jpg
