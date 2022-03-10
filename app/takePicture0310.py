@@ -98,7 +98,8 @@ def faceCondition(camera_status,
     #     # photograph=='啟動'
     #     pass
 
-    if camera_status == '拍照' and txt == '已符合測量條件,請按下拍照':
+    # if camera_status == '拍照' and txt == '已符合測量條件,請按下拍照':
+    if camera_status == '拍照':
         # flag = False
         ret, img = cap.read()
         # print(ret)
