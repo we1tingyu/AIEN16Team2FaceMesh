@@ -501,6 +501,7 @@ class FaceMeshDetector():
 
                     head_of_eye_ratio = (x2 - x1) / total_x
                     print(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio}')
+                    print(f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio}')
                     print('------------')
 
                 face = []
