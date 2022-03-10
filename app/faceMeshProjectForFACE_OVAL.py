@@ -70,8 +70,18 @@ class FaceMeshDetector():
         EYE_AND_NOSE=facialFeatures.EYE_AND_NOSE
         # 眼尾和眉尾
         EYEBROW_AND_EYE=facialFeatures.EYEBROW_AND_EYE
+
+        # 鼻翼
+        ALAE_OF_NOSE=facialFeatures.ALAE_OF_NOSE
+
+        # 眼頭
+        HEAD_OF_EYE=facialFeatures.HEAD_OF_EYE
         
         # 四角比例
+        # 眼尾
+        END_OF_EYE=facialFeatures.END_OF_EYE
+        # 唇角
+        LIP_CORNER=facialFeatures.LIP_CORNER
         # 四角ID
         # SQUARE=facialFeatures.SQUARE
         # leye_ID = SQUARE['leye']
@@ -151,8 +161,6 @@ class FaceMeshDetector():
                             x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                             # 終點的 2D int 座標 (給 cv2 用)
                             endAddress2D = int(x2), int(y2)
-                            # print(f'startAddress:{startAddress},endAddress:{endAddress}')
-
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D)
 
@@ -205,8 +213,6 @@ class FaceMeshDetector():
                             x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                             # 終點的 2D int 座標 (給 cv2 用)
                             endAddress2D = int(x2), int(y2)
-                            # print(f'startAddress:{startAddress},endAddress:{endAddress}')
-
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
                             
@@ -241,7 +247,6 @@ class FaceMeshDetector():
                         startAddress2D = int(left_x), int(y)
                         # 終點的 2D int 座標 (給 cv2 用)
                         endAddress2D = int(right_x), int(y)
-
                         # 畫線
                         self.drawSpecificLine(img, startAddress2D, endAddress2D, RED)
 
@@ -274,7 +279,6 @@ class FaceMeshDetector():
                         startAddress2D = int(x), int(top_y)
                         # 終點的 2D int 座標 (給 cv2 用)
                         endAddress2D = int(x), int(bottom_y)
-
                         # 畫線
                         self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
@@ -294,35 +298,64 @@ class FaceMeshDetector():
                         print(f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
                         print('------------')
 
-                # 四角比例
-                # elif drawFortuneTelling == "四角比例":
-                #     for idx1,value in enumerate(SQUARE):
-                #         ID = value
+                # 臉部四角形比例
+                elif drawFortuneTelling == "臉部四角形比例":
+                    # 眼尾的線
+                    startID, endID = END_OF_EYE
 
-                #         lm = faceLms.landmark[ID]
-                #         # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
-                #         x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
+                    lm_start = faceLms.landmark[startID]
+                    x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
+                    # # 起點的 2D int 座標 (給 cv2 用)
+                    # startAddress2D = int(x1), int(y1)
+                    lm_end = faceLms.landmark[endID]
+                    x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
 
-                #         leye_x = faceLms.landmark[leye_ID].x*iw
-                #         reye_x = faceLms.landmark[reye_ID].x*iw
+                    y_average_top = (y1 + y2) / 2
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(x1), int(y_average_top)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x2), int(y_average_top)
+                    # draw specific line user defined (只畫線, 不算距離)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                #         # 起點的 2D int 座標 (給 cv2 用)
-                #         startAddress2D = int(leye_x), int(y)
-                #         # 終點的 2D int 座標 (給 cv2 用)
-                #         endAddress2D = int(reye_x), int(y)
+                    # 唇角的線
+                    startID, endID = LIP_CORNER
 
-                #         self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
+                    lm_start = faceLms.landmark[startID]
+                    x3, y3, z3 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
+                    # # 起點的 2D int 座標 (給 cv2 用)
+                    # startAddress2D = int(x1), int(y1)
+                    lm_end = faceLms.landmark[endID]
+                    x4, y4, z4 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
 
-                #         square_point_y.append(y)
+                    y_average_bottom = (y3 + y4) / 2
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(x1), int(y_average_bottom)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x2), int(y_average_bottom)
+                    # draw specific line user defined (只畫線, 不算距離)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                #         print(f'y1:{square_point_y[0]}, y2:{square_point_y[1]}, y3:{square_point_y[2]}, y4:{square_point_y[3]}')
+                    # 畫左邊的線
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(x1), int(y_average_top)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x1), int(y_average_bottom)
+                    # draw specific line user defined (只畫線, 不算距離)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                #         width_x = reye_x - leye_x
+                    # 畫右邊的線
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(x2), int(y_average_top)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x2), int(y_average_bottom)
+                    # draw specific line user defined (只畫線, 不算距離)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
-                #         ratio = width_x / 5
-
-                #         print(f'四角比例 {ratio}')
-                #         print('------------')
+                    four_square_ratio = (x2 - x1) / (y_average_bottom - y_average_top)
+                    print(f'臉部四角形長寬分別為: {(x2 - x1)}, {(y_average_bottom - y_average_top)}')
+                    print(f'臉部四角形比例為: {four_square_ratio}')
+                    print('------------')
 
                 #美人角
                 elif drawFortuneTelling == "美人角":
@@ -331,7 +364,6 @@ class FaceMeshDetector():
                             startID, endID = value
                            
                             lm_start = faceLms.landmark[startID]
-                            
                             x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
                             # 起點的 2D int 座標 (給 cv2 用)
                             startAddress2D = int(x1), int(y1)
@@ -339,7 +371,6 @@ class FaceMeshDetector():
                             x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                             # 終點的 2D int 座標 (給 cv2 用)
                             endAddress2D = int(x2), int(y2)
-                            
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
                             
@@ -361,7 +392,6 @@ class FaceMeshDetector():
                             startID, endID = value
                            
                             lm_start = faceLms.landmark[startID]
-                            
                             x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
                             # 起點的 2D int 座標 (給 cv2 用)
                             startAddress2D = int(x1), int(y1)
@@ -369,7 +399,6 @@ class FaceMeshDetector():
                             x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                             # 終點的 2D int 座標 (給 cv2 用)
                             endAddress2D = int(x2), int(y2)
-                            
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, RED)
                             
@@ -388,7 +417,6 @@ class FaceMeshDetector():
                             startID, endID = value
                            
                             lm_start = faceLms.landmark[startID]
-                            
                             x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
                             # 起點的 2D int 座標 (給 cv2 用)
                             startAddress2D = int(x1), int(y1)
@@ -396,7 +424,6 @@ class FaceMeshDetector():
                             x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                             # 終點的 2D int 座標 (給 cv2 用)
                             endAddress2D = int(x2), int(y2)
-                            
                             # draw specific line user defined (只畫線, 不算距離)
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
                             
@@ -424,7 +451,6 @@ class FaceMeshDetector():
                     startAddress2D = int(left_x), int(top_y)
                     # 終點的 2D int 座標 (給 cv2 用)
                     endAddress2D = int(right_x), int(top_y)
-
                     # 畫線
                     self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
@@ -432,16 +458,49 @@ class FaceMeshDetector():
                     startAddress2D = int(right_x), int(top_y)
                     # 終點的 2D int 座標 (給 cv2 用)
                     endAddress2D = int(right_x), int(bottom_y)
-
-                    middle_x = (int(left_x) + int(right_x)) / 2
-                    middle_y = (int(top_y) + int(bottom_y)) / 2
-
                     # 畫線
                     self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                     face_ratio = total_y / total_x
 
                     print(f'臉部比例為-> 1:{face_ratio}')
+                    print('------------')
+
+                # 鼻子大小
+                elif drawFortuneTelling == "鼻子大小":
+                    # 開始計算鼻翼
+                    startID, endID = ALAE_OF_NOSE
+                    
+                    lm_start = faceLms.landmark[startID]
+                    x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(x1), int(y1)
+                    lm_end = faceLms.landmark[endID]
+                    x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x2), int(y2)
+                    # draw specific line user defined (只畫線, 不算距離)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
+                    alae_of_nose_ratio = (x2 - x1) / total_x
+                    print(f'鼻子寬度佔臉部寬度比例為: {alae_of_nose_ratio}')
+                    
+                    # 開始計算眼頭
+                    startID, endID = HEAD_OF_EYE
+                    
+                    lm_start = faceLms.landmark[startID]
+                    x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(x1), int(y1)
+                    lm_end = faceLms.landmark[endID]
+                    x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x2), int(y2)
+                    # draw specific line user defined (只畫線, 不算距離)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
+                    head_of_eye_ratio = (x2 - x1) / total_x
+                    print(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio}')
                     print('------------')
 
                 face = []
