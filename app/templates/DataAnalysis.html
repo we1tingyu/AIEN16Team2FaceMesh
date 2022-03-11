@@ -1,444 +1,455 @@
 <!DOCTYPE html>
 <html lang="zh-TW">
-    <head>
-        <meta charset="UTF-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="description" content="" />
-        <meta name="author" content="" />
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="" />
+  <meta name="author" content="" />
 
-        <title>Data</title>
+  <title>Data</title>
 
-        <!-- Favicon-->
-        <link type="image/x-icon" rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}"/>
-        
-        <!-- Bootstrap icons-->
-        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <!-- Favicon-->
+  <link type="image/x-icon" rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}"/>
+  
+  <!-- Bootstrap icons-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/fontawesome.css">
+  <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
+  <link rel="stylesheet" href="assets/css/owl.css">
+
+  <style>
+    .table-c {
+      height: 80px;
+    }
+
+    .table-roll tbody {
+      display:block;
+      height:450px;
+      overflow-y:scroll;
+    }
+
+    .table-roll thead, tbody tr {
+      display:table;
+      width:60%;
+      table-layout:fixed;
+    }
+
+    .table-roll thead {
+      width: calc( 100% )
+    }
     
-        <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}"/>
+    .table-roll thead th{ background:#ccc;}
 
-        <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-        <link rel="stylesheet" href="assets/css/fontawesome.css">
-        <link rel="stylesheet" href="assets/css/templatemo-sixteen.css">
-        <link rel="stylesheet" href="assets/css/owl.css">
+    .button-camera {
+      float: left;
+      border-radius: 50%;
+      position: relative;
+      border: none;
+      font-size: 28px;
+      color: #FFFFFF;
+      text-align: center;
+      -webkit-transition-duration: 0.4s; /* Safari */
+      transition-duration: 0.4s;
+      text-decoration: none;
+      overflow: hidden;
+      cursor: pointer;
+    }
 
-        <style>
-          .table-c {
-            height: 80px;
-          }
+    .button-camera:after {
+      content: "";
+      background: #ee9090;
+      display: block;
+      position: absolute;
+      padding-top: 300%;
+      padding-left: 350%;
+      margin-left: -20px!important;
+      margin-top: -120%;
+      opacity: 0;
+      transition: all 0.8s
+    }
 
-          .table-roll tbody {
-            display:block;
-            height:450px;
-            overflow-y:scroll;
-          }
+    .button-camera:active:after {
+      padding: 0;
+      margin: 0;
+      opacity: 1;
+      transition: 0s
+    }
 
-          .table-roll thead, tbody tr {
-            display:table;
-            width:60%;
-            table-layout:fixed;
-          }
+    .button-go {
+      display: inline-block;
+      border-radius: 4px;
+      background-color: #ee2424;
+      border: none;
+      color: #FFFFFF;
+      text-align: center;
+      font-size: 20px;
+      padding: 15px;
+      width: 150px;
+      border-radius: 20px;
+      transition: all 0.5s;
+      cursor: pointer;
+      margin: 5px;
+      float: right;
+    }
+    
+    .button-go span {
+      cursor: pointer;
+      display: inline-block;
+      position: relative;
+      transition: 0.5s;
+    }
+    
+    .button-go span:after {
+      content: '»';
+      position: absolute;
+      opacity: 0;
+      top: 0;
+      transition: 0.5s;
+    }
+    
+    .button-go:hover span {
+      padding-right: 25px;
+    }
+    
+    .button-go:hover span:after {
+      opacity: 1;
+      right: 0;
+    }
 
-          .table-roll thead {
-            width: calc( 100% )
-          }
-          
-          .table-roll thead th{ background:#ccc;}
+    .button-click {
+      display: inline-block;
+      padding: 15px 25px;
+      font-size: 20px;
+      cursor: pointer;
+      text-align: center;   
+      text-decoration: none;
+      outline: none;
+      color: #fff;
+      background-color: #f07070;
+      border: none;
+      border-radius: 50px;
+      box-shadow: 0 8px rgb(179, 178, 178);
+    }
+    
+    .button-click:hover {background-color: #f12929}
+    
+    .button-click:active {
+      background-color: #d61a1a;
+      box-shadow: 0 10px rgb(141, 140, 140);
+      transform: translateY(4px);
+    }
+    </style>
 
-          .button-camera {
-            float: left;
-            border-radius: 50%;
-            position: relative;
-            border: none;
-            font-size: 28px;
-            color: #FFFFFF;
-            text-align: center;
-            -webkit-transition-duration: 0.4s; /* Safari */
-            transition-duration: 0.4s;
-            text-decoration: none;
-            overflow: hidden;
-            cursor: pointer;
-          }
+    <script>
+      x=1;
+      function change(){
+        x++;
+        document.getElementById("photo").src="images/camera-wait.png";
+      }
+    </script>
 
-          .button-camera:after {
-            content: "";
-            background: #ee9090;
-            display: block;
-            position: absolute;
-            padding-top: 300%;
-            padding-left: 350%;
-            margin-left: -20px!important;
-            margin-top: -120%;
-            opacity: 0;
-            transition: all 0.8s
-          }
+  </head>
 
-          .button-camera:active:after {
-            padding: 0;
-            margin: 0;
-            opacity: 1;
-            transition: 0s
-          }
+  <body class="d-flex flex-column">
 
-          .button-go {
-            display: inline-block;
-            border-radius: 4px;
-            background-color: #ee2424;
-            border: none;
-            color: #FFFFFF;
-            text-align: center;
-            font-size: 20px;
-            padding: 15px;
-            width: 150px;
-            border-radius: 20px;
-            transition: all 0.5s;
-            cursor: pointer;
-            margin: 5px;
-            float: right;
-          }
-          
-          .button-go span {
-            cursor: pointer;
-            display: inline-block;
-            position: relative;
-            transition: 0.5s;
-          }
-          
-          .button-go span:after {
-            content: '»';
-            position: absolute;
-            opacity: 0;
-            top: 0;
-            transition: 0.5s;
-          }
-          
-          .button-go:hover span {
-            padding-right: 25px;
-          }
-          
-          .button-go:hover span:after {
-            opacity: 1;
-            right: 0;
-          }
+    <!-- ***** Preloader Start ***** 頁面跳轉-->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
 
-          .button-click {
-            display: inline-block;
-            padding: 15px 25px;
-            font-size: 20px;
-            cursor: pointer;
-            text-align: center;   
-            text-decoration: none;
-            outline: none;
-            color: #fff;
-            background-color: #f07070;
-            border: none;
-            border-radius: 50px;
-            box-shadow: 0 8px rgb(179, 178, 178);
-          }
-          
-          .button-click:hover {background-color: #f12929}
-          
-          .button-click:active {
-            background-color: #d61a1a;
-            box-shadow: 0 10px rgb(141, 140, 140);
-            transform: translateY(4px);
-          }
-          </style>
-
-          <script>
-            x=1;
-            function change(){
-              x++;
-              document.getElementById("photo").src="images/camera-wait.png";
-            }
-          </script>
-
-    </head>
-
-    <body class="d-flex flex-column">
-
-        <!-- ***** Preloader Start ***** 頁面跳轉-->
-        <div id="preloader">
-            <div class="jumper">
-                <div></div>
-                <div></div>
-                <div></div>
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand" href="Home.html"><h2>AIEN16-2 <em>面相分析</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="Home.html">首頁</a>
+                    </li> 
+                    <li class="nav-item">
+                    <a class="nav-link" href="Test.html">功能體驗</a>
+                    </li>
+                    <li class="nav-item active">
+                    <a class="nav-link" href="DataAnalysis.html">數據分析</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="Aesthetics.html">美學標準</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="About.html">關於我們</a>
+                      </li>
+                </ul>
+                <ul class="toolbar-menu toolbar-menu--member">
+                  <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
+                  <li class="toolbar-item"><a class="text-underline-none" href="Signup.html">註冊</a></li>
+                </ul>
             </div>
-        </div>  
-        <!-- ***** Preloader End ***** -->
-        <header class="">
-            <nav class="navbar navbar-expand-lg">
-              <div class="container">
-                <a class="navbar-brand" href="Home.html"><h2>AIEN16-2 <em>面相分析</em></h2></a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-                  <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse" id="navbarResponsive">
-                    <ul class="navbar-nav ml-auto">
-                        <li class="nav-item">
-                        <a class="nav-link" href="Home.html">首頁</a>
-                        </li> 
-                        <li class="nav-item">
-                        <a class="nav-link" href="Test.html">功能體驗</a>
-                        </li>
-                        <li class="nav-item active">
-                        <a class="nav-link" href="DataAnalysis.html">數據分析</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="Aesthetics.html">美學標準</a>
-                        </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="About.html">關於我們</a>
-                         </li>
-                    </ul>
-                    <ul class="toolbar-menu toolbar-menu--member">
-                      <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
-                      <li class="toolbar-item"><a class="text-underline-none" href="Signup.html">註冊</a></li>
-                    </ul>
-                </div>
-              </div>
-            </nav>
-        </header>
+          </div>
+        </nav>
+    </header>
 
-        <!-- Page Content -->
-        <div class="page-heading about-heading header-text">
-            <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                <div class="text-content">
-                    <h4>數據分析</h4>
-                    <h2>Data Analysis</h2>
-                </div>
-                </div>
+    <!-- Page Content -->
+    <div class="page-heading about-heading header-text">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="text-content">
+                <h4>數據分析</h4>
+                <h2>Data Analysis</h2>
             </div>
             </div>
         </div>
+        </div>
+    </div>
 
-        <div class="best-features about-features">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="section-heading">
-                  <h2>開始測試 : 面相數據</h2>
+    <div class="best-features about-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>開始測試 : 面相數據</h2>
+            </div>
+            <div class="col-md-6">
+              <table class="table-c">
+                <tr>
+                  <td><img src="images/camera.png"></td>
+                  <td>啟動相機</td>
+                  <td><img id="photo" src="images/camera-open.png" onclick="change()"></td>
+                  <td>拍照</td>
+                </tr>
+              </table>
+              <p></p>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+              <img src="images/臉譜.png" alt="">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="left-content">
+              <h4>利用即時影像圖像分析面相及完美比例</h4>
+              <table class="table-roll">
+                <thead>
+                    <tr>
+                        <th colspan="2">各項指標數據</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="images/三庭.jpg"></td>
+                    <td>三庭</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/五眼.jpg"></td>
+                    <td>五眼</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/黃金比例.jpg"></td>
+                    <td>黃金比例</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/四角比例.jpg"></td>
+                    <td>四角比例</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/美人角.jpg"></td>
+                    <td>美人角</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/三點線.jpg"></td>
+                    <td>三點線</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/側臉線.jpg"></td>
+                    <td>側臉線</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/四高三低.jpg"></td>
+                    <td>四高三低</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/鼻子大小.jpg"></td>
+                    <td>三庭</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p></p>
+
+              <a href="#Analysis"><button class="button-go" style="vertical-align:middle"><span>分析結果 </span></button></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="best-features about-features" id="Analysis">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p></p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="best-features about-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>開始測試 : 面相分析</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <button class="button-click" onclick="Function_video_feed('臉部網格圖')">臉部特徵網格圖</button>
+            <button class="button-click" onclick="Function_video_feed('臉部外框圖')">臉部外框圖</button>
+            <button class="button-click" onclick="Function_video_feed('五官特徵圖')">臉部五官特徵圖</button>
+          <br/></p>
+          <p>
+            <button class="button-click" onclick="Function_video_feed('三庭')">三庭</button>
+            <button class="button-click" onclick="Function_video_feed('五眼')">五眼</button>
+            <button class="button-click" onclick="Function_video_feed('黃金比例')">黃金比例</button>
+            <button class="button-click" onclick="Function_video_feed('四角比例')">四角比例</button>
+          <br/></p>
+          <p>
+            <button class="button-click" onclick="Function_video_feed('美人角')">美人角</button>
+            <button class="button-click" onclick="Function_video_feed('三點線')">三點線</button>
+            <button class="button-click" onclick="Function_video_feed('側臉線')">側臉線</button>
+            <button class="button-click" onclick="Function_video_feed('四高三低')">四高三低</button>
+            <button class="button-click" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
+          </p>
+          </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
                 </div>
                 <div class="col-md-6">
-                  <table class="table-c">
-                    <tr>
-                      <td><img src="images/camera.png"></td>
-                      <td>啟動相機</td>
-                      <td><img id="photo" src="images/camera-open.png" onclick="change()"></td>
-                      <td>拍照</td>
-                    </tr>
-                  </table>
+                  <div class="right-image">
+                    <img src="images/臉譜.png" alt="">
+                  </div>
                 </div>
-              </div>
-              <div class="col-md-6">
-                <div class="right-image">
-                  <img src="images/臉譜.png" alt="">
-                </div>
-              </div>
-
-              <div class="col-md-6">
-                <div class="left-content">
-                  <h4>利用即時影像圖像分析面相及完美比例</h4>
-                  <table class="table-roll">
-                    <thead>
-                        <tr>
-                            <th colspan="2">各項指標數據</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td><img src="images/三庭.jpg"></td>
-                        <td>三庭</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/五眼.jpg"></td>
-                        <td>五眼</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/黃金比例.jpg"></td>
-                        <td>黃金比例</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/四角比例.jpg"></td>
-                        <td>四角比例</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/美人角.jpg"></td>
-                        <td>美人角</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/三點線.jpg"></td>
-                        <td>三點線</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/側臉線.jpg"></td>
-                        <td>側臉線</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/四高三低.jpg"></td>
-                        <td>四高三低</td>
-                      </tr>
-                      <tr>
-                        <td><img src="images/鼻子大小.jpg"></td>
-                        <td>三庭</td>
-                      </tr>
-                    </tbody>
-                  </table>
-
-                  <p></p>
-
-                  <a href="Analysis.html"><button class="button-go" style="vertical-align:middle"><span>分析結果 </span></button></a>
-
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="best-features about-features">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-                <div class="section-heading">
-                  <h2>開始測試 : 面相分析</h2>
-                </div>
-              </div>
-              <div class="col-md-8">
-              <p>
-                <button class="button-click" onclick="Function_video_feed('臉部網格圖')">臉部特徵網格圖</button>
-                <button class="button-click" onclick="Function_video_feed('臉部外框圖')">臉部外框圖</button>
-                <button class="button-click" onclick="Function_video_feed('五官特徵圖')">臉部五官特徵圖</button>
-              <br/></p>
-              <p>
-                <button class="button-click" onclick="Function_video_feed('三庭')">三庭</button>
-                <button class="button-click" onclick="Function_video_feed('五眼')">五眼</button>
-                <button class="button-click" onclick="Function_video_feed('黃金比例')">黃金比例</button>
-                <button class="button-click" onclick="Function_video_feed('四角比例')">四角比例</button>
-              <br/></p>
-              <p>
-                <button class="button-click" onclick="Function_video_feed('美人角')">美人角</button>
-                <button class="button-click" onclick="Function_video_feed('三點線')">三點線</button>
-                <button class="button-click" onclick="Function_video_feed('側臉線')">側臉線</button>
-                <button class="button-click" onclick="Function_video_feed('四高三低')">四高三低</button>
-                <button class="button-click" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
-              <br/></p>
-              </div>
-            </div>
-          </div>
-        </div>
-    
-        <div class="best-features about-features">
-          <div class="container">
-            <div class="row">
-              <div class="col-md-12">
-              </div>
-              <div class="col-md-6">
-                <div class="right-image">
-                  <img src="images/臉譜.png" alt="">
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="left-content">
-                  <h4>特徵說明</h4>              
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="latest-products">
-          <div class="container">
-            <div class="row">
-  
-              <div class="col-md-12">
-                <div class="section-heading">
-                  <h2>實際應用</h2>
-                </div>
-              </div>
-              <div class="col-md-4">
-                <div class="product-item">
-                  <a href="#"><img src="images/cut.jpg" alt=""></a>
-                  <div class="down-content">
-                    <a href="#"><h4>整形</h4></a>
-                    <h6>Plastic surgery</h6>
-                    <p>EX : 開眼頭 墊下巴 削骨</p>
+                <div class="col-md-6">
+                  <div class="left-content">
+                    <h4>特徵說明</h4>              
                   </div>
                 </div>
               </div>
-              <div class="col-md-4">
-                <div class="product-item">
-                  <a href="#"><img src="images/eyebrow.PNG" alt=""></a>
-                  <div class="down-content">
-                    <a href="#"><h4>化妝</h4></a>
-                    <h6>Make up</h6>
-                    <p>EX : 畫眉三點定位法</p>
-                  </div>
-                </div>
-              </div>
-  
-              <div class="col-md-4">
-                <div class="product-item">
-                  <a href="#"><img src="images/hair.jpg" alt=""></a>
-                  <div class="down-content">
-                    <a href="#"><h4>髮型</h4></a>
-                    <h6>Hairstyle</h6>
-                    <p>EX : 高額頭適合留瀏海</p>
-                  </div>
-                </div>
-              </div>
-  
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>實際應用</h2>
             </div>
           </div>
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="#"><img src="images/cut.jpg" alt=""></a>
+              <div class="down-content">
+                <a href="#"><h4>整形</h4></a>
+                <h6>Plastic surgery</h6>
+                <p>EX : 開眼頭 墊下巴 削骨</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="#"><img src="images/eyebrow.PNG" alt=""></a>
+              <div class="down-content">
+                <a href="#"><h4>化妝</h4></a>
+                <h6>Make up</h6>
+                <p>EX : 畫眉三點定位法</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="#"><img src="images/hair.jpg" alt=""></a>
+              <div class="down-content">
+                <a href="#"><h4>髮型</h4></a>
+                <h6>Hairstyle</h6>
+                <p>EX : 高額頭適合留瀏海</p>
+              </div>
+            </div>
+          </div>
+
         </div>
+      </div>
+    </div>
 
-        <footer>
-            <div class="container">
-            <div class="row">
-                <div class="col-md-12">
-                <div class="inner-content">
-                    <p>AIEN16 &copy; 2022 Second Group
-                </div>
-                </div>
+    <footer>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="inner-content">
+                <p>AIEN16 &copy; 2022 Second Group
             </div>
             </div>
-        </footer>
+        </div>
+        </div>
+    </footer>
 
 
-        <!-- Bootstrap core JavaScript -->
-        <script src="vendor/jquery/jquery.min.js"></script>
-        <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
 
-        <!-- Additional Scripts -->
-        <script src="assets/js/custom.js"></script>
-        <script src="assets/js/owl.js"></script>
-        <script src="assets/js/slick.js"></script>
-        <script src="assets/js/isotope.js"></script>
-        <script src="assets/js/accordions.js"></script>
+    <!-- Additional Scripts -->
+    <script src="assets/js/custom.js"></script>
+    <script src="assets/js/owl.js"></script>
+    <script src="assets/js/slick.js"></script>
+    <script src="assets/js/isotope.js"></script>
+    <script src="assets/js/accordions.js"></script>
 
 
-        <script language = "text/Javascript"> 
-            cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
-            function clearField(t){                   //declaring the array outside of the
-            if(! cleared[t.id]){                      // function makes it static and global
-                cleared[t.id] = 1;  // you could use true and false, but that's more typing
-                t.value='';         // with more chance of typos
-                t.style.color='#fff';
-                }
+    <script language = "text/Javascript"> 
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t){                   //declaring the array outside of the
+        if(! cleared[t.id]){                      // function makes it static and global
+            cleared[t.id] = 1;  // you could use true and false, but that's more typing
+            t.value='';         // with more chance of typos
+            t.style.color='#fff';
             }
-        </script>
+        }
+    </script>
 
-        <!-- Bootstrap core JS-->
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
-        <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
-        <script>
-            function Function_video_feed(style) {
-              document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
-            }
-      
-          </script>
-    </body>
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <script>
+        function Function_video_feed(style) {
+          document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+        }
+
+    </script>
+  </body>
 </html>
