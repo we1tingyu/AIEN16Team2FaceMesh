@@ -80,7 +80,7 @@
             transition: 0s
           }
 
-          .button {
+          .button-go {
             display: inline-block;
             border-radius: 4px;
             background-color: #ee2424;
@@ -97,14 +97,14 @@
             float: right;
           }
           
-          .button span {
+          .button-go span {
             cursor: pointer;
             display: inline-block;
             position: relative;
             transition: 0.5s;
           }
           
-          .button span:after {
+          .button-go span:after {
             content: '»';
             position: absolute;
             opacity: 0;
@@ -112,13 +112,36 @@
             transition: 0.5s;
           }
           
-          .button:hover span {
+          .button-go:hover span {
             padding-right: 25px;
           }
           
-          .button:hover span:after {
+          .button-go:hover span:after {
             opacity: 1;
             right: 0;
+          }
+
+          .button-click {
+            display: inline-block;
+            padding: 15px 25px;
+            font-size: 20px;
+            cursor: pointer;
+            text-align: center;   
+            text-decoration: none;
+            outline: none;
+            color: #fff;
+            background-color: #f07070;
+            border: none;
+            border-radius: 50px;
+            box-shadow: 0 8px rgb(179, 178, 178);
+          }
+          
+          .button-click:hover {background-color: #f12929}
+          
+          .button-click:active {
+            background-color: #d61a1a;
+            box-shadow: 0 10px rgb(141, 140, 140);
+            transform: translateY(4px);
           }
           </style>
 
@@ -159,10 +182,7 @@
                         <a class="nav-link" href="Test.html">功能體驗</a>
                         </li>
                         <li class="nav-item active">
-                        <a class="nav-link" href="Data.html">面相數據</a>
-                         </li>
-                        <li class="nav-item">
-                        <a class="nav-link" href="Analysis.html">面相分析</a>
+                        <a class="nav-link" href="DataAnalysis.html">數據分析</a>
                         </li>
                         <li class="nav-item">
                         <a class="nav-link" href="Aesthetics.html">美學標準</a>
@@ -186,8 +206,8 @@
             <div class="row">
                 <div class="col-md-12">
                 <div class="text-content">
-                    <h4>面相數據</h4>
-                    <h2>Face Data</h2>
+                    <h4>數據分析</h4>
+                    <h2>Data Analysis</h2>
                 </div>
                 </div>
             </div>
@@ -269,8 +289,59 @@
 
                   <p></p>
 
-                  <a href="Analysis.html"><button class="button" style="vertical-align:middle"><span>分析結果 </span></button></a>
+                  <a href="Analysis.html"><button class="button-go" style="vertical-align:middle"><span>分析結果 </span></button></a>
 
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="best-features about-features">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+                <div class="section-heading">
+                  <h2>開始測試 : 面相分析</h2>
+                </div>
+              </div>
+              <div class="col-md-8">
+              <p>
+                <button class="button-click" onclick="Function_video_feed('臉部網格圖')">臉部特徵網格圖</button>
+                <button class="button-click" onclick="Function_video_feed('臉部外框圖')">臉部外框圖</button>
+                <button class="button-click" onclick="Function_video_feed('五官特徵圖')">臉部五官特徵圖</button>
+              <br/></p>
+              <p>
+                <button class="button-click" onclick="Function_video_feed('三庭')">三庭</button>
+                <button class="button-click" onclick="Function_video_feed('五眼')">五眼</button>
+                <button class="button-click" onclick="Function_video_feed('黃金比例')">黃金比例</button>
+                <button class="button-click" onclick="Function_video_feed('四角比例')">四角比例</button>
+              <br/></p>
+              <p>
+                <button class="button-click" onclick="Function_video_feed('美人角')">美人角</button>
+                <button class="button-click" onclick="Function_video_feed('三點線')">三點線</button>
+                <button class="button-click" onclick="Function_video_feed('側臉線')">側臉線</button>
+                <button class="button-click" onclick="Function_video_feed('四高三低')">四高三低</button>
+                <button class="button-click" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
+              <br/></p>
+              </div>
+            </div>
+          </div>
+        </div>
+    
+        <div class="best-features about-features">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-12">
+              </div>
+              <div class="col-md-6">
+                <div class="right-image">
+                  <img src="images/臉譜.png" alt="">
+                </div>
+              </div>
+              <div class="col-md-6">
+                <div class="left-content">
+                  <h4>特徵說明</h4>              
                 </div>
               </div>
             </div>
