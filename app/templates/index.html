@@ -70,6 +70,10 @@
                                 </div>
                                 </br>
                                 <div class="col-lg-6 col-xl-7" style="height: auto;width: auto;">
+                                    <button id="getFaceData">取得資料</button>
+                                    <div id="jsonOutput" style="width:400px;display:table-cell">
+                                        <p>結果:</p>
+                                    </div>
                                     <div class="bg-featured-blog" >
                                         <img id="image2" src="">
                                     </div>
@@ -109,13 +113,42 @@
         <!-- jquery -->
         <script src="http://code.jquery.com/jquery-latest.js"></script>
         <script>
+            var faceParam=30;
+        data={ "param": faceParam };
+
             function Function_video_feed(style) {
               document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+            
+                // $("#getFaceData").click(function(event){            
+                    $.ajax({
+                        type:"post",
+                        url:"http://localhost:5000/getFaceData",
+                        contentType:"application/json",
+                        data:JSON.stringify(data),
+                    }).done(function(data){                
+                        $("#jsonOutput").html(JSON.stringify(data));
+                    }).fail(function(err){
+                        alert(err.responseText);
+                    });
+                // });
             }
             function Function_stream_live(style) {
               document.getElementById("image2").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
             }
       
+            
+            $("#getFaceData").click(function(event){            
+                $.ajax({
+                    type:"post",
+                    url:"http://localhost:5000/getFaceData",
+                    contentType:"application/json",
+                    data:JSON.stringify(data),
+                }).done(function(data){                
+                    $("#jsonOutput").html(JSON.stringify(data));
+                }).fail(function(err){
+                    alert(err.responseText);
+                });
+            });
           </script>
     </body>
 </html>
