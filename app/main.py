@@ -13,10 +13,10 @@ from takePicture0310 import streamlive
 
 # app = Flask(__name__, '/')
 import flask
-from flask_cors import CORS
+# from flask_cors import CORS
 
 app = flask.Flask(__name__, '/')
-CORS(app)
+# CORS(app)
 
 # 裝飾器是告訴 Flask，哪個 URL 應該觸發我們的函式。
 # 斜線代表的就是網站的根目錄，可以疊加。

@@ -110,10 +110,10 @@ def streamlive(camera_status):
             b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
         
         if camera_status=='拍照' :
-            if txt=='幹你老蘇哩 靠太近啦!' or  txt=='請將臉部靠近鏡頭' :
+            if not txt=='已符合測量條件,請按下拍照' :
+                print("不符條件")
                 break
-            else:
-                pass
+            
         
        
                
