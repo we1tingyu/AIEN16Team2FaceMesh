@@ -10,7 +10,13 @@ from takePicture0310 import streamlive
 # Flask 類別 初始化時 傳入的 __name__ 參數，代表當前模組的名稱。
 # 為固定用法，以便讓 Flask 知道在哪裡尋找資源。
 # (例如: 模板和靜態文件)
-app = Flask(__name__, '/')
+
+# app = Flask(__name__, '/')
+import flask
+from flask_cors import CORS
+
+app = flask.Flask(__name__, '/')
+CORS(app)
 
 # 裝飾器是告訴 Flask，哪個 URL 應該觸發我們的函式。
 # 斜線代表的就是網站的根目錄，可以疊加。
@@ -44,6 +50,12 @@ def video_feed(style):
     return Response(faceMeshDetection(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling),
                 mimetype='multipart/x-mixed-replace; boundary=frame')
     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
+
+@app.route('/getFaceData', methods=["POST"])
+def getFaceData():
+    #print(flask.request.json["param"])
+    data={ "臉部周長":flask.request.json["param"]**2}    
+    return flask.jsonify(data)
 
 # stream live
 @app.route('/stream_live/<string:style>')

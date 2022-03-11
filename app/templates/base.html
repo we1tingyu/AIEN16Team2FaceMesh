@@ -12,6 +12,7 @@
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-sixteen.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}" />
+    <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/dada.css') }}" />
 
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/custom.js') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/isotope.js') }}" />
@@ -55,17 +56,17 @@
                         <li class="nav-item">
                             <a class="nav-link" href="Home.html">首頁</a>
                         </li>
-                        <li class="nav-item active">
+                        <li class="nav-item">
                             <a class="nav-link" href="Test.html">功能體驗</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="Data.html">面相數據</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="Analysis.html">面相分析</a>
+                            <a class="nav-link" href="DataAnalysis.html">數據分析</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link" href="Aesthetics.html">美學標準</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="About.html">關於我們</a>
                         </li>
                     </ul>
                     <ul class="toolbar-menu toolbar-menu--member">
@@ -81,34 +82,42 @@
 
     <!-- Page Content -->
     {% block banner %}
+    <!-- Banner Starts Here -->
     <div class="banner header-text">
         <div class="owl-banner owl-carousel">
-            <div class="banner-item-01">
-                <div class="text-content">
-                    <h4>面相分析</h4>
-                    <h2>New Arrivals On Sale</h2>
-                </div>
-            </div>
-            <div class="banner-item-02">
-                <div class="text-content">
-                    <h4>Flash Deals</h4>
-                    <h2>Get your best products</h2>
-                </div>
-            </div>
-            <div class="banner-item-03">
-                <div class="text-content">
-                    <h4>Last Minute</h4>
-                    <h2>Grab last minute deals</h2>
-                </div>
-            </div>
-            <div class="banner-item-01">
-                <div class="text-content">
-                    <h4>面相分析</h4>
-                    <h2>New Arrivals On Sale</h2>
-                </div>
+        <div class="banner-item-01">
+            <div class="text-content">
+            <h4>AIEN16-2</h4>
+            <h2>AI Mediapipe Face Analysis</h2>
             </div>
         </div>
+        <div class="banner-item-02">
+            <div class="text-content">
+            <h4>功能體驗</h4>
+            <h2>Functional Experience</h2>
+            </div>
+        </div>
+        <div class="banner-item-03">
+            <div class="text-content">
+            <h4>數據分析</h4>
+            <h2>Data Analysis</h2>
+            </div>
+        </div>
+        <div class="banner-item-05">
+            <div class="text-content">
+            <h4>美學標準</h4>
+            <h2>Aesthetics Criterion</h2>
+            </div>
+        </div>
+        <div class="banner-item-04">
+            <div class="text-content">
+            <h4>關於我們</h4>
+            <h2>About Us</h2>
+            </div>
+        </div>
+        </div>
     </div>
+    <!-- Banner Ends Here -->
     {% endblock banner %}
 
 
