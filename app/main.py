@@ -4,7 +4,7 @@ from flask import Flask, render_template, Response
 
 from faceMeshProjectForFACE_OVAL import faceMeshDetection
 # from app3 import faceMeshDetection
-from takePicture import faceCondition
+from takePicture0310 import streamlive
 # from faceMeshProjectForFlask import faceMeshDetection_test
 #
 # Flask 類別 初始化時 傳入的 __name__ 參數，代表當前模組的名稱。
@@ -49,7 +49,7 @@ def video_feed(style):
 @app.route('/stream_live/<string:style>')
 def stream_live(style):          
     # photograph = style
-    return Response(faceCondition(style),
+    return Response(streamlive(style),
                 mimetype='multipart/x-mixed-replace; boundary=frame')
     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
 

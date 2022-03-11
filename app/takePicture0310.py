@@ -1,6 +1,8 @@
 # coding:utf-8
 import cv2
 from datetime import datetime
+
+from flask import Flask
 from faceMeshProjectForFACE_OVAL import FaceMeshDetector
 from PIL import Image, ImageFont, ImageDraw
 import numpy
@@ -13,7 +15,7 @@ def add_txt_to_image(img, txt='', position=(10, 40)):
     # cv2.putText(影像, 文字, 座標, 字型, 大小, 顏色, 線條寬度, 線條種類)
     # cv2.putText(img, str,  position ,  font ,  1, (0, 255, 255), 1, cv2.LINE_AA)
 
-    img_PIL = Image.fromarray(cv2.cvtColor(img, cv2.COLOR_BGR2RGB))
+    img_PIL = Image.fromarray(cv2.cvtColor(img.copy(), cv2.COLOR_BGR2RGB))
 
     # font = ImageFont.load_default()
     font = ImageFont.truetype(
@@ -59,57 +61,63 @@ def get_txt(img):
     
     return txt
 
-def faceCondition(camera_status,
-                  # msg='',
-                  # msgnew='',                  
-                  ):
-    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  #建立一個 VideoCapture 物件 0號設備
-
-    global txt        
+def faceCondition(camera_status,cap,txt,img):          
    
     print(camera_status) 
+    print(txt)         
     
-    flag=True
-    if camera_status == "拍照" and txt=='已符合測量條件,請按下拍照':
-        flag = False
-    elif camera_status == "啟動" or camera_status == "拍照":        
-        flag = True
+    if camera_status == "拍照" and txt=='已符合測量條件,請按下拍照' :
+        time = datetime.now().strftime('%Y%m%d%H%M%S')
+        cv2.imencode('.jpg',
+                    img)[1].tofile("./app/static/images/" + time + ".jpg")
+        #得到長寬
+        print(cap.get(3))        
+        print(cap.get(4))
+        print("success to save:" + time + ".jpg")
+        print("-------------------------")
+        cap.release()
+        cv2.destroyAllWindows()  #刪除建立的全部視窗
+        
+        return img
+
+    # elif camera_status == "拍照" :
+    #     pass
+        
     
-
-    while cap.isOpened()  :  #迴圈讀取每一幀
-
+def streamlive(camera_status):
+    cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  #建立一個 VideoCapture 物件 0號設備
+    while cap.isOpened() and cv2.waitKey(1) :  #迴圈讀取每一幀
+        
         # if k == ord('q'): #若檢測到按鍵 ‘q’，退出q
         #     break
         ret, img = cap.read()
 
         if not ret:
             print("camera byebye")
-            continue
+            break
 
         img = cv2.flip(img, 1)  # 解決鏡頭左右相反的問題   
 
         txt= get_txt(img)
-        img = add_txt_to_image(img, txt)        
-        
-        if not flag :
+        imgtxt = add_txt_to_image(img, txt)   
 
-            time = datetime.now().strftime('%Y%m%d%H%M%S')
-            cv2.imencode('.jpg',
-                        img)[1].tofile("./app/static/images/" + time + ".jpg")
-            #得到長寬
-            print(cap.get(3))        
-            print(cap.get(4))
-            print("success to save:" + time + ".jpg")
-            print("-------------------------")
-            cv2.destroyAllWindows()  #刪除建立的全部視窗
-            
-            return img
+        img = faceCondition(camera_status,cap,txt,img)     
         
-        elif flag :    
-            # 傳送至前端
-            frame = cv2.imencode('.jpg', img)[1].tobytes()
-            yield (b'--frame\r\n'
-                b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+                   
+        # 傳送至前端
+        frame = cv2.imencode('.jpg', imgtxt)[1].tobytes()
+        yield (b'--frame\r\n'
+            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+        
+        if camera_status=='拍照' :
+            if txt=='幹你老蘇哩 靠太近啦!' or  txt=='請將臉部靠近鏡頭' :
+                break
+            else:
+                pass
+        
+       
+               
+    
 
    
 
