@@ -1,10 +1,13 @@
 # import all necessary 3rd python packages 
-from flask import Flask, render_template, Response
+from copy import copy
+from flask import Flask, render_template, Response, request
 # import modules.mysql_connection
 
 from faceMeshProjectForFACE_OVAL import faceMeshDetection
 # from app3 import faceMeshDetection
 from takePicture0310 import streamlive,facePicture
+from takePicture0312 import streamlive
+
 # from faceMeshProjectForFlask import faceMeshDetection_test
 #
 # Flask 類別 初始化時 傳入的 __name__ 參數，代表當前模組的名稱。
@@ -58,17 +61,17 @@ def getFaceData():
     return flask.jsonify(data)
 
 # stream live
-@app.route('/stream_live/<string:style>')
+@app.route('/stream_live/<string:style>', methods=["POST"])
 def stream_live(style):          
     # photograph = style
     return Response(streamlive(style),
                 mimetype='multipart/x-mixed-replace; boundary=frame')
     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
 
-@app.route('/stream_live1/<string:style>')
+@app.route('/stream_live1/<string:style>', methods=["POST"])
 def stream_live1(style):          
     # img = cv2.imread('./app/20220309185753.jpg')
-    return  Response(facePicture(style), 
+    return  Response(streamlive(style), 
                 mimetype="multipart/x-mixed-replace;boundary=frame")
 
 # 連接AZURE的mysql
