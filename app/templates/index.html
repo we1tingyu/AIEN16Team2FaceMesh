@@ -64,7 +64,7 @@
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('眉尾、眼尾和鼻翼連成一線')">眉尾、眼尾和鼻翼連成一線</button>
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('啟動')">啟動相機</button>
-                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('拍照')">拍照 (>.^)~y</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live1('拍照')">拍照 (>.^)~y</button>
                                         
                                     </div>
                                 </div>
@@ -76,6 +76,7 @@
                                     </div>
                                     <div class="bg-featured-blog" >
                                         <img id="image2" src="">
+                                        <img id="image3" src="">
                                     </div>
                             </div>
                             </div>
@@ -134,6 +135,9 @@
             }
             function Function_stream_live(style) {
               document.getElementById("image2").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
+            }
+            function Function_stream_live1(style) {
+              document.getElementById("image3").src = "{{ url_for('stream_live1', style='style') }}".replace("style", style);
             }
       
             

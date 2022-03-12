@@ -1,12 +1,19 @@
 # coding:utf-8
 import cv2
 from datetime import datetime
-
+import threading
 from flask import Flask
-from faceMeshProjectForFACE_OVAL import FaceMeshDetector
 from PIL import Image, ImageFont, ImageDraw
 import numpy
 import os
+from faceMeshProjectForFACE_OVAL import FaceMeshDetector
+
+# 創建一個lock對象: lock = threading.Lock()
+# 獲取使用lock: lock.acquire()
+# 解除釋放lock: lock.release()
+# 釋放前其他Thread(執行緒)無法執行
+lock = threading.Lock()
+
 
 # 將txt畫至img
 def add_txt_to_image(img, txt='', position=(10, 40)):
@@ -61,11 +68,14 @@ def get_txt(img):
     
     return txt
 
-def faceCondition(camera_status,cap,txt,img):          
+def facePicture(camera_status):              
    
     print(camera_status) 
-    print(txt)         
-    
+
+             
+    if txt :
+        print(txt)
+
     if camera_status == "拍照" and txt=='已符合測量條件,請按下拍照' :
         time = datetime.now().strftime('%Y%m%d%H%M%S')
         cv2.imencode('.jpg',
@@ -78,13 +88,20 @@ def faceCondition(camera_status,cap,txt,img):
         cap.release()
         cv2.destroyAllWindows()  #刪除建立的全部視窗
         
-        return img
+    
+        # frame = cv2.imencode('.jpg', img)[1].tobytes()
+        # yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
     # elif camera_status == "拍照" :
     #     pass
         
     
 def streamlive(camera_status):
+    global lock
+    # global cap
+    # global txt
+    # global img
+
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  #建立一個 VideoCapture 物件 0號設備
     while cap.isOpened() and cv2.waitKey(1) :  #迴圈讀取每一幀
         
@@ -95,25 +112,41 @@ def streamlive(camera_status):
         if not ret:
             print("camera byebye")
             break
-
-        img = cv2.flip(img, 1)  # 解決鏡頭左右相反的問題   
-
-        txt= get_txt(img)
-        imgtxt = add_txt_to_image(img, txt)   
-
-        img = faceCondition(camera_status,cap,txt,img)     
         
-                   
-        # 傳送至前端
-        frame = cv2.imencode('.jpg', imgtxt)[1].tobytes()
-        yield (b'--frame\r\n'
-            b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
-        
-        if camera_status=='拍照' :
-            if not txt=='已符合測量條件,請按下拍照' :
-                print("不符條件")
-                break
-            
+        with lock :
+
+            img = cv2.flip(img, 1)  # 解決鏡頭左右相反的問題   
+
+            txt= get_txt(img)
+            imgtxt = add_txt_to_image(img, txt)   
+
+                
+            # if camera_status == "拍照" and txt=='已符合測量條件,請按下拍照' :
+            #     time = datetime.now().strftime('%Y%m%d%H%M%S')
+            #     cv2.imencode('.jpg',img)[1].tofile("./app/static/images/" + time + ".jpg")
+            #     #得到長寬
+            #     print(cap.get(3))        
+            #     print(cap.get(4))
+            #     print("success to save:" + time + ".jpg")
+            #     print("-------------------------")
+            #     cap.release()
+            #     cv2.destroyAllWindows()  #刪除建立的全部視窗
+                    
+            # 傳送至前端
+            frame = cv2.imencode('.jpg', imgtxt)[1].tobytes()
+        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+    if not cap.isOpened():
+        cap.release()
+        cv2.destroyAllWindows()  #刪除建立的全部視窗
+        frame = cv2.imencode('.jpg', img)[1].tobytes()
+        yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+            # if camera_status=='拍照' :
+            #     if not txt=='已符合測量條件,請按下拍照' :
+            #         print("不符條件")
+            #         break
+                
         
        
                
