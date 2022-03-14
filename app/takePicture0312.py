@@ -68,26 +68,20 @@ def get_txt(img):
     
     return txt
 
-def facePicture(camera_status):              
-   
-    print(camera_status) 
+def savePicture(img,cap): 
 
-             
-    if txt :
-        print(txt)
+    time = datetime.now().strftime('%Y%m%d%H%M%S')
+    cv2.imencode('.jpg',
+                img)[1].tofile("./app/static/images/" + time + ".jpg")
+    #得到長寬
+    print(cap.get(3))        
+    print(cap.get(4))
+    print("success to save:" + time + ".jpg")
+    print("-------------------------")
+    cap.release()
+    cv2.destroyAllWindows()  #刪除建立的全部視窗
 
-    if camera_status == "拍照" and txt=='已符合測量條件,請按下拍照' :
-        time = datetime.now().strftime('%Y%m%d%H%M%S')
-        cv2.imencode('.jpg',
-                    img)[1].tofile("./app/static/images/" + time + ".jpg")
-        #得到長寬
-        print(cap.get(3))        
-        print(cap.get(4))
-        print("success to save:" + time + ".jpg")
-        print("-------------------------")
-        cap.release()
-        cv2.destroyAllWindows()  #刪除建立的全部視窗
-        
+    return img   
     
         # frame = cv2.imencode('.jpg', img)[1].tobytes()
         # yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
@@ -121,16 +115,10 @@ def streamlive(camera_status):
             imgtxt = add_txt_to_image(img, txt)   
 
                 
-            # if camera_status == "拍照" and txt=='已符合測量條件,請按下拍照' :
-            #     time = datetime.now().strftime('%Y%m%d%H%M%S')
-            #     cv2.imencode('.jpg',img)[1].tofile("./app/static/images/" + time + ".jpg")
-            #     #得到長寬
-            #     print(cap.get(3))        
-            #     print(cap.get(4))
-            #     print("success to save:" + time + ".jpg")
-            #     print("-------------------------")
-            #     cap.release()
-            #     cv2.destroyAllWindows()  #刪除建立的全部視窗
+            if camera_status == "拍照" and txt=='已符合測量條件,請按下拍照' :
+                img=savePicture(img,cap)
+            else:
+                camera_status = "啟動"
                     
             # 傳送至前端
             frame = cv2.imencode('.jpg', imgtxt)[1].tobytes()
