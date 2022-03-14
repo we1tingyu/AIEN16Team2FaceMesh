@@ -87,7 +87,7 @@ def savePicture(img,cap):
                 img)[1].tofile("./app/static/images/" + time + ".jpg") 
 
     cv2.imencode('.jpg',
-                img)[1].tofile("./app/static/images/" + '最新照片' + ".jpg")
+                img)[1].tofile("./app/static/images/" + 'Thelatestphotos' + ".jpg")
                                    
     #得到長寬
     print(cap.get(3))        
