@@ -1,7 +1,7 @@
 # coding:utf-8
 import cv2
 import time
-from datetime import datetime
+from datetime import datetime,timedelta 
 import threading
 from flask import Flask
 from PIL import Image, ImageFont, ImageDraw
@@ -76,12 +76,10 @@ def countdown(num_of_secs):
         m, s = divmod(num_of_secs, 60)
         min_sec_format = '{:02d}:{:02d}'.format(m, s)
         print(min_sec_format)
-        # time.sleep(1)
+        time.sleep(1)
         num_of_secs -= 1
         return min_sec_format
-        
-        
-    # print('Countdown finished.')
+   
 
 def savePicture(img,cap): 
     time = datetime.now().strftime('%Y%m%d%H%M%S')
@@ -105,6 +103,9 @@ def streamlive(camera_status):
     # global img
 
     cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)  #建立一個 VideoCapture 物件 0號設備
+
+    time_flag = False
+
     while cap.isOpened() and cv2.waitKey(1) :  #迴圈讀取每一幀
         
         # if k == ord('q'): #若檢測到按鍵 ‘q’，退出q
@@ -120,18 +121,26 @@ def streamlive(camera_status):
         img = cv2.flip(img, 1)  # 解決鏡頭左右相反的問題   
         
         txt= get_txt(img)
-        imgtxt = add_txt_to_image(img, txt)
+        # imgtxt = add_txt_to_image(img, txt)
+        
+        
 
         if  txt=='已符合測量條件,請按下拍照' : 
-            # time.sleep(1)            
-            secs_=countdown(4)                       
-            imgtxt=add_txt_to_image(img,secs_,position=(20,40))
+                       
+            if not time_flag:
+                cTime = time.time()
+                time_flag = True
             
-            if not secs_ :
-                img=savePicture(img,cap)                
-        
-       
-                
+            pTime = time.time()
+            s_format = '{:02d}:{:02d}'.format(0, 4-int(pTime - cTime))     
+            imgtxt=add_txt_to_image(img,s_format,position=(20,40))
+
+            
+            if  int(pTime - cTime) == 4:
+                imgtxt=savePicture(img,cap) 
+        else:
+            time_flag = False
+            imgtxt = add_txt_to_image(img, txt)                        
         
         
                 
