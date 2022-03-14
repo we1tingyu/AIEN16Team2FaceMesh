@@ -84,7 +84,11 @@ def countdown(num_of_secs):
 def savePicture(img,cap): 
     time = datetime.now().strftime('%Y%m%d%H%M%S')
     cv2.imencode('.jpg',
-                img)[1].tofile("./app/static/images/" + time + ".jpg")
+                img)[1].tofile("./app/static/images/" + time + ".jpg") 
+
+    cv2.imencode('.jpg',
+                img)[1].tofile("./app/static/images/" + '最新照片' + ".jpg")
+                                   
     #得到長寬
     print(cap.get(3))        
     print(cap.get(4))
@@ -132,12 +136,13 @@ def streamlive(camera_status):
                 time_flag = True
             
             pTime = time.time()
-            s_format = '{:02d}:{:02d}'.format(0, 4-int(pTime - cTime))     
+            s_format = "於"+'{:02d}:{:02d}'.format(0, 2-int(pTime - cTime)) + "秒後拍照"
             imgtxt=add_txt_to_image(img,s_format,position=(20,40))
 
             
-            if  int(pTime - cTime) == 4:
+            if  int(pTime - cTime) == 2:
                 imgtxt=savePicture(img,cap) 
+                
         else:
             time_flag = False
             imgtxt = add_txt_to_image(img, txt)                        
