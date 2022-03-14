@@ -65,6 +65,7 @@
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
                                         
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('啟動')">啟動相機</button>
+                                        <!-- <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('拍照')">拍照 (>.^)~y</button> -->
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('拍照')">拍照 (>.^)~y</button>
                                         
                                         
@@ -140,7 +141,9 @@
               document.getElementById("image2").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
             }
             
-      
+            // function getImg() {
+            //     document.getElementById("image2").src = "{{ url_for('static', filename='images/temp.jpg') }}";
+            // }
             
             $("#getFaceData").click(function(event){            
                 $.ajax({
