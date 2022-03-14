@@ -5,7 +5,7 @@ from flask import Flask, render_template, Response, request
 
 from faceMeshProjectForFACE_OVAL import faceMeshDetection
 # from app3 import faceMeshDetection
-from takePicture0310 import streamlive,facePicture
+# from takePicture0310 import streamlive,facePicture
 from takePicture0312 import streamlive
 
 # from faceMeshProjectForFlask import faceMeshDetection_test
@@ -61,18 +61,14 @@ def getFaceData():
     return flask.jsonify(data)
 
 # stream live
-@app.route('/stream_live/<string:style>', methods=["POST"])
+@app.route('/stream_live/<string:style>', methods=["GET"])
 def stream_live(style):          
     # photograph = style
     return Response(streamlive(style),
                 mimetype='multipart/x-mixed-replace; boundary=frame')
     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
 
-@app.route('/stream_live1/<string:style>', methods=["POST"])
-def stream_live1(style):          
-    # img = cv2.imread('./app/20220309185753.jpg')
-    return  Response(streamlive(style), 
-                mimetype="multipart/x-mixed-replace;boundary=frame")
+
 
 # 連接AZURE的mysql
 @app.route('/try-mysql')
