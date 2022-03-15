@@ -136,11 +136,11 @@ def streamlive(camera_status):
                 time_flag = True
             
             pTime = time.time()
-            s_format = "於"+'{:02d}:{:02d}'.format(0, 2-int(pTime - cTime)) + "秒後拍照"
+            s_format = "於"+'{:02d}:{:02d}'.format(0, 3-int(pTime - cTime)) + "秒後拍照"
             imgtxt=add_txt_to_image(img,s_format,position=(20,40))
 
             
-            if  int(pTime - cTime) == 2:
+            if  int(pTime - cTime) == 3:
                 imgtxt=savePicture(img,cap) 
                 
         else:
