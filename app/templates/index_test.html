@@ -1,0 +1,380 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="" />
+  <meta name="author" content="" />
+
+  <title>Data</title>
+
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}"/>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-sixteen.css') }}"/>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}"/>
+  
+
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/custom.js') }}"/>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/isotope.js') }}"/>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/accordions.js') }}"/>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/slick.js') }}"/>
+
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://code.jquery.com/jquery-3.6.0.slim.js" rel="stylesheet" /> -->
+
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/bootstrap/css/bootstrap.min.css') }}"/>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/bootstrap/js/bootstrap.min.js') }}"/>
+  <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/jquery/jquery.min.js') }}"/>
+
+
+  <script>
+    x=1;
+    function change(){
+      x++;
+      document.getElementById("photo").src="images/camera-wait.png";
+    }
+  </script>
+
+  </head>
+
+  <body class="d-flex flex-column">
+
+    <!-- ***** Preloader Start ***** 頁面跳轉-->
+    <div id="preloader">
+        <div class="jumper">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </div>  
+    <!-- ***** Preloader End ***** -->
+
+    <header class="">
+        <nav class="navbar navbar-expand-lg">
+          <div class="container">
+            <a class="navbar-brand" href="Home.html"><h2>AIEN16-2 <em>面相分析</em></h2></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+              <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                    <a class="nav-link" href="Home.html">首頁</a>
+                    </li> 
+                    <li class="nav-item">
+                    <a class="nav-link" href="Test.html">功能體驗</a>
+                    </li>
+                    <li class="nav-item active">
+                    <a class="nav-link" href="DataAnalysis.html">數據分析</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="Aesthetics.html">美學標準</a>
+                    </li>
+                    <li class="nav-item">
+                    <a class="nav-link" href="About.html">關於我們</a>
+                      </li>
+                </ul>
+                <ul class="toolbar-menu toolbar-menu--member">
+                  <li class="toolbar-item toolbar-item--login"><a class="text-underline-none" href="Signin.html">登入</a></li>
+                  <li class="toolbar-item"><a class="text-underline-none" href="Signup.html">註冊</a></li>
+                </ul>
+            </div>
+          </div>
+        </nav>
+    </header>
+
+    <!-- Page Content -->
+    <div class="page-heading about-heading header-text">
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="text-content">
+                <h4>數據分析</h4>
+                <h2>Data Analysis</h2>
+            </div>
+            </div>
+        </div>
+        </div>
+    </div>
+
+    <div class="best-features about-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>開始測試 : 面相數據</h2>
+            </div>
+            <div class="col-md-6">
+              <table class="table-c">
+                <tr>
+                  <td><button onclick="Function_stream_live('啟動')">
+                    <img src="images/camera.png"></button></td>
+                  <td>啟動相機</td>
+                  <td><button onclick="Function_stream_live('拍照')">
+                    <img id="photo" src="images/camera-open.png" onclick="change()"></button></td>
+                  <td>拍照</td>
+                </tr>
+              </table>
+              <p></p>
+            </div>
+
+          </div>
+          <div class="col-md-6">
+            <div class="right-image">
+              <img src="images/臉譜.png" alt="">
+            </div>
+          </div>
+
+          <div class="col-md-6">
+            <div class="left-content">
+              <h4>利用即時影像圖像分析面相及完美比例</h4>
+              <table class="table-roll">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="p">各項指標數據</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><img src="images/三庭.jpg"></td>
+                    <td class="p">三庭</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/五眼.jpg"></td>
+                    <td class="p">五眼</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/黃金比例.jpg"></td>
+                    <td class="p">黃金比例</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/四角比例.jpg"></td>
+                    <td class="p">四角比例</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/美人角.jpg"></td>
+                    <td class="p">美人角</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/三點線.jpg"></td>
+                    <td class="p">三點線</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/側臉線.jpg"></td>
+                    <td class="p">側臉線</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/四高三低.jpg"></td>
+                    <td class="p">四高三低</td>
+                  </tr>
+                  <tr>
+                    <td><img src="images/鼻子大小.jpg"></td>
+                    <td class="p">三庭</td>
+                  </tr>
+                </tbody>
+              </table>
+
+              <p></p>
+
+              <a href="#Analysis"><button class="button-go" style="vertical-align:middle"><span>分析結果 </span></button></a>
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="best-features about-features" id="Analysis">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <p></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="best-features about-features">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>開始測試 : 面相分析</h2>
+            </div>
+          </div>
+          <div class="col-md-8">
+            <button class="button-click" onclick="Function_video_feed('臉部網格圖')">臉部特徵網格圖</button>
+            <button class="button-click" onclick="Function_video_feed('臉部外框圖')">臉部外框圖</button>
+            <button class="button-click" onclick="Function_video_feed('五官特徵圖')">臉部五官特徵圖</button>
+          <br/></p>
+          <p>
+            <button class="button-click" onclick="Function_video_feed('三庭')">三庭</button>
+            <button class="button-click" onclick="Function_video_feed('五眼')">五眼</button>
+            <button class="button-click" onclick="Function_video_feed('黃金比例')">黃金比例</button>
+            <button class="button-click" onclick="Function_video_feed('四角比例')">四角比例</button>
+          <br/></p>
+          <p>
+            <button class="button-click" onclick="Function_video_feed('美人角')">美人角</button>
+            <button class="button-click" onclick="Function_video_feed('三點線')">三點線</button>
+            <button class="button-click" onclick="Function_video_feed('側臉線')">側臉線</button>
+            <button class="button-click" onclick="Function_video_feed('四高三低')">四高三低</button>
+            <button class="button-click" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
+          </p>
+          </div>
+            <div class="container">
+              <div class="row">
+                <div class="col-md-12">
+                </div>
+                <div class="col-md-6">
+                  <div class="right-image">
+                    <img src="images/臉譜.png" alt="">
+                  </div>
+                </div>
+                <div class="col-md-6">
+                  <div class="left-content">
+                    <h4>特徵說明</h4>   
+                    <p class="p">TEST</p>           
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="latest-products">
+      <div class="container">
+        <div class="row">
+
+          <div class="col-md-12">
+            <div class="section-heading">
+              <h2>實際應用</h2>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="#"><img src="images/cut.jpg" alt=""></a>
+              <div class="down-content">
+                <a href="#"><h4>整形</h4></a>
+                <h6>Plastic surgery</h6>
+                <p>EX : 開眼頭 墊下巴 削骨</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="#"><img src="images/eyebrow.PNG" alt=""></a>
+              <div class="down-content">
+                <a href="#"><h4>化妝</h4></a>
+                <h6>Make up</h6>
+                <p>EX : 畫眉三點定位法</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-4">
+            <div class="product-item">
+              <a href="#"><img src="images/hair.jpg" alt=""></a>
+              <div class="down-content">
+                <a href="#"><h4>髮型</h4></a>
+                <h6>Hairstyle</h6>
+                <p>EX : 高額頭適合留瀏海</p>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <footer>
+        <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+            <div class="inner-content">
+                <p>AIEN16 &copy; 2022 Second Group
+            </div>
+            </div>
+        </div>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/jquery/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  
+    <!-- Additional Scripts -->
+    <!-- <script src="assets/js/custom.js"></script> -->
+    <script src="{{ url_for('static', filename='js/custom.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/owl.js') }}"></script>
+    <script src="{{ url_for('static', filename='/js/isotope.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/accordions.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/slick.js') }}"></script>  
+
+    <script language = "text/Javascript"> 
+        cleared[0] = cleared[1] = cleared[2] = 0; //set a cleared flag for each field
+        function clearField(t){                   //declaring the array outside of the
+        if(! cleared[t.id]){                      // function makes it static and global
+            cleared[t.id] = 1;  // you could use true and false, but that's more typing
+            t.value='';         // with more chance of typos
+            t.style.color='#fff';
+            }
+        }
+    </script>
+
+    <!-- Bootstrap core JS-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Core theme JS-->
+    <script src="js/scripts.js"></script>
+    <script>
+        function Function_video_feed(style) {
+          document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+        }
+    </script>
+
+    <!-- jquery -->
+    <script src="http://code.jquery.com/jquery-latest.js"></script>
+    <script>
+        var faceParam=30;
+    data={ "param": faceParam };
+
+        function Function_video_feed(style) {
+          document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+        
+            // $("#getFaceData").click(function(event){            
+                $.ajax({
+                    type:"post",
+                    url:"http://localhost:5000/getFaceData",
+                    contentType:"application/json",
+                    data:JSON.stringify(data),
+                }).done(function(data){                
+                    $("#jsonOutput").html(JSON.stringify(data));
+                }).fail(function(err){
+                    alert(err.responseText);
+                });
+            // });
+        }
+        function Function_stream_live(style) {
+          document.getElementById("image2").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
+        }
+        
+        // function getImg() {
+        //     document.getElementById("image2").src = "{{ url_for('static', filename='images/temp.jpg') }}";
+        // }
+        
+        $("#getFaceData").click(function(event){            
+            $.ajax({
+                type:"post",
+                url:"http://localhost:5000/getFaceData",
+                contentType:"application/json",
+                data:JSON.stringify(data),
+            }).done(function(data){                
+                $("#jsonOutput").html(JSON.stringify(data));
+            }).fail(function(err){
+                alert(err.responseText);
+            });
+        });
+      </script>
+      
+  </body>
+</html>
