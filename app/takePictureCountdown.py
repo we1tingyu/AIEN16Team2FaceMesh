@@ -13,7 +13,7 @@ from faceMeshProjectForFACE_OVAL import FaceMeshDetector
 # 獲取使用lock: lock.acquire()
 # 解除釋放lock: lock.release()
 # 釋放前其他Thread(執行緒)無法執行
-lock = threading.Lock()
+# lock = threading.Lock()
 
 
 # 將txt畫至img
@@ -54,7 +54,8 @@ def get_txt(img):
         drawFortuneTelling="臉部外框",
         takePicture=True)
     # print(distance)
-
+    
+    # 依主程式回傳之臉周長 判斷使用者與攝影機之間的距離
     if type(distance) is float:
         distance = int(distance)
         
@@ -69,7 +70,7 @@ def get_txt(img):
     
     return txt
 
-# 倒數計時
+# 倒數計時器(沒用到、寫爽的)
 def countdown(num_of_secs):
     
     while num_of_secs:
@@ -81,8 +82,10 @@ def countdown(num_of_secs):
         return min_sec_format
    
 
+# 將照片儲存起來
 def savePicture(img,cap): 
     time = datetime.now().strftime('%Y%m%d%H%M%S')
+    # 可儲存中文檔案名稱
     cv2.imencode('.jpg',
                 img)[1].tofile("./app/static/images/" + time + ".jpg") 
 
@@ -99,7 +102,7 @@ def savePicture(img,cap):
 
     return img   
         
-    
+# 拍照主程式    
 def streamlive(camera_status):
     # global lock
     # global cap
@@ -110,11 +113,11 @@ def streamlive(camera_status):
 
     time_flag = False
 
-    while cap.isOpened() and cv2.waitKey(1) :  #迴圈讀取每一幀
+    while cap.isOpened() and cv2.waitKey(1) :  # cap.isOpened()確認攝影機有打開  # 迴圈讀取每一幀
         
         # if k == ord('q'): #若檢測到按鍵 ‘q’，退出q
         #     break
-        ret, img = cap.read()
+        ret, img = cap.read()    # ret:True/False
 
         if not ret:
             print("camera byebye")
@@ -131,7 +134,7 @@ def streamlive(camera_status):
 
         if  txt=='已符合測量條件,請按下拍照' : 
                        
-            if not time_flag:
+            if not time_flag:   # 僅只在第一次進入迴圈 才會進入
                 cTime = time.time()
                 time_flag = True
             
@@ -153,27 +156,13 @@ def streamlive(camera_status):
         frame = cv2.imencode('.jpg', imgtxt)[1].tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
+    # 若偵測到鏡頭沒開，則回傳最後一張img至前端
     if not cap.isOpened():
         cap.release()
         cv2.destroyAllWindows()  #刪除建立的全部視窗
         frame = cv2.imencode('.jpg', img)[1].tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-            # if camera_status=='拍照' :
-            #     if not txt=='已符合測量條件,請按下拍照' :
-            #         print("不符條件")
-            #         break
-                
-        
-       
+              
                
     
-
-   
-
-
-# 執行func.
-# faceCondition()
-
-# todo : 1. 第二次啟動後的拍照 失敗
-#        2.非適當距離的時候按拍照發生後 下次無法拍照
