@@ -46,8 +46,14 @@ def video_feed(style):
     # It works by telling the browser to keep the connection open and replace the web page or piece of media it is displaying with another when it receives a special token.
     # The header is old and widely supported. It works in legacy browsers.
     # Each yield expression is directly sent thru Response to the browser.
-    videoMode = False
-    filePath = "./videos/Thelatestphotos.jpg"
+
+    # 是否為影片
+    # videoMode = False
+    videoMode = True
+    # 路徑
+    # filePath = "./videos/Thelatestphotos.jpg"
+    filePath = "./videos/1-720p.mp4"
+
     drawFaceLms = True 
     drawID = False 
     drawFortuneTelling = style
