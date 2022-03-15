@@ -596,18 +596,26 @@ def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLm
         with lock:                  # acquire threading lock, set the output frame, and release threading lock.  
             img, faces, distance, sum = detector.findFaceMesh(img, drawFaceLms, drawID, drawFortuneTelling)      
                     
-            # time.time():1970年之後經過的秒数
-            cTime = time.time()
-            fps = 1/(cTime-pTime)
-            pTime = cTime
-            cv2.putText(img, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
-            #cv2.imshow("Image", img)
+            # 若為影片則加上 FPS
+            if videoMode:
+                # time.time():1970年之後經過的秒数
+                cTime = time.time()
+                fps = 1/(cTime-pTime)
+                pTime = cTime
+                cv2.putText(img, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
+                #cv2.imshow("Image", img)
         
             # 傳送至前端
             frame = cv2.imencode('.jpg', img)[1].tobytes()
         yield (b'--frame\r\n'b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
+
+        # 若為圖片則直接 break 出 while 迴圈
+        if not videoMode:
+                break
+            
         if cv2.waitKey(1) == ord('q'): 
             break 
+        
     if videoMode:    
         cap.release()   
     cv2.destroyAllWindows()

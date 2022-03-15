@@ -48,11 +48,11 @@ def video_feed(style):
     # Each yield expression is directly sent thru Response to the browser.
 
     # 是否為影片
-    # videoMode = False
-    videoMode = True
+    videoMode = False
+    # videoMode = True
     # 路徑
-    # filePath = "./videos/Thelatestphotos.jpg"
-    filePath = "./videos/1-720p.mp4"
+    filePath = "app/static/images/Thelatestphotos.jpg"
+    # filePath = "./videos/1-720p.mp4"
 
     drawFaceLms = True 
     drawID = False 
