@@ -93,26 +93,24 @@
         </div>
     </div>
 
-    <div class="best-features about-features">
+    <div class="best-features about-features"  id="Top">
       <div class="container">
         <div class="row">
           <div class="col-md-12">
             <div class="section-heading">
               <h2>開始測試 : 面相數據</h2>
             </div>
-            <div class="col-md-6">
-              <table class="table-c">
+            <div class="col-md-3">
+              <table>
                 <tr>
-                  <td><img src="images/camera.png"></td>
-                  <td>啟動相機</td>
                   <td><img id="photo" src="images/camera-open.png" onclick="change()"></td>
                   <td>拍照</td>
                 </tr>
               </table>
-              <p></p>
+              <p>位置正確後會自動3秒拍照</p>
             </div>
-
           </div>
+
           <div class="col-md-6">
             <div class="right-image">
               <img src="images/臉譜.png" alt="">
@@ -131,39 +129,31 @@
                 <tbody>
                   <tr>
                     <td><img src="images/三庭.jpg"></td>
-                    <td class="p">三庭</td>
+                    <td><button onclick="Function_video_feed('三庭')">三庭</button></td>
                   </tr>
                   <tr>
                     <td><img src="images/五眼.jpg"></td>
-                    <td class="p">五眼</td>
+                    <td><button onclick="Function_video_feed('五眼')">五眼</button></td>
                   </tr>
                   <tr>
                     <td><img src="images/黃金比例.jpg"></td>
-                    <td class="p">黃金比例</td>
+                    <td><button onclick="Function_video_feed('黃金比例')">黃金比例</button></td>
                   </tr>
                   <tr>
                     <td><img src="images/四角比例.jpg"></td>
-                    <td class="p">四角比例</td>
+                    <td><button onclick="Function_video_feed('四角比例')">四角比例</button></td>
                   </tr>
                   <tr>
                     <td><img src="images/美人角.jpg"></td>
-                    <td class="p">美人角</td>
+                    <td><button onclick="Function_video_feed('美人角')">美人角</button></td>
                   </tr>
                   <tr>
                     <td><img src="images/三點線.jpg"></td>
-                    <td class="p">三點線</td>
-                  </tr>
-                  <tr>
-                    <td><img src="images/側臉線.jpg"></td>
-                    <td class="p">側臉線</td>
-                  </tr>
-                  <tr>
-                    <td><img src="images/四高三低.jpg"></td>
-                    <td class="p">四高三低</td>
+                    <td><button onclick="Function_video_feed('三點線')">三點線</button></td>
                   </tr>
                   <tr>
                     <td><img src="images/鼻子大小.jpg"></td>
-                    <td class="p">三庭</td>
+                    <td><button onclick="Function_video_feed('鼻子大小')">鼻子寬度</button></td>
                   </tr>
                 </tbody>
               </table>
@@ -210,28 +200,32 @@
           <p>
             <button class="button-click" onclick="Function_video_feed('美人角')">美人角</button>
             <button class="button-click" onclick="Function_video_feed('三點線')">三點線</button>
-            <button class="button-click" onclick="Function_video_feed('側臉線')">側臉線</button>
-            <button class="button-click" onclick="Function_video_feed('四高三低')">四高三低</button>
-            <button class="button-click" onclick="Function_video_feed('鼻子大小')">鼻子大小</button>
+            <button class="button-click" onclick="Function_video_feed('鼻子大小')">鼻子寬度</button>
           </p>
           </div>
-            <div class="container">
-              <div class="row">
-                <div class="col-md-12">
-                </div>
-                <div class="col-md-6">
-                  <div class="right-image">
-                    <img src="images/臉譜.png" alt="">
-                  </div>
-                </div>
-                <div class="col-md-6">
-                  <div class="left-content">
-                    <h4>特徵說明</h4>   
-                    <p class="p">TEST</p>           
-                  </div>
-                </div>
-              </div>
+
+          <div class="col-md-6">
+            <div class="right-image">
+              <img src="images/臉譜.png" alt="">
             </div>
+          </div>
+          <div class="col-md-6">
+            <div class="left-content">
+              <h4>數據</h4>
+              <table class="table-roll">
+                <thead>
+                    <tr>
+                        <th colspan="2" class="p">髮型妝容建議</th>
+                    </tr>
+                </thead>
+                <tbody>
+                  
+                </tbody>
+              </table>
+              <p></p>
+              <a href="#Top"><button class="button-go" style="vertical-align:middle"><span>原圖數據 </span></button></a>
+            </div>
+          </div>
         </div>
       </div>
     </div>
