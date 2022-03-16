@@ -47,7 +47,7 @@ class FaceMeshDetector():
         # there are 468 points.
         self.drawSpec = self.mpDraw.DrawingSpec(color=(30,144,255), thickness=1, circle_radius=1) 
 
-    def findFaceMesh(self, img, drawFaceLms=True, drawID=False, drawFortuneTelling="臉部特徵網格圖",takePicture=False):
+    def findFaceMesh(self, img, drawFaceLms=True, drawID=False, drawFortuneTelling="臉部特徵網格圖",takePicture=False, returnTxt=False):
         # 左右相反，for camera
         #self.imgRGB = cv2.cvtColor(cv2.flip(img, 1), cv2.COLOR_BGR2RGB) # opposite right/left for actual face sync-up detection when face turns left/right.
         self.imgRGB = cv2.cvtColor(img, cv2.COLOR_BGR2RGB)
@@ -110,6 +110,7 @@ class FaceMeshDetector():
         five_eye_x = []
         five_eye_ratio = []
         sum=0  
+        printTxt = ""
         # multi_face_landmarks :臉上作完正規化的xyz座標
         if self.results.multi_face_landmarks:
             for faceLms in self.results.multi_face_landmarks:                
@@ -139,6 +140,7 @@ class FaceMeshDetector():
                 
                 # 臉部特徵網格圖, 什麼都不畫
                 if drawFortuneTelling == "臉部特徵網格圖":
+                    printTxt += "什麼都不告訴你"
                     pass
                 
                 # 臉部外框
@@ -193,6 +195,8 @@ class FaceMeshDetector():
                     print(f'臉的周長:{sum}')
                     print('------------')
 
+                    printTxt += f'臉的周長:{sum}'
+
                 # 臉部面相算命特徵圖, 五官
                 elif drawFortuneTelling == "臉部面相算命特徵圖":
                     # draw specific IDs for fortune telling(畫出上面自行定義的各點)
@@ -234,6 +238,8 @@ class FaceMeshDetector():
                         print(f'RIGHT_EYEBROW:{distance[0]}, LEFT_EYEBROW:{distance[1]}, RIGHT_EYE:{distance[2]}, LEFT_EYE{distance[3]}, NOSE_LENGTH:{distance[4]}, NOSE_WIDTH:{distance[5]}, FOREHEAD:{distance[6]}, PHILTRUM:{distance[7]}, MOUTH:{distance[8]}')
                         print('------------')
 
+                        printTxt += f'RIGHT_EYEBROW:{distance[0]}, LEFT_EYEBROW:{distance[1]}, RIGHT_EYE:{distance[2]}, LEFT_EYE{distance[3]}, NOSE_LENGTH:{distance[4]}, NOSE_WIDTH:{distance[5]}, FOREHEAD:{distance[6]}, PHILTRUM:{distance[7]}, MOUTH:{distance[8]}'
+
                 # 三庭
                 elif drawFortuneTelling == "三庭":
                     for idx1,value in enumerate(THREE_COURT):
@@ -255,7 +261,11 @@ class FaceMeshDetector():
                     if three_court_y:
                         print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]}, y2:{three_court_y[1]}, y3:{three_court_y[2]}, y4:{three_court_y[3]}')
 
+                        printTxt += f'由上到下的 y 座標分別是 y1:{three_court_y[0]}, y2:{three_court_y[1]}, y3:{three_court_y[2]}, y4:{three_court_y[3]}'
+
                         print(f'上到下的 y 距離:{total_y}')
+
+                        printTxt += f'上到下的 y 距離:{total_y}'
 
                         for i in range(len(THREE_COURT) - 1):
                             y_distance = three_court_y[i+1] - three_court_y[i]
@@ -265,6 +275,8 @@ class FaceMeshDetector():
 
                         print(f'三庭(上到下)比例為-> {three_court_ratio[0]}:{three_court_ratio[1]}:{three_court_ratio[2]}')
                         print('------------')
+
+                        printTxt += f'三庭(上到下)比例為-> {three_court_ratio[0]}:{three_court_ratio[1]}:{three_court_ratio[2]}'
                 
                 # 五眼
                 elif drawFortuneTelling == "五眼":
@@ -287,7 +299,11 @@ class FaceMeshDetector():
                     if five_eye_x:
                         print(f'由左到右的 x 座標分別是 x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
 
+                        printTxt += f'由左到右的 x 座標分別是 x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}'
+
                         print(f'左到右的 x 距離:{total_x}')
+
+                        printTxt += f'左到右的 x 距離:{total_x}'
 
                         for i in range(len(FIVE_EYE) - 1):
                             x_distance = five_eye_x[i+1] - five_eye_x[i]
@@ -297,6 +313,8 @@ class FaceMeshDetector():
 
                         print(f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
                         print('------------')
+
+                        printTxt += f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}'
 
                 # 臉部四角形比例
                 elif drawFortuneTelling == "臉部四角形比例":
@@ -357,6 +375,9 @@ class FaceMeshDetector():
                     print(f'臉部四角形比例為: {four_square_ratio}')
                     print('------------')
 
+                    printTxt += f'臉部四角形長寬分別為: {(x2 - x1)}, {(y_average_bottom - y_average_top)}'
+                    printTxt += f'臉部四角形比例為: {four_square_ratio}'
+
                 #美人角
                 elif drawFortuneTelling == "美人角":
                     for idx1,ff in enumerate(BEAUTY_CORNER):
@@ -382,6 +403,8 @@ class FaceMeshDetector():
                     # 計算夾角
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
                     print(f"美人角角度是{ang1}")
+
+                    printTxt += f"美人角角度是{ang1}"
                     
 
                 # 眉尾、眼尾和鼻翼連成一線
@@ -410,6 +433,7 @@ class FaceMeshDetector():
                     # 計算眼尾和眉尾夾角
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
                     print(f"眼尾和眉尾夾角角度是{ang1}")
+                    printTxt += f"眼尾和眉尾夾角角度是{ang1}"
 
                     # 眼尾和鼻翼
                     for idx1,ff in enumerate(EYE_AND_NOSE):
@@ -436,14 +460,20 @@ class FaceMeshDetector():
                     ang2 = self.angle(startAddressForAngle[2], endAddressForAngle[2], startAddressForAngle[3], endAddressForAngle[3])
                     print(f"眼尾和鼻翼夾角角度是{ang2}")
 
+                    printTxt += f"眼尾和鼻翼夾角角度是{ang2}"
+
                     # 計算(左眉-左眼)和(左眼-左鼻)夾角, (正數)順時鐘旋轉表示眉毛較短
                     ang3 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[2], endAddressForAngle[2], ignore_clockwise_direction=False)
                     print(f"左眉尾、左眼尾和左鼻翼夾角角度是{ang3} (若為 0 表示連成一直線, 負數表示眉毛較短, 正數表示眉毛較長)")
+
+                    printTxt += f"左眉尾、左眼尾和左鼻翼夾角角度是{ang3} (若為 0 表示連成一直線, 負數表示眉毛較短, 正數表示眉毛較長)"
 
                     # 計算(右眉-右眼)和(右眼-右鼻)夾角, (負數)逆時鐘旋轉表示眉毛較短, 故取負數
                     ang4 = -self.angle(startAddressForAngle[1], endAddressForAngle[1], startAddressForAngle[3], endAddressForAngle[3], ignore_clockwise_direction=False)
                     print(f"右眉尾、右眼尾和右鼻翼夾角角度是{ang4} (若為 0 表示連成一直線, 負數表示眉毛較短, 正數表示眉毛較長)")
                     print('------------')
+
+                    printTxt += f"右眉尾、右眼尾和右鼻翼夾角角度是{ang4} (若為 0 表示連成一直線, 負數表示眉毛較短, 正數表示眉毛較長)"
 
                 # 臉部黃金比例
                 elif drawFortuneTelling == "臉部黃金比例":
@@ -466,6 +496,8 @@ class FaceMeshDetector():
                     print(f'臉部比例為-> 1:{face_ratio}')
                     print('------------')
 
+                    printTxt += f'臉部比例為-> 1:{face_ratio}'
+
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
                     # 開始計算鼻翼
@@ -485,6 +517,8 @@ class FaceMeshDetector():
                     alae_of_nose_ratio = (x2 - x1) / total_x
                     print(f'鼻子寬度佔臉部寬度比例為: {alae_of_nose_ratio}')
                     
+                    printTxt += f'鼻子寬度佔臉部寬度比例為: {alae_of_nose_ratio}'
+
                     # 開始計算眼頭
                     startID, endID = HEAD_OF_EYE
                     
@@ -503,6 +537,12 @@ class FaceMeshDetector():
                     print(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio}')
                     print(f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio}')
                     print('------------')
+
+                    printTxt += f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio}'
+                    printTxt += f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio}'
+
+                if returnTxt :
+                        return printTxt
 
                 face = []
                 for id, lm in enumerate(faceLms.landmark):   # use enumerate to get index and values 
@@ -611,7 +651,11 @@ def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLm
 
         # 若為圖片則直接 break 出 while 迴圈
         if not videoMode:
-                break
+            cv2.imencode('.jpg',
+            img)[1].tofile("./app/static/images/" +drawFortuneTelling+ "YAYAYA.jpg") 
+            print("success to save:" + drawFortuneTelling + "YAYAYA.jpg")
+            print("-------------------------")
+            break
             
         if cv2.waitKey(1) == ord('q'): 
             break 

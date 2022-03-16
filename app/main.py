@@ -3,11 +3,13 @@ from copy import copy
 from flask import Flask, render_template, Response, request
 # import modules.mysql_connection
 
-from faceMeshProjectForFACE_OVAL import faceMeshDetection
+from faceMeshProjectForFACE_OVAL import faceMeshDetection, FaceMeshDetector
 # from app3 import faceMeshDetection
 # from takePicture0310 import streamlive,facePicture
 from takePictureCountdown import streamlive
 # from takePicture0314_IP import streamlive
+
+import cv2
 
 # from faceMeshProjectForFlask import faceMeshDetection_test
 #
@@ -60,6 +62,34 @@ def video_feed(style):
     return Response(faceMeshDetection(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling),
                 mimetype='multipart/x-mixed-replace; boundary=frame')
     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
+
+
+@app.route('/getTxt', methods=["POST"])
+def getTxt():
+    #print(flask.request.json["param"])
+    # 是否為影片
+    videoMode = False
+    # videoMode = True
+    # 路徑
+    filePath = "app/static/images/Thelatestphotos.jpg"
+    img = cv2.imread(filePath)
+    # filePath = "./videos/1-720p.mp4"
+
+    drawFaceLms = True 
+    drawID = False 
+    drawFortuneTelling = flask.request.json["param"]
+
+    returnTxt=True
+    txt = "YAYAYA"
+    # txt = faceMeshDetection(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt)
+    txt = FaceMeshDetector(maxFaces=10).findFaceMesh(img.copy(), drawFaceLms=True, drawID=False, drawFortuneTelling=drawFortuneTelling, returnTxt=True)
+    # print(findFaceMesh(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt))
+    # print(txt)
+    # print(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt)
+
+    data={ "回傳文字":txt}    
+    return flask.jsonify(data)
+
 
 @app.route('/getFaceData', methods=["POST"])
 def getFaceData():

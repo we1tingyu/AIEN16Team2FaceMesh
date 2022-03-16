@@ -67,6 +67,19 @@
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('啟動')">啟動相機</button>
                                         <!-- <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('拍照')">拍照 (>.^)~y</button> -->
                                         <button type="button" class="btn btn-primary btn-lg" onclick="Function_stream_live('拍照')">拍照 (>.^)~y</button>
+
+                                        <hr>
+
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('臉部特徵網格圖')">傳送文字(臉部特徵網格圖)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('臉部外框')">傳送文字(臉部外框)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('臉部面相算命特徵圖')">傳送文字(臉部面相算命特徵圖)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('三庭')">傳送文字(三庭)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('五眼')">傳送文字(五眼)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('美人角')">傳送文字(美人角)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('臉部黃金比例')">傳送文字(臉部黃金比例)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('臉部四角形比例')">傳送文字(臉部四角形比例)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('眉尾、眼尾和鼻翼連成一線')">傳送文字(眉尾、眼尾和鼻翼連成一線)</button>
+                                        <button type="button" class="btn btn-primary btn-lg" onclick="Function_text_test('鼻子大小')">傳送文字(鼻子大小)</button>
                                         
                                         
                                         
@@ -81,6 +94,7 @@
                                     <div class="bg-featured-blog" >
                                         <img id="image2" src="">
                                         <img id="image3" src="">
+                                        <div id="someDiv"></div>
                                     </div>
                             </div>
                             </div>
@@ -140,6 +154,24 @@
             function Function_stream_live(style) {
               document.getElementById("image2").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
             }
+
+            function Function_text_test(style) {
+                // document.getElementById("image2").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
+            //   document.querySelector('#someDiv').innerHTML = decodedHTML;
+
+                data1={ "param": style };
+                $.ajax({
+                    type:"post",
+                    url:"http://localhost:5000/getTxt",
+                    contentType:"application/json",
+                    data:JSON.stringify(data1),
+                }).done(function(data2){                
+                    $("#jsonOutput").html(JSON.stringify(data2["回傳文字"]));
+                    // document.querySelector('#someDiv').innerHTML = JSON.stringify(data);
+                }).fail(function(err){
+                    alert(err.responseText);
+                });
+            }
             
             // function getImg() {
             //     document.getElementById("image2").src = "{{ url_for('static', filename='images/temp.jpg') }}";
@@ -152,7 +184,7 @@
                     contentType:"application/json",
                     data:JSON.stringify(data),
                 }).done(function(data){                
-                    $("#jsonOutput").html(JSON.stringify(data));
+                    $("#jsonOutput").html(JSON.stringify(data["臉部周長"]));
                 }).fail(function(err){
                     alert(err.responseText);
                 });
