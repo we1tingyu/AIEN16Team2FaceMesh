@@ -172,7 +172,7 @@
                     contentType:"application/json",
                     data:JSON.stringify(data1),
                 }).done(function(data2){                
-                    $("#jsonOutput").html(JSON.stringify(data2["回傳文字"]));
+                  $("#jsonOutput").html(JSON.stringify(data2["回傳文字"]).replace("\"", "").replace("\"", ""));
                     // document.querySelector('#someDiv').innerHTML = JSON.stringify(data);
                 }).fail(function(err){
                     alert(err.responseText);
