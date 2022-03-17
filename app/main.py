@@ -46,19 +46,24 @@ def DataAnalysis():
 
 # feed a video stream as a source
 # 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖 (0 不畫, 1 畫臉框, 2 畫五官)
-@app.route('/video_feed/<string:style>')
-def video_feed(style):
+@app.route('/video_feed/<string:style>/<string:videoMode>')
+def video_feed(style, videoMode):
     # multipart/x-mixed-replace is an HTTP header. Your server can use it to push dynamically updated content to the web browser.
     # It works by telling the browser to keep the connection open and replace the web page or piece of media it is displaying with another when it receives a special token.
     # The header is old and widely supported. It works in legacy browsers.
     # Each yield expression is directly sent thru Response to the browser.
 
     # 是否為影片
-    videoMode = False
+    # videoMode = False
     # videoMode = True
     # 路徑
-    filePath = "app/static/images/Thelatestphotos.jpg"
-    # filePath = "./videos/1-720p.mp4"
+    print(videoMode)
+    if videoMode == "影片":
+        filePath = "./videos/1-720p.mp4"
+        videoMode = True
+    elif videoMode == "照片":
+        filePath = "app/static/images/Thelatestphotos.jpg"
+        videoMode = False
 
     drawFaceLms = True 
     drawID = False 
@@ -94,7 +99,7 @@ def getTxt():
     data={ "回傳文字":txt}    
     return flask.jsonify(data)
 
-
+# 老師示範用 ajax 前後端傳送資料
 @app.route('/getFaceData', methods=["POST"])
 def getFaceData():
     #print(flask.request.json["param"])
