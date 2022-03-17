@@ -656,10 +656,10 @@ def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLm
 
         # 若為圖片則直接 break 出 while 迴圈
         if not videoMode:
-            cv2.imencode('.jpg',
-            img)[1].tofile("./app/static/images/" +drawFortuneTelling+ "YAYAYA.jpg") 
-            print("success to save:" + drawFortuneTelling + "YAYAYA.jpg")
-            print("-------------------------")
+            # cv2.imencode('.jpg',
+            # img)[1].tofile("./app/static/images/" +drawFortuneTelling+ "YAYAYA.jpg") 
+            # print("success to save:" + drawFortuneTelling + "YAYAYA.jpg")
+            # print("-------------------------")
             break
             
         if cv2.waitKey(1) == ord('q'): 
