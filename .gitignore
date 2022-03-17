@@ -173,5 +173,5 @@ dmypy.json
 
  __pycache__/ 
 
-# 忽略測試照片
-/app/static/images/2022*.jpg
+# # 忽略測試照片
+# /app/static/images/2022*.jpg
