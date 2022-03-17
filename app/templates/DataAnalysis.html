@@ -13,7 +13,7 @@
             <div class="col-md-3">
               <table>
                 <tr>
-                  <td><img id="photo" src="images/camera-open.png" onclick="change()"></td>
+                  <td><img id="photo" src="images/camera-open.png" onclick="Function_stream_live('拍照')"></td>
                   <td>拍照</td>
                 </tr>
               </table>
@@ -23,7 +23,7 @@
 
           <div class="col-md-6">
             <div class="right-image">
-              <img src="images/臉譜.png" alt="">
+              <img src="images/臉譜.png" id="image1" alt="">
             </div>
           </div>
 
@@ -154,16 +154,22 @@
 
     {% block scripts %}
     <!-- Core theme JS-->
-    <script>
+    <!-- <script>
       x=1;
       function change(){
         x++;
         document.getElementById("photo").src="images/camera-wait.png";
       }
-    </script>
+    </script> -->
    
     <script>
-       function Function_video_feed(style) {
+
+
+        function Function_stream_live(style) {
+              document.getElementById("image1").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
+              document.getElementById("photo").src="images/camera-wait.png";
+            }
+        function Function_video_feed(style) {
               document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
               data1={ "param": style };
                 $.ajax({
