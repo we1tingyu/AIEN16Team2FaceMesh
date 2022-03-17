@@ -109,6 +109,8 @@ class FaceMeshDetector():
         FIVE_EYE=facialFeatures.FIVE_EYE
         five_eye_x = []
         five_eye_ratio = []
+        five_eye_ratio_diff = []
+        score=0
         sum=0  
         printTxt = ""
         # multi_face_landmarks :臉上作完正規化的xyz座標
@@ -192,10 +194,10 @@ class FaceMeshDetector():
                     if takePicture :
                         return sum
                         
-                    print(f'臉的周長:{sum}')
-                    print('------------')
+                    # print(f'臉的周長:{sum:.2f}')
+                    # print('------------')
 
-                    printTxt += f'臉的周長:{sum}<br>'
+                    printTxt += f'臉的周長:{sum:.2f}<br>'
 
                 # 臉部面相算命特徵圖, 五官
                 elif drawFortuneTelling == "臉部面相算命特徵圖":
@@ -235,10 +237,10 @@ class FaceMeshDetector():
                         # append into distance[]                           
                         distance.append(sum)                     
                     if distance:
-                        print(f'RIGHT_EYEBROW:{distance[0]}, LEFT_EYEBROW:{distance[1]}, RIGHT_EYE:{distance[2]}, LEFT_EYE{distance[3]}, NOSE_LENGTH:{distance[4]}, NOSE_WIDTH:{distance[5]}, FOREHEAD:{distance[6]}, PHILTRUM:{distance[7]}, MOUTH:{distance[8]}')
-                        print('------------')
+                        # print(f'RIGHT_EYEBROW:{distance[0]:.2f}, LEFT_EYEBROW:{distance[1]:.2f}, RIGHT_EYE:{distance[2]:.2f}, LEFT_EYE{distance[3]:.2f}, NOSE_LENGTH:{distance[4]:.2f}, NOSE_WIDTH:{distance[5]:.2f}, FOREHEAD:{distance[6]:.2f}, PHILTRUM:{distance[7]:.2f}, MOUTH:{distance[8]:.2f}')
+                        # print('------------')
 
-                        printTxt += f'RIGHT_EYEBROW:{distance[0]}, LEFT_EYEBROW:{distance[1]}, RIGHT_EYE:{distance[2]}, LEFT_EYE{distance[3]}, NOSE_LENGTH:{distance[4]}, NOSE_WIDTH:{distance[5]}, FOREHEAD:{distance[6]}, PHILTRUM:{distance[7]}, MOUTH:{distance[8]}<br>'
+                        printTxt += f'RIGHT_EYEBROW:{distance[0]:.2f}, LEFT_EYEBROW:{distance[1]:.2f}, RIGHT_EYE:{distance[2]:.2f}, LEFT_EYE{distance[3]:.2f}, NOSE_LENGTH:{distance[4]:.2f}, NOSE_WIDTH:{distance[5]:.2f}, FOREHEAD:{distance[6]:.2f}, PHILTRUM:{distance[7]:.2f}, MOUTH:{distance[8]:.2f}<br>'
 
                 # 三庭
                 elif drawFortuneTelling == "三庭":
@@ -259,13 +261,13 @@ class FaceMeshDetector():
                         three_court_y.append(y)
 
                     if three_court_y:
-                        print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]}, y2:{three_court_y[1]}, y3:{three_court_y[2]}, y4:{three_court_y[3]}')
+                        # print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]:.2f}, y2:{three_court_y[1]:.2f}, y3:{three_court_y[2]:.2f}, y4:{three_court_y[3]:.2f}')
 
-                        printTxt += f'由上到下的 y 座標分別是 y1:{three_court_y[0]}, y2:{three_court_y[1]}, y3:{three_court_y[2]}, y4:{three_court_y[3]}<br>'
+                        printTxt += f'由上到下的 y 座標分別是 y1:{three_court_y[0]:.2f}, y2:{three_court_y[1]:.2f}, y3:{three_court_y[2]:.2f}, y4:{three_court_y[3]:.2f}<br>'
 
-                        print(f'上到下的 y 距離:{total_y}')
+                        # print(f'上到下的 y 距離:{total_y:.2f}')
 
-                        printTxt += f'上到下的 y 距離:{total_y}<br>'
+                        printTxt += f'上到下的 y 距離:{total_y:.2f}<br>'
 
                         for i in range(len(THREE_COURT) - 1):
                             y_distance = three_court_y[i+1] - three_court_y[i]
@@ -273,10 +275,10 @@ class FaceMeshDetector():
                             # print(ratio)
                             three_court_ratio.append(ratio)
 
-                        print(f'三庭(上到下)比例為-> {three_court_ratio[0]}:{three_court_ratio[1]}:{three_court_ratio[2]}')
-                        print('------------')
+                        # print(f'三庭(上到下)比例為-> {three_court_ratio[0]:.2f}:{three_court_ratio[1]:.2f}:{three_court_ratio[2]:.2f}')
+                        # print('------------')
 
-                        printTxt += f'三庭(上到下)比例為-> {three_court_ratio[0]}:{three_court_ratio[1]}:{three_court_ratio[2]}<br>'
+                        printTxt += f'三庭(上到下)比例為-> {three_court_ratio[0]:.2f}:{three_court_ratio[1]:.2f}:{three_court_ratio[2]:.2f}<br>'
                 
                 # 五眼
                 elif drawFortuneTelling == "五眼":
@@ -297,24 +299,32 @@ class FaceMeshDetector():
                         five_eye_x.append(x)
 
                     if five_eye_x:
-                        print(f'由左到右的 x 座標分別是 x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}')
+                        # print(f'由左到右的 x 座標分別是 x1:{five_eye_x[0]:.2f}, x2:{five_eye_x[1]:.2f}, x3:{five_eye_x[2]:.2f}, x4:{five_eye_x[3]:.2f}, x5:{five_eye_x[4]:.2f}, x6:{five_eye_x[5]:.2f}')
 
-                        printTxt += f'由左到右的 x 座標分別是 x1:{five_eye_x[0]}, x2:{five_eye_x[1]}, x3:{five_eye_x[2]}, x4:{five_eye_x[3]}, x5:{five_eye_x[4]}, x6:{five_eye_x[5]}<br>'
+                        printTxt += f'由左到右的 x 座標分別是 x1:{five_eye_x[0]:.2f}, x2:{five_eye_x[1]:.2f}, x3:{five_eye_x[2]:.2f}, x4:{five_eye_x[3]:.2f}, x5:{five_eye_x[4]:.2f}, x6:{five_eye_x[5]:.2f}<br>'
 
-                        print(f'左到右的 x 距離:{total_x}')
+                        # print(f'左到右的 x 距離:{total_x:.2f}')
 
-                        printTxt += f'左到右的 x 距離:{total_x}<br>'
+                        printTxt += f'左到右的 x 距離:{total_x:.2f}<br>'
 
                         for i in range(len(FIVE_EYE) - 1):
                             x_distance = five_eye_x[i+1] - five_eye_x[i]
-                            ratio = x_distance / total_x
+                            ratio = (x_distance / total_x) * 5
                             # print(ratio)
                             five_eye_ratio.append(ratio)
+                            five_eye_ratio_diff.append(1-ratio)
+                            score += 1-(abs(1-ratio))
+                        score = score * 100 / 5
 
-                        print(f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}')
-                        print('------------')
+                        # print(f'五眼(左到右)比例為-> {five_eye_ratio[0]:.2f}:{five_eye_ratio[1]:.2f}:{five_eye_ratio[2]:.2f}:{five_eye_ratio[3]:.2f}:{five_eye_ratio[4]:.2f}')
+                        # print('------------')
 
-                        printTxt += f'五眼(左到右)比例為-> {five_eye_ratio[0]}:{five_eye_ratio[1]}:{five_eye_ratio[2]}:{five_eye_ratio[3]}:{five_eye_ratio[4]}<br>'
+                        printTxt += f'五眼(左到右)比例為-> {five_eye_ratio[0]:.2f}:{five_eye_ratio[1]:.2f}:{five_eye_ratio[2]:.2f}:{five_eye_ratio[3]:.2f}:{five_eye_ratio[4]:.2f}<hr>'
+
+                        printTxt += f'五眼的完美比例是-> 1:1:1:1:1<br>'
+
+                        printTxt += f'您的落差為-> {five_eye_ratio_diff[0]:.2f}:{five_eye_ratio_diff[1]:.2f}:{five_eye_ratio_diff[2]:.2f}:{five_eye_ratio_diff[3]:.2f}:{five_eye_ratio_diff[4]:.2f}<hr>'
+                        printTxt += f'您獲得的分數為-> {score:.2f}分'
 
                 # 臉部四角形比例
                 elif drawFortuneTelling == "臉部四角形比例":
@@ -371,12 +381,12 @@ class FaceMeshDetector():
                     self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                     four_square_ratio = (x2 - x1) / (y_average_bottom - y_average_top)
-                    print(f'臉部四角形長寬分別為: {(x2 - x1)}, {(y_average_bottom - y_average_top)}')
-                    print(f'臉部四角形比例為: {four_square_ratio}')
-                    print('------------')
+                    # print(f'臉部四角形長寬分別為: {(x2 - x1):.2f}, {(y_average_bottom - y_average_top):.2f}')
+                    # print(f'臉部四角形比例為: {four_square_ratio:.2f}')
+                    # print('------------')
 
-                    printTxt += f'臉部四角形長寬分別為: {(x2 - x1)}, {(y_average_bottom - y_average_top)}<br>'
-                    printTxt += f'臉部四角形比例為: {four_square_ratio}<br>'
+                    printTxt += f'臉部四角形長寬分別為: {(x2 - x1):.2f}, {(y_average_bottom - y_average_top):.2f}<br>'
+                    printTxt += f'臉部四角形比例為: {four_square_ratio:.2f}<br>'
 
                 #美人角
                 elif drawFortuneTelling == "美人角":
@@ -402,9 +412,9 @@ class FaceMeshDetector():
 
                     # 計算夾角
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
-                    print(f"美人角角度是{ang1}")
+                    # print(f"美人角角度是{ang1}°")
 
-                    printTxt += f"美人角角度是{ang1}<br>"
+                    printTxt += f"美人角角度是{ang1}°<br>"
                     
 
                 # 眉尾、眼尾和鼻翼連成一線
@@ -432,7 +442,7 @@ class FaceMeshDetector():
 
                     # 計算眼尾和眉尾夾角
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
-                    print(f"眼尾和眉尾夾角角度是{ang1}°")
+                    # print(f"眼尾和眉尾夾角角度是{ang1}°")
                     printTxt += f"眼尾和眉尾夾角角度是{ang1}°<br>"
 
                     # 眼尾和鼻翼
@@ -458,20 +468,20 @@ class FaceMeshDetector():
 
                     # 計算眼尾和鼻翼夾角
                     ang2 = self.angle(startAddressForAngle[2], endAddressForAngle[2], startAddressForAngle[3], endAddressForAngle[3])
-                    print(f"眼尾和鼻翼夾角角度是{ang2}°")
+                    # print(f"眼尾和鼻翼夾角角度是{ang2}°")
 
                     printTxt += f"眼尾和鼻翼夾角角度是{ang2}°<br>"
 
                     # 計算(左眉-左眼)和(左眼-左鼻)夾角, (正數)順時鐘旋轉表示眉毛較短
                     ang3 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[2], endAddressForAngle[2], ignore_clockwise_direction=False)
-                    print(f"左眉尾、左眼尾和左鼻翼夾角角度是{180-ang3}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)")
+                    # print(f"左眉尾、左眼尾和左鼻翼夾角角度是{180-ang3}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)")
 
                     printTxt += f"左眉尾、左眼尾和左鼻翼夾角角度是{180-ang3}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)<br>"
 
                     # 計算(右眉-右眼)和(右眼-右鼻)夾角, (負數)逆時鐘旋轉表示眉毛較短, 故取負數
                     ang4 = -self.angle(startAddressForAngle[1], endAddressForAngle[1], startAddressForAngle[3], endAddressForAngle[3], ignore_clockwise_direction=False)
-                    print(f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)")
-                    print('------------')
+                    # print(f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)")
+                    # print('------------')
 
                     printTxt += f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)<br>"
 
@@ -493,10 +503,10 @@ class FaceMeshDetector():
 
                     face_ratio = total_y / total_x
 
-                    print(f'臉部比例為-> 1:{face_ratio}')
-                    print('------------')
+                    # print(f'臉部比例為-> 1:{face_ratio:.3f}')
+                    # print('------------')
 
-                    printTxt += f'臉部比例為-> 1:{face_ratio}<br>'
+                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'
 
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
@@ -515,9 +525,9 @@ class FaceMeshDetector():
                     self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                     alae_of_nose_ratio = (x2 - x1) / total_x
-                    print(f'鼻子寬度佔臉部寬度比例為: {alae_of_nose_ratio}')
+                    # print(f'鼻子寬度佔臉部寬度比例為: {alae_of_nose_ratio:.2f}')
                     
-                    printTxt += f'鼻子寬度佔臉部寬度比例為: {alae_of_nose_ratio}<br>'
+                    printTxt += f'鼻子寬度佔臉部寬度比例為: {alae_of_nose_ratio:.2f}<br>'
 
                     # 開始計算眼頭
                     startID, endID = HEAD_OF_EYE
@@ -534,12 +544,12 @@ class FaceMeshDetector():
                     self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                     head_of_eye_ratio = (x2 - x1) / total_x
-                    print(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio}')
-                    print(f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio}')
-                    print('------------')
+                    # print(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}')
+                    # print(f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio:.2f}')
+                    # print('------------')
 
-                    printTxt += f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio}<br>'
-                    printTxt += f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio}<br>'
+                    printTxt += f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}<br>'
+                    printTxt += f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio:.2f}<br>'
 
                 if returnTxt :
                         return printTxt
@@ -642,13 +652,13 @@ def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLm
             img, faces, distance, sum = detector.findFaceMesh(img, drawFaceLms, drawID, drawFortuneTelling)      
                     
             # 若為影片則加上 FPS
-            if videoMode:
-                # time.time():1970年之後經過的秒数
-                cTime = time.time()
-                fps = 1/(cTime-pTime)
-                pTime = cTime
-                cv2.putText(img, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
-                #cv2.imshow("Image", img)
+            # if videoMode:
+            #     # time.time():1970年之後經過的秒数
+            #     cTime = time.time()
+            #     fps = 1/(cTime-pTime)
+            #     pTime = cTime
+            #     cv2.putText(img, f'FPS: {int(fps)}', (20, 70), cv2.FONT_HERSHEY_PLAIN, 3, (0, 255, 0), 3)
+            #     #cv2.imshow("Image", img)
         
             # 傳送至前端
             frame = cv2.imencode('.jpg', img)[1].tobytes()
