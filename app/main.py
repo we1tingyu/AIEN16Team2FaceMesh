@@ -37,8 +37,13 @@ app = flask.Flask(__name__, '/')
 # 因此，你需要先做的就是在專案底下建置一個資料夾，並且命名為『templates』
 @app.route('/')
 def index():
-    return render_template('index.html')
+    return render_template('Home.html')
     # return render_template('Test.html')
+
+#功能體驗
+@app.route('/Experience')
+def Experience():
+    return render_template('Experience.html')
 
 #數據分析
 @app.route('/DataAnalysis')
@@ -48,7 +53,12 @@ def DataAnalysis():
 #美學標準
 @app.route('/Aesthetics')
 def Aesthetics():
-    return render_template('Aesthetics.html')      
+    return render_template('Aesthetics.html')   
+
+#關於我們
+@app.route('/About')
+def About():
+    return render_template('About.html')       
 
 # feed a video stream as a source
 # 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖; 加上 videoMode 參數, 傳到 videoMode, 表示"影片"或"照片"

@@ -1,0 +1,159 @@
+{% extends "base.html" %}
+{% block title %}AIEN16面相分析 - 功能體驗{% endblock title%}
+{% block Banner %}
+<div class="page-heading about-heading header-text">
+      <div class="container">
+        <div class="row">
+          <div class="col-md-12">
+            <div class="text-content">
+              <h4>功能體驗</h4>
+              <h2>Aesthetics Criterion</h2>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock Banner %}
+{% block content %}
+
+<!--Mediapipe Face Sart-->
+<div class="latest-products">
+    <div class="container">
+      <div class="row">
+
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>Mediapipe Face</h2>
+          </div>
+          <div class="best-features about-features">
+            <p class="p">
+              MediaPipe Face Mesh 是一種人臉幾何解決方案，即使在移動設備上也能實時估計 468 個 3D 人臉地標。<br/>
+              它採用機器學習 (ML) 來推斷 3D 表面幾何形狀，只需要一個相機輸入，而不需要專用的深度傳感器。<br/>
+              該解決方案在整個管道中利用輕量級模型架構和 GPU 加速，提供對實時體驗至關重要的實時性能。<br/>
+            </p>            
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="#"><img src="images/facemesh1.png" alt=""></a>
+            <div class="down-content">
+              <a href="#"><h3>原始</h3></a>
+              <h6>Demo</h6>
+              <p class="p">Mediapipe原始模型</p>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="#"><img src="images/facemesh2.png" alt=""></a>
+            <div class="down-content">
+              <a href="#"><h3>標號</h3></a>
+              <h6>Mark</h>
+              <p class="p">將每個點標記號碼</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-md-4">
+          <div class="product-item">
+            <a href="#"><img src="images/facemesh3.png" alt=""></a>
+            <div class="down-content">
+              <a href="#"><h3>畫線</h3></a>
+              <h6>Line</h6>
+              <p class="p">將座標點連線畫線計算</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+  <!--Mediapipe Face End-->
+
+  <div class="best-features about-features">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="section-heading">
+            <h2>影片展示</h2>
+          </div>
+        </div>
+        <div class="col-md-8" style="float:left">
+          <button class="button-click" onclick="Function_video_feed('臉部特徵網格圖', '影片')">臉部特徵網格圖</button>
+          <button class="button-click" onclick="Function_video_feed('臉部外框', '影片')">臉部外框圖</button>
+          <button class="button-click" onclick="Function_video_feed('臉部面相算命特徵圖', '影片')">臉部五官特徵圖</button>
+        <br/></p>
+        <p>
+          <button class="button-click" onclick="Function_video_feed('三庭', '影片')">三庭</button>
+          <button class="button-click" onclick="Function_video_feed('臉部黃金比例', '影片')">黃金比例</button>
+          <button class="button-click" onclick="Function_video_feed('臉部四角形比例', '影片')">四角比例</button>
+        <br/></p>
+        <p>
+          <button class="button-click" onclick="Function_video_feed('五眼', '影片')">五眼</button>
+          <button class="button-click" onclick="Function_video_feed('美人角', '影片')">美人角</button>
+          <button class="button-click" onclick="Function_video_feed('眉尾、眼尾和鼻翼連成一線', '影片')">三點線</button>
+          <button class="button-click" onclick="Function_video_feed('鼻子大小', '影片')">鼻子寬度</button>
+        </p>
+        </div>
+
+        <div class="col-md-6">
+          <div class="right-image">
+            <img src="images/video.jpg" id="image2" onclick="Function_video_feed('臉部特徵網格圖', '影片')" alt="" >
+          </div>
+        <!-- </div>
+        <div class="col-md-6">
+          <div class="left-content">
+            <h4>面部畫線評分</h4>
+            <p id="jsonOutput"></p>
+            <table class="table-roll">
+              <thead>
+                  <tr>
+                      <th colspan="2" class="p">髮型妝容建議</th>
+                  </tr>
+              </thead>
+              <tbody>
+                
+              </tbody>
+            </table>
+            <p></p>
+            <a href="#Top"><button class="button-go" style="vertical-align:middle"><span>原圖數據 </span></button></a>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  {% endblock content %}
+  {% block scripts %}
+  <script>
+      function Function_video_feed(style, videoMode) {
+                document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
+
+                // 影片
+                if (videoMode == "影片") {
+                    $("#jsonOutput").html("播放影片 ing");
+                }
+                // 照片
+                else if (videoMode == "照片") {
+                    // 處理回傳值
+                    data1={ "param": style };
+                    $.ajax({
+                        type:"post",
+                        url:"http://localhost:5000/getTxt",
+                        contentType:"application/json",
+                        data:JSON.stringify(data1),
+                    }).done(function(data2){                
+                        $("#jsonOutput").html(JSON.stringify(data2["回傳文字"]).replace("\"", "").replace("\"", ""));
+                    }).fail(function(err){
+                        alert(err.responseText);
+                    });
+                }
+                // 照相功能
+                else if (videoMode == "照相") {
+                    document.getElementById("image1").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
+                    $("#jsonOutput").html("拍照 ing");
+                }
+            }
+    
+        
+  </script>
+  {% endblock scripts %}
