@@ -1,0 +1,123 @@
+
+.table-roll tbody {
+  display:block;
+  height:450px;
+  overflow-y:scroll;
+}
+
+.table-roll thead, tbody tr {
+  display:table;
+  width:60%;
+  table-layout:fixed;
+}
+
+.table-roll thead {
+  width: calc( 100% )
+}
+
+.table-roll thead th{ background:#ccc;}
+
+.button-camera {
+  float: left;
+  border-radius: 50%;
+  position: relative;
+  border: none;
+  font-size: 28px;
+  color: #FFFFFF;
+  text-align: center;
+  -webkit-transition-duration: 0.4s; /* Safari */
+  transition-duration: 0.4s;
+  text-decoration: none;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+.button-camera:after {
+  content: "";
+  background: #ee9090;
+  display: block;
+  position: absolute;
+  padding-top: 300%;
+  padding-left: 350%;
+  margin-left: -20px!important;
+  margin-top: -120%;
+  opacity: 0;
+  transition: all 0.8s
+}
+
+.button-camera:active:after {
+  padding: 0;
+  margin: 0;
+  opacity: 1;
+  transition: 0s
+}
+
+.button-go {
+  display: inline-block;
+  border-radius: 4px;
+  background-color: #ee2424;
+  border: none;
+  color: #FFFFFF;
+  text-align: center;
+  font-size: 20px;
+  padding: 15px;
+  width: 150px;
+  border-radius: 20px;
+  transition: all 0.5s;
+  cursor: pointer;
+  margin: 5px;
+  float: right;
+}
+
+.button-go span {
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: 0.5s;
+}
+
+.button-go span:after {
+  content: '»';
+  position: absolute;
+  opacity: 0;
+  top: 0;
+  transition: 0.5s;
+}
+
+.button-go:hover span {
+  padding-right: 25px;
+}
+
+.button-go:hover span:after {
+  opacity: 1;
+  right: 0;
+}
+
+.button-click {
+  display: inline-block;
+  padding: 15px 25px;
+  font-size: 20px;
+  cursor: pointer;
+  text-align: center;   
+  text-decoration: none;
+  outline: none;
+  color: #fff;
+  background-color: #f07070;
+  border: none;
+  border-radius: 50px;
+  box-shadow: 0 8px rgb(179, 178, 178);
+}
+
+.button-click:hover {background-color: #f12929}
+
+.button-click:active {
+  background-color: #d61a1a;
+  box-shadow: 0 10px rgb(141, 140, 140);
+  transform: translateY(4px);
+}
+
+.p {
+    font-size: 18px;
+    font-family: 'FontAwesome';
+    font-weight: bold;
+}

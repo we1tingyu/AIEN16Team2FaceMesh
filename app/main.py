@@ -40,6 +40,10 @@ def index():
     return render_template('index.html')
     # return render_template('Test.html')
 
+@app.route('/DataAnalysis')
+def DataAnalysis():
+    return render_template('DataAnalysis.html')    
+
 # feed a video stream as a source
 # 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖 (0 不畫, 1 畫臉框, 2 畫五官)
 @app.route('/video_feed/<string:style>')

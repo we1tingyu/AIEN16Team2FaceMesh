@@ -88,16 +88,8 @@ a.filled-button:hover {
 	margin-bottom: 15px;
 }
 
-.products-heading {
-	background-image: url(../images/products-heading.jpg);
-}
-
 .about-heading {
-	background-image: url(../images/about-heading.jpg);
-}
-
-.contact-heading {
-	background-image: url(../images/contact-heading.jpg);
+	background-image: url(/app/templates/images/ai-heahing.PNG);
 }
 
 .page-heading {
@@ -265,7 +257,7 @@ header .navbar {
 .navbar-collapse {
 	text-align: center;
 }
-.navbar .navbar-nav  {
+.navbar .navbar-nav .nav-item {
 	margin: 0px 15px;
 }
 .navbar .navbar-nav a.nav-link {
@@ -318,7 +310,7 @@ header .navbar {
 
 .banner-item-01 {
 	padding: 300px 0px;
-	background-image: url(../images/slide_01.jpg);
+	background-image: url(/app/templates/images/home-heading.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -326,7 +318,7 @@ header .navbar {
 
 .banner-item-02 {
 	padding: 300px 0px;
-	background-image: url(../images/slide_02.jpg);
+	background-image: url(/app/templates/images/aiface2.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -334,7 +326,23 @@ header .navbar {
 
 .banner-item-03 {
 	padding: 300px 0px;
-	background-image: url(../images/slide_03.jpg);
+	background-image: url(/app/templates/images/aiface4.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.banner-item-04 {
+	padding: 300px 0px;
+	background-image: url(/app/templates/images/aiface5.jpg);
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-position: center center;
+}
+
+.banner-item-05 {
+	padding: 300px 0px;
+	background-image: url(/app/templates/images/home-heading-beauty.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;

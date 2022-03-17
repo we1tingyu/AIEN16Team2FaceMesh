@@ -7,7 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>{% block title%}{% endblock title%} -titleBlock</title>
+    <title>{% block title%}{% endblock title%}</title>
+    <link type="image/x-icon" rel="icon" href="{{ url_for('static', filename='assets/favicon.ico') }}"/>
 
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/fontawesome.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-sixteen.css') }}" />
@@ -28,7 +29,7 @@
 </head>
 
 <body>
-    {% block preloader %}
+    
     <!-- ***** Preloader Start ***** 頁面跳轉-->
     <div id="preloader">
         <div class="jumper">
@@ -38,8 +39,8 @@
         </div>
     </div>
     <!-- ***** Preloader End ***** -->
-    {% endblock preloader %}
-    {% block header %}
+    
+    
     <!-- Header -->
     <header class="">
         <nav class="navbar navbar-expand-lg">
@@ -78,10 +79,11 @@
             </div>
         </nav>
     </header>
-    {% endblock header %}
+    
 
-    <!-- Page Content -->
-    {% block banner %}
+    
+
+    
     <!-- Banner Starts Here -->
     <div class="banner header-text">
         <div class="owl-banner owl-carousel">
@@ -118,10 +120,12 @@
         </div>
     </div>
     <!-- Banner Ends Here -->
-    {% endblock banner %}
+    
+<!-- Page Content -->
+{% block content %}
+{% endblock content %}
 
-
-    {% block footer %}
+    
     <footer>
         <div class="container">
             <div class="row">
@@ -133,9 +137,9 @@
             </div>
         </div>
     </footer>
-    {% endblock footer %}
+    
 
-    {% block scripts %}
+    
     <script src="{{ url_for('static', filename='js/jquery/jquery.min.js') }}"></script>
     <script src="{{ url_for('static', filename='js/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
     <!-- Additional Scripts -->
@@ -156,6 +160,7 @@
             }
         }
     </script>
+    {% block scripts %}
     {% endblock scripts %}
 </body>
 
