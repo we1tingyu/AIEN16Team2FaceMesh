@@ -51,7 +51,7 @@ def Aesthetics():
     return render_template('Aesthetics.html')      
 
 # feed a video stream as a source
-# 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖 (0 不畫, 1 畫臉框, 2 畫五官)
+# 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖; 加上 videoMode 參數, 傳到 videoMode, 表示"影片"或"照片"
 @app.route('/video_feed/<string:style>/<string:videoMode>')
 def video_feed(style, videoMode):
     # multipart/x-mixed-replace is an HTTP header. Your server can use it to push dynamically updated content to the web browser.
@@ -62,8 +62,12 @@ def video_feed(style, videoMode):
     # 是否為影片
     # videoMode = False
     # videoMode = True
+    # print(videoMode)
+
     # 路徑
-    print(videoMode)
+    # filePath = "./videos/1-720p.mp4"
+    # filePath = "app/static/images/Thelatestphotos.jpg"
+    
     if videoMode == "影片":
         filePath = "./videos/1-720p.mp4"
         videoMode = True

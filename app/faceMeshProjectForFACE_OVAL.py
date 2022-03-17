@@ -618,7 +618,7 @@ class FaceMeshDetector():
         # LineDistance = self.euclaideanDistance3D(self.startAddress, self.endAddress)
         # return LineDistance
 
-def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLms=True, drawID=False, drawFortuneTelling="0"):
+def faceMeshDetection(videoMode=True, filePath="./videos/1-720p.mp4", drawFaceLms=True, drawID=False, drawFortuneTelling="臉部特徵網格圖"):
     #cap = cv2.VideoCapture(0)                         # From camera capture real time 
     #cap = cv2.VideoCapture("../videos/2-1080p.mp4")   # required AV1 hardware decoding
     #cap = cv2.VideoCapture("../videos/2-720pL.mp4")
