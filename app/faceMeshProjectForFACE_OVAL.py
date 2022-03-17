@@ -304,6 +304,7 @@ class FaceMeshDetector():
                         self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                         five_eye_x.append(x)
+                        
 
                     if five_eye_x:
                         # print(f'由左到右的 x 座標分別是 x1:{five_eye_x[0]:.2f}, x2:{five_eye_x[1]:.2f}, x3:{five_eye_x[2]:.2f}, x4:{five_eye_x[3]:.2f}, x5:{five_eye_x[4]:.2f}, x6:{five_eye_x[5]:.2f}')
@@ -510,8 +511,14 @@ class FaceMeshDetector():
 
                     # print(f'臉部比例為-> 1:{face_ratio:.3f}')
                     # print('------------')
-
-                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'
+                    
+                    # 鑑別值
+                    k=1
+                    GR = 1.618
+                    score = (1-(k*abs(face_ratio-GR)/GR))*100
+                    
+                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'                    
+                    printTxt += f'您獲得的分數為-> {score:.2f}分'
 
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
