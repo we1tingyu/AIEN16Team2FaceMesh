@@ -60,20 +60,20 @@
             </div>
           </div>
           <div class="col-md-8">
-            <button class="button-click" onclick="Function_video_feed('臉部特徵網格圖')">臉部特徵網格圖</button>
-            <button class="button-click" onclick="Function_video_feed('臉部外框')">臉部外框圖</button>
-            <button class="button-click" onclick="Function_video_feed('臉部面相算命特徵圖')">臉部五官特徵圖</button>
+            <button class="button-click" onclick="Function_video_feed('臉部特徵網格圖', '照片')">臉部特徵網格圖</button>
+            <button class="button-click" onclick="Function_video_feed('臉部外框', '照片')">臉部外框圖</button>
+            <button class="button-click" onclick="Function_video_feed('臉部面相算命特徵圖', '照片')">臉部五官特徵圖</button>
           <br/></p>
           <p>
-            <button class="button-click" onclick="Function_video_feed('三庭')">三庭</button>
-            <button class="button-click" onclick="Function_video_feed('臉部黃金比例')">黃金比例</button>
-            <button class="button-click" onclick="Function_video_feed('臉部四角形比例')">四角比例</button>
+            <button class="button-click" onclick="Function_video_feed('三庭', '照片')">三庭</button>
+            <button class="button-click" onclick="Function_video_feed('臉部黃金比例', '照片')">黃金比例</button>
+            <button class="button-click" onclick="Function_video_feed('臉部四角形比例', '照片')">四角比例</button>
           <br/></p>
           <p>
-            <button class="button-click" onclick="Function_video_feed('五眼')">五眼</button>
-            <button class="button-click" onclick="Function_video_feed('美人角')">美人角</button>
-            <button class="button-click" onclick="Function_video_feed('眉尾、眼尾和鼻翼連成一線')">三點線</button>
-            <button class="button-click" onclick="Function_video_feed('鼻子大小')">鼻子寬度</button>
+            <button class="button-click" onclick="Function_video_feed('五眼'), '照片'">五眼</button>
+            <button class="button-click" onclick="Function_video_feed('美人角', '照片')">美人角</button>
+            <button class="button-click" onclick="Function_video_feed('眉尾、眼尾和鼻翼連成一線', '照片')">三點線</button>
+            <button class="button-click" onclick="Function_video_feed('鼻子大小', '照片')">鼻子寬度</button>
           </p>
           </div>
 
@@ -174,8 +174,8 @@
               document.getElementById("image1").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
               document.getElementById("photo").src="images/camera-wait.png";
             }
-        function Function_video_feed(style) {
-              document.getElementById("image2").src = "{{ url_for('video_feed', style='style') }}".replace("style", style);
+        function Function_video_feed(style, videoMode) {
+              document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
               data1={ "param": style };
                 $.ajax({
                     type:"post",
