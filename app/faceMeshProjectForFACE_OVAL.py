@@ -514,14 +514,12 @@ class FaceMeshDetector():
 
                     face_ratio = total_y / total_x
 
-                    face_ratio*= 1.1
-                    # print(f'臉部比例為-> 1:{face_ratio:.3f}')
-                    # print('------------')
+                    
                     
                     # 鑑別值
                     k=2
                     # 因無法完全抓到臉長 調整黃金比例
-                    GR = 1.618 * 0.8567
+                    GR = 1.618 * 0.77
                     
                     score = (1-(k*abs(face_ratio-GR)/GR))*100
                     
