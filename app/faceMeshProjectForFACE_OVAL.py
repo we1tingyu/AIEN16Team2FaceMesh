@@ -509,16 +509,20 @@ class FaceMeshDetector():
 
                     face_ratio = total_y / total_x
 
+                    face_ratio*= 1.1
                     # print(f'臉部比例為-> 1:{face_ratio:.3f}')
                     # print('------------')
                     
                     # 鑑別值
-                    k=1
-                    GR = 1.618
+                    k=2
+                    # 因無法完全抓到臉長 調整黃金比例
+                    GR = 1.618 * 0.8567
+                    
                     score = (1-(k*abs(face_ratio-GR)/GR))*100
                     
                     printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'                    
-                    printTxt += f'您獲得的分數為-> {score:.2f}分'
+                    printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
+                   
 
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
