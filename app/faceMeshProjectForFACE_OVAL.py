@@ -420,7 +420,12 @@ class FaceMeshDetector():
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
                     # print(f"美人角角度是{ang1}°")
 
-                    printTxt += f"美人角角度是{ang1}°<br>"
+                    score = (1 - (abs(ang1-45) / 45)) * 100
+
+                    printTxt += f"美人角角度是-> {ang1}°<br>"
+                    printTxt += f'美人角的完美角度是-> 45°<br>'
+                    printTxt += f'您的落差為-> {abs(ang1-45)}<hr>'
+                    printTxt += f'您獲得的分數為-> {score:.2f}分'
                     
 
                 # 眉尾、眼尾和鼻翼連成一線
