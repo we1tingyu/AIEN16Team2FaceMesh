@@ -89,7 +89,7 @@ a.filled-button:hover {
 }
 
 .about-heading {
-	background-image: url(/app/templates/images/ai-heahing.PNG);
+	background-image: url(../images/ai-heahing.PNG);
 }
 
 .page-heading {
@@ -310,7 +310,7 @@ header .navbar {
 
 .banner-item-01 {
 	padding: 300px 0px;
-	background-image: url(/app/templates/images/home-heading.jpg);
+	background-image: url(../images/home-heading.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -318,7 +318,7 @@ header .navbar {
 
 .banner-item-02 {
 	padding: 300px 0px;
-	background-image: url(/app/templates/images/aiface2.png);
+	background-image: url(../images/aiface2.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -326,7 +326,7 @@ header .navbar {
 
 .banner-item-03 {
 	padding: 300px 0px;
-	background-image: url(/app/templates/images/aiface4.jpg);
+	background-image: url(../images/aiface4.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -334,7 +334,7 @@ header .navbar {
 
 .banner-item-04 {
 	padding: 300px 0px;
-	background-image: url(/app/templates/images/aiface5.jpg);
+	background-image: url(../images/aiface5.jpg);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;
@@ -342,7 +342,7 @@ header .navbar {
 
 .banner-item-05 {
 	padding: 300px 0px;
-	background-image: url(/app/templates/images/home-heading-beauty.png);
+	background-image: url(../images/home-heading-beauty.png);
 	background-size: cover;
 	background-repeat: no-repeat;
 	background-position: center center;

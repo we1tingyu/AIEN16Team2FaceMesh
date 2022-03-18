@@ -131,15 +131,15 @@ class FaceMeshDetector():
                     # self.mpDraw.draw_landmarks(img, faceLms, self.mpFaceMesh.FACEMESH_CONTOURS,
                     #                             self.drawSpec, self.mpDrawingStyles.get_default_face_mesh_contours_style())
 
-                    # 取得四個邊界的 x 和 y
-                    top_y = faceLms.landmark[top_ID].y*ih
-                    bottom_y = faceLms.landmark[bottom_ID].y*ih
-                    left_x = faceLms.landmark[left_ID].x*iw
-                    right_x = faceLms.landmark[right_ID].x*iw
+                # 取得四個邊界的 x 和 y
+                top_y = faceLms.landmark[top_ID].y*ih
+                bottom_y = faceLms.landmark[bottom_ID].y*ih
+                left_x = faceLms.landmark[left_ID].x*iw
+                right_x = faceLms.landmark[right_ID].x*iw
 
-                    # 算出臉的長(total_y)寬(total_x)
-                    total_y = bottom_y - top_y
-                    total_x = right_x - left_x
+                # 算出臉的長(total_y)寬(total_x)
+                total_y = bottom_y - top_y
+                total_x = right_x - left_x
                 
                 # 臉部特徵網格圖, 什麼都不畫
                 if drawFortuneTelling == "臉部特徵網格圖":
@@ -420,7 +420,12 @@ class FaceMeshDetector():
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
                     # print(f"美人角角度是{ang1}°")
 
-                    printTxt += f"美人角角度是{ang1}°<br>"
+                    score = (1 - (abs(ang1-45) / 45)) * 100
+
+                    printTxt += f"美人角角度是-> {ang1}°<br>"
+                    printTxt += f'美人角的完美角度是-> 45°<br>'
+                    printTxt += f'您的落差為-> {abs(ang1-45)}<hr>'
+                    printTxt += f'您獲得的分數為-> {score:.2f}分'
                     
 
                 # 眉尾、眼尾和鼻翼連成一線
