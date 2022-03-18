@@ -261,6 +261,14 @@ class FaceMeshDetector():
 
                         three_court_y.append(y)
 
+                    y_head = three_court_y[3] - (three_court_y[3] - three_court_y[0]) * 1.17647
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(left_x), int(y_head)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(y_head)
+                    # 畫線
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
                     if three_court_y:
                         # print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]:.2f}, y2:{three_court_y[1]:.2f}, y3:{three_court_y[2]:.2f}, y4:{three_court_y[3]:.2f}')
 
@@ -332,6 +340,69 @@ class FaceMeshDetector():
                         printTxt += f'您的落差為-> {ratio_diff[0]:.2f}:{ratio_diff[1]:.2f}:{ratio_diff[2]:.2f}:{ratio_diff[3]:.2f}:{ratio_diff[4]:.2f}<hr>'
                         printTxt += f'您獲得的分數為-> {score:.2f}分'
 
+                #美人角
+                elif drawFortuneTelling == "美人角":
+                    for idx1,ff in enumerate(BEAUTY_CORNER):
+                        for idx2,value in enumerate(BEAUTY_CORNER[idx1]):
+                            startID, endID = value
+                           
+                            lm_start = faceLms.landmark[startID]
+                            x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
+                            # 起點的 2D int 座標 (給 cv2 用)
+                            startAddress2D = int(x1), int(y1)
+                            lm_end = faceLms.landmark[endID]
+                            x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
+                            # 終點的 2D int 座標 (給 cv2 用)
+                            endAddress2D = int(x2), int(y2)
+                            # draw specific line user defined (只畫線, 不算距離)
+                            self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
+                            
+                            # 起點的 3D float 座標
+                            startAddressForAngle.append([x1, y1])
+                            # 終點的 3D float 座標
+                            endAddressForAngle.append([x2, y2])
+
+                    # 計算夾角
+                    ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
+                    # print(f"美人角角度是{ang1}°")
+
+                    score = (1 - (abs(ang1-45) / 45)) * 100
+
+                    printTxt += f"美人角角度是-> {ang1}°<br>"
+                    printTxt += f'美人角的完美角度是-> 45°<br>'
+                    printTxt += f'您的落差為-> {abs(ang1-45)}<hr>'
+                    printTxt += f'您獲得的分數為-> {score:.2f}分'
+                
+                # 臉部黃金比例
+                elif drawFortuneTelling == "臉部黃金比例":
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(left_x), int(top_y)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(top_y)
+                    # 畫線
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(right_x), int(top_y)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(bottom_y)
+                    # 畫線
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
+                    face_ratio = total_y / total_x
+
+                    
+                    
+                    # 鑑別值
+                    k=2
+                    # 因無法完全抓到臉長 調整黃金比例
+                    GR = 1.618 * 0.77
+                    
+                    score = (1-(k*abs(face_ratio-GR)/GR))*100
+                    
+                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'                    
+                    printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
+
                 # 臉部四角形比例
                 elif drawFortuneTelling == "臉部四角形比例":
                     # 眼尾的線
@@ -393,40 +464,6 @@ class FaceMeshDetector():
 
                     printTxt += f'臉部四角形長寬分別為: {(x2 - x1):.2f}, {(y_average_bottom - y_average_top):.2f}<br>'
                     printTxt += f'臉部四角形比例為: {four_square_ratio:.2f}<br>'
-
-                #美人角
-                elif drawFortuneTelling == "美人角":
-                    for idx1,ff in enumerate(BEAUTY_CORNER):
-                        for idx2,value in enumerate(BEAUTY_CORNER[idx1]):
-                            startID, endID = value
-                           
-                            lm_start = faceLms.landmark[startID]
-                            x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
-                            # 起點的 2D int 座標 (給 cv2 用)
-                            startAddress2D = int(x1), int(y1)
-                            lm_end = faceLms.landmark[endID]
-                            x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
-                            # 終點的 2D int 座標 (給 cv2 用)
-                            endAddress2D = int(x2), int(y2)
-                            # draw specific line user defined (只畫線, 不算距離)
-                            self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
-                            
-                            # 起點的 3D float 座標
-                            startAddressForAngle.append([x1, y1])
-                            # 終點的 3D float 座標
-                            endAddressForAngle.append([x2, y2])
-
-                    # 計算夾角
-                    ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
-                    # print(f"美人角角度是{ang1}°")
-
-                    score = (1 - (abs(ang1-45) / 45)) * 100
-
-                    printTxt += f"美人角角度是-> {ang1}°<br>"
-                    printTxt += f'美人角的完美角度是-> 45°<br>'
-                    printTxt += f'您的落差為-> {abs(ang1-45)}<hr>'
-                    printTxt += f'您獲得的分數為-> {score:.2f}分'
-                    
 
                 # 眉尾、眼尾和鼻翼連成一線
                 elif drawFortuneTelling == "眉尾、眼尾和鼻翼連成一線":
@@ -496,35 +533,6 @@ class FaceMeshDetector():
 
                     printTxt += f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)<br>"
 
-                # 臉部黃金比例
-                elif drawFortuneTelling == "臉部黃金比例":
-                    # 起點的 2D int 座標 (給 cv2 用)
-                    startAddress2D = int(left_x), int(top_y)
-                    # 終點的 2D int 座標 (給 cv2 用)
-                    endAddress2D = int(right_x), int(top_y)
-                    # 畫線
-                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
-
-                    # 起點的 2D int 座標 (給 cv2 用)
-                    startAddress2D = int(right_x), int(top_y)
-                    # 終點的 2D int 座標 (給 cv2 用)
-                    endAddress2D = int(right_x), int(bottom_y)
-                    # 畫線
-                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
-
-                    face_ratio = total_y / total_x
-
-                    # print(f'臉部比例為-> 1:{face_ratio:.3f}')
-                    # print('------------')
-                    
-                    # 鑑別值
-                    k=1
-                    GR = 1.618
-                    score = (1-(k*abs(face_ratio-GR)/GR))*100
-                    
-                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'                    
-                    printTxt += f'您獲得的分數為-> {score:.2f}分'
-
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
                     # 開始計算鼻翼
@@ -564,9 +572,19 @@ class FaceMeshDetector():
                     # print(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}')
                     # print(f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio:.2f}')
                     # print('------------')
-
+                    NoseWide = alae_of_nose_ratio / head_of_eye_ratio
+                    
+                    # 鑑別值
+                    k=1.7
+                    # 完美鼻寬比值
+                    PerfectNW = 1 
+                    
+                    score = (1-(k*abs(NoseWide-PerfectNW)/PerfectNW))*100
+                    
+                    
                     printTxt += f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}<br>'
-                    printTxt += f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio:.2f}<br>'
+                    printTxt += f'兩者比例為: {NoseWide:.2f}<br>' 
+                    printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
 
                 if returnTxt :
                         return printTxt

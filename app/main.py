@@ -38,7 +38,7 @@ app = flask.Flask(__name__, '/')
 @app.route('/')
 def index():
     # return render_template('Home.html')
-    return render_template('Home.html')
+    return render_template('Index.html')
     # return render_template('Test.html')
 
 #功能體驗
@@ -93,7 +93,8 @@ def video_feed(style, videoMode):
         filePath = "./videos/1-720p.mp4"
         videoMode = True
     elif videoMode == "照片":
-        filePath = "app/static/images/Thelatestphotos.jpg"
+        # filePath = "app/static/images/Thelatestphotos.jpg"
+        filePath = "app/static/images/Female1.jpg"
         videoMode = False
     elif videoMode == "照相":
         return Response(streamlive(style),
