@@ -461,6 +461,14 @@ class FaceMeshDetector():
 
                     printTxt += f'臉部四角形長寬分別為: {(x2 - x1):.2f}, {(y_average_bottom - y_average_top):.2f}<br>'
                     printTxt += f'臉部四角形比例為: {four_square_ratio:.2f}<br>'
+                    
+                    # 鑑別值
+                    k=1
+                    # 完美鼻寬比值
+                    PerfectFC = 1.4 
+                    score = (1-(k*abs(four_square_ratio-PerfectFC)/PerfectFC))*100          
+                    
+                    printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
 
                 # 眉尾、眼尾和鼻翼連成一線
                 elif drawFortuneTelling == "眉尾、眼尾和鼻翼連成一線":
