@@ -261,6 +261,14 @@ class FaceMeshDetector():
 
                         three_court_y.append(y)
 
+                    y_head = three_court_y[3] - (three_court_y[3] - three_court_y[0]) * 1.17647
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(left_x), int(y_head)
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(right_x), int(y_head)
+                    # 畫線
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
                     if three_court_y:
                         # print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]:.2f}, y2:{three_court_y[1]:.2f}, y3:{three_court_y[2]:.2f}, y4:{three_court_y[3]:.2f}')
 
