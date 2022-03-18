@@ -59,6 +59,7 @@ class FaceMeshDetector():
         ih, iw, ic = img.shape
 
         FACE_OVAL=facialFeatures.FACE_OVAL
+        FACE_OVAL_NEW=facialFeatures.FACE_OVAL_NEW
         READ_FACE=facialFeatures.READ_FACE
         BEAUTY_CORNER=facialFeatures.BEAUTY_CORNER
         #美人角用的座標 
@@ -134,8 +135,25 @@ class FaceMeshDetector():
                 # 取得四個邊界的 x 和 y
                 top_y = faceLms.landmark[top_ID].y*ih
                 bottom_y = faceLms.landmark[bottom_ID].y*ih
+                # left_x 和 right_x 初始值
                 left_x = faceLms.landmark[left_ID].x*iw
                 right_x = faceLms.landmark[right_ID].x*iw
+
+                # 確認 left_x, left_ID 和 right_x, 
+                for idx1,value in enumerate(FACE_OVAL_NEW):
+                    ID = value
+
+                    lm_ID = faceLms.landmark[ID]
+                    x1, y1, z1 = lm_ID.x*iw, lm_ID.y*ih, lm_ID.z*ic
+
+                    if x1 < left_x:
+                        left_x = x1
+                        left_ID = ID
+                    elif x1 > right_x:
+                        right_x = x1
+                        right_ID = ID
+
+                print(f'left_x:{left_x}, left_ID:{left_ID}, right_x:{right_x}, right_ID:{right_ID}, ')
                 
                 # 計算髮際線的座標, 用原本臉長 * 1 / 0.87 倍當做實際臉長
                 top_y = bottom_y - (bottom_y - top_y) * (1 / 0.87)
