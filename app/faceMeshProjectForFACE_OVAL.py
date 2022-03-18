@@ -131,15 +131,15 @@ class FaceMeshDetector():
                     # self.mpDraw.draw_landmarks(img, faceLms, self.mpFaceMesh.FACEMESH_CONTOURS,
                     #                             self.drawSpec, self.mpDrawingStyles.get_default_face_mesh_contours_style())
 
-                    # 取得四個邊界的 x 和 y
-                    top_y = faceLms.landmark[top_ID].y*ih
-                    bottom_y = faceLms.landmark[bottom_ID].y*ih
-                    left_x = faceLms.landmark[left_ID].x*iw
-                    right_x = faceLms.landmark[right_ID].x*iw
+                # 取得四個邊界的 x 和 y
+                top_y = faceLms.landmark[top_ID].y*ih
+                bottom_y = faceLms.landmark[bottom_ID].y*ih
+                left_x = faceLms.landmark[left_ID].x*iw
+                right_x = faceLms.landmark[right_ID].x*iw
 
-                    # 算出臉的長(total_y)寬(total_x)
-                    total_y = bottom_y - top_y
-                    total_x = right_x - left_x
+                # 算出臉的長(total_y)寬(total_x)
+                total_y = bottom_y - top_y
+                total_x = right_x - left_x
                 
                 # 臉部特徵網格圖, 什麼都不畫
                 if drawFortuneTelling == "臉部特徵網格圖":
