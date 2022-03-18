@@ -136,6 +136,9 @@ class FaceMeshDetector():
                 bottom_y = faceLms.landmark[bottom_ID].y*ih
                 left_x = faceLms.landmark[left_ID].x*iw
                 right_x = faceLms.landmark[right_ID].x*iw
+                
+                # 計算髮際線的座標, 用原本臉長 * 1 / 0.87 倍當做實際臉長
+                top_y = bottom_y - (bottom_y - top_y) * (1 / 0.87)
 
                 # 算出臉的長(total_y)寬(total_x)
                 total_y = bottom_y - top_y
@@ -252,6 +255,10 @@ class FaceMeshDetector():
                         # x, y, z = int(lm.x*iw), int(lm.y*ih), int(lm.z*ic)
                         x, y, z = lm.x*iw, lm.y*ih, lm.z*ic
 
+                        # 修正髮際線的 y 座標
+                        if idx1 == 0:
+                            y = top_y
+                        
                         # 起點的 2D int 座標 (給 cv2 用)
                         startAddress2D = int(left_x), int(y)
                         # 終點的 2D int 座標 (給 cv2 用)
@@ -260,14 +267,6 @@ class FaceMeshDetector():
                         self.drawSpecificLine(img, startAddress2D, endAddress2D, RED)
 
                         three_court_y.append(y)
-
-                    y_head = three_court_y[3] - (three_court_y[3] - three_court_y[0]) * 1.17647
-                    # 起點的 2D int 座標 (給 cv2 用)
-                    startAddress2D = int(left_x), int(y_head)
-                    # 終點的 2D int 座標 (給 cv2 用)
-                    endAddress2D = int(right_x), int(y_head)
-                    # 畫線
-                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                     if three_court_y:
                         # print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]:.2f}, y2:{three_court_y[1]:.2f}, y3:{three_court_y[2]:.2f}, y4:{three_court_y[3]:.2f}')
@@ -370,7 +369,7 @@ class FaceMeshDetector():
 
                     printTxt += f"美人角角度是-> {ang1}°<br>"
                     printTxt += f'美人角的完美角度是-> 45°<br>'
-                    printTxt += f'您的落差為-> {abs(ang1-45)}<hr>'
+                    printTxt += f'您的落差為-> {abs(ang1-45)}°<hr>'
                     printTxt += f'您獲得的分數為-> {score:.2f}分'
                 
                 # 臉部黃金比例
@@ -391,12 +390,10 @@ class FaceMeshDetector():
 
                     face_ratio = total_y / total_x
 
-                    
-                    
                     # 鑑別值
-                    k=2
-                    # 因無法完全抓到臉長 調整黃金比例
-                    GR = 1.618 * 0.77
+                    k=1
+                    # 調整黃金比例
+                    GR = 1.618
                     
                     score = (1-(k*abs(face_ratio-GR)/GR))*100
                     
@@ -545,8 +542,7 @@ class FaceMeshDetector():
                     scoreR = (1-(k*abs(ThreePointsLineR-PerfectTPL)/PerfectTPL))*100          
                     score = (scoreL+scoreR)/2
                     printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
-
-
+                    
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
                     # 開始計算鼻翼
