@@ -59,7 +59,17 @@ def Aesthetics():
 #關於我們
 @app.route('/About')
 def About():
-    return render_template('About.html')       
+    return render_template('About.html')
+
+#登入
+@app.route('/Signin')
+def Signin():
+    return render_template('Signin.html')  
+
+#註冊
+@app.route('/Signup')
+def Signup():
+    return render_template('Signup.html')
 
 # feed a video stream as a source
 # 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖; 加上 videoMode 參數, 傳到 videoMode, 表示"影片"或"照片"

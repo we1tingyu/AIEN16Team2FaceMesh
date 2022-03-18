@@ -14,6 +14,7 @@
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/templatemo-sixteen.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/owl.css') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='css/dada.css') }}" />
+    
 
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/custom.js') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/isotope.js') }}" />
@@ -25,6 +26,7 @@
     <link type="text/css" rel="stylesheet"
         href="{{ url_for('static', filename='js/bootstrap/js/bootstrap.min.js') }}" />
     <link type="text/css" rel="stylesheet" href="{{ url_for('static', filename='js/jquery/jquery.min.js') }}" />
+    {% block link%}{% endblock link%}
     {% endblock head %}
 </head>
 
@@ -76,8 +78,8 @@
                     </ul>
                     <ul class="toolbar-menu toolbar-menu--member">
                         <li class="toolbar-item toolbar-item--login"><a class="text-underline-none"
-                                href="Signin.html">登入</a></li>
-                        <li class="toolbar-item"><a class="text-underline-none" href="Signup.html">註冊</a></li>
+                                href="{{ url_for('Signin') }}">登入</a></li>
+                        <li class="toolbar-item"><a class="text-underline-none" href="{{ url_for('Signup') }}">註冊</a></li>
                     </ul>
                 </div>
             </div>
