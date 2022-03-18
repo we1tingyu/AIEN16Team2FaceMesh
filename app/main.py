@@ -38,7 +38,7 @@ app = flask.Flask(__name__, '/')
 @app.route('/')
 def index():
     # return render_template('Home.html')
-    return render_template('Index.html')
+    return render_template('Home.html')
     # return render_template('Test.html')
 
 #功能體驗
