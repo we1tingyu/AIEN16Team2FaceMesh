@@ -397,7 +397,7 @@ class FaceMeshDetector():
                     
                     score = (1-(k*abs(face_ratio-GR)/GR))*100
                     
-                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'                    
+                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<hr>'                    
                     printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
 
                 # 臉部四角形比例
@@ -460,7 +460,7 @@ class FaceMeshDetector():
                     # print('------------')
 
                     printTxt += f'臉部四角形長寬分別為: {(x2 - x1):.2f}, {(y_average_bottom - y_average_top):.2f}<br>'
-                    printTxt += f'臉部四角形比例為: {four_square_ratio:.2f}<br>'
+                    printTxt += f'臉部四角形比例為: {four_square_ratio:.2f}<hr>'
                     
                     # 鑑別值
                     k=1
@@ -536,7 +536,7 @@ class FaceMeshDetector():
                     # print(f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)")
                     # print('------------')
 
-                    printTxt += f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)<br>"
+                    printTxt += f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)<hr>"
                     
                     ThreePointsLineL= 180-ang3
                     ThreePointsLineR= 180-ang4
@@ -602,7 +602,7 @@ class FaceMeshDetector():
                     
                     
                     printTxt += f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}<br>'
-                    printTxt += f'兩者比例為: {NoseWide:.2f}<br>' 
+                    printTxt += f'兩者比例為: {NoseWide:.2f}<hr>' 
                     printTxt += f'若為男性您獲得的分數為-> {scoreBoy:.2f}分<br>'                    
                     printTxt += f'若為女性您獲得的分數為-> {scoreGirl:.2f}分<br>'
 
