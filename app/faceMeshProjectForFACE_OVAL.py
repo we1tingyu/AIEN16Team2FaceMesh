@@ -532,6 +532,20 @@ class FaceMeshDetector():
                     # print('------------')
 
                     printTxt += f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)<br>"
+                    
+                    ThreePointsLineL= 180-ang3
+                    ThreePointsLineR= 180-ang4
+                    
+                    # 鑑別值
+                    k=5
+                    # 完美鼻寬比值
+                    PerfectTPL = 180 
+                    
+                    scoreL = (1-(k*abs(ThreePointsLineL-PerfectTPL)/PerfectTPL))*100 
+                    scoreR = (1-(k*abs(ThreePointsLineR-PerfectTPL)/PerfectTPL))*100          
+                    score = (scoreL+scoreR)/2
+                    printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
+
 
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
@@ -579,12 +593,14 @@ class FaceMeshDetector():
                     # 完美鼻寬比值
                     PerfectNW = 1 
                     
-                    score = (1-(k*abs(NoseWide-PerfectNW)/PerfectNW))*100
+                    scoreGirl = (1-(k*abs(NoseWide-PerfectNW)/PerfectNW))*100
+                    scoreBoy = (1-(k*abs(NoseWide-PerfectNW*1.2)/PerfectNW*1.2))*100
                     
                     
                     printTxt += f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}<br>'
                     printTxt += f'兩者比例為: {NoseWide:.2f}<br>' 
-                    printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
+                    printTxt += f'若為男性您獲得的分數為-> {scoreBoy:.2f}分<br>'                    
+                    printTxt += f'若為女性您獲得的分數為-> {scoreGirl:.2f}分<br>'
 
                 if returnTxt :
                         return printTxt
