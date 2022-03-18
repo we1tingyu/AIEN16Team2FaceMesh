@@ -94,7 +94,7 @@ def video_feed(style, videoMode):
         videoMode = True
     elif videoMode == "照片":
         # filePath = "app/static/images/Thelatestphotos.jpg"
-        filePath = "app/static/images/Female1.jpg"
+        filePath = "app/static/images/Thelatestphotos.jpg"
         videoMode = False
     elif videoMode == "照相":
         return Response(streamlive(style),
