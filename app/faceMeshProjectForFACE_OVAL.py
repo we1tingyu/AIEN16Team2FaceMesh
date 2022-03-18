@@ -574,9 +574,19 @@ class FaceMeshDetector():
                     # print(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}')
                     # print(f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio:.2f}')
                     # print('------------')
-
+                    NoseWide = alae_of_nose_ratio / head_of_eye_ratio
+                    
+                    # 鑑別值
+                    k=1.7
+                    # 完美鼻寬比值
+                    PerfectNW = 1 
+                    
+                    score = (1-(k*abs(NoseWide-PerfectNW)/PerfectNW))*100
+                    
+                    
                     printTxt += f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}<br>'
-                    printTxt += f'兩者比例為: {alae_of_nose_ratio / head_of_eye_ratio:.2f}<br>'
+                    printTxt += f'兩者比例為: {NoseWide:.2f}<br>' 
+                    printTxt += f'您獲得的分數為-> {score:.2f}分<br>'
 
                 if returnTxt :
                         return printTxt
