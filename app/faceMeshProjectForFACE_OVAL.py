@@ -109,7 +109,8 @@ class FaceMeshDetector():
         FIVE_EYE=facialFeatures.FIVE_EYE
         five_eye_x = []
         five_eye_ratio = []
-        five_eye_ratio_diff = []
+
+        ratio_diff = []
         score=0
         sum=0  
         printTxt = ""
@@ -271,14 +272,20 @@ class FaceMeshDetector():
 
                         for i in range(len(THREE_COURT) - 1):
                             y_distance = three_court_y[i+1] - three_court_y[i]
-                            ratio = y_distance / total_y
+                            ratio = (y_distance / total_y) * 3
                             # print(ratio)
                             three_court_ratio.append(ratio)
+                            ratio_diff.append(1-ratio)
+                            score += 1-(abs(1-ratio))
+                        score = score * 100 / 3
 
                         # print(f'三庭(上到下)比例為-> {three_court_ratio[0]:.2f}:{three_court_ratio[1]:.2f}:{three_court_ratio[2]:.2f}')
                         # print('------------')
 
                         printTxt += f'三庭(上到下)比例為-> {three_court_ratio[0]:.2f}:{three_court_ratio[1]:.2f}:{three_court_ratio[2]:.2f}<br>'
+                        printTxt += f'三庭的完美比例是-> 1:1:1<br>'
+                        printTxt += f'您的落差為-> {ratio_diff[0]:.2f}:{ratio_diff[1]:.2f}:{ratio_diff[2]:.2f}<hr>'
+                        printTxt += f'您獲得的分數為-> {score:.2f}分'
                 
                 # 五眼
                 elif drawFortuneTelling == "五眼":
@@ -297,6 +304,7 @@ class FaceMeshDetector():
                         self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                         five_eye_x.append(x)
+                        
 
                     if five_eye_x:
                         # print(f'由左到右的 x 座標分別是 x1:{five_eye_x[0]:.2f}, x2:{five_eye_x[1]:.2f}, x3:{five_eye_x[2]:.2f}, x4:{five_eye_x[3]:.2f}, x5:{five_eye_x[4]:.2f}, x6:{five_eye_x[5]:.2f}')
@@ -312,7 +320,7 @@ class FaceMeshDetector():
                             ratio = (x_distance / total_x) * 5
                             # print(ratio)
                             five_eye_ratio.append(ratio)
-                            five_eye_ratio_diff.append(1-ratio)
+                            ratio_diff.append(1-ratio)
                             score += 1-(abs(1-ratio))
                         score = score * 100 / 5
 
@@ -320,10 +328,8 @@ class FaceMeshDetector():
                         # print('------------')
 
                         printTxt += f'五眼(左到右)比例為-> {five_eye_ratio[0]:.2f}:{five_eye_ratio[1]:.2f}:{five_eye_ratio[2]:.2f}:{five_eye_ratio[3]:.2f}:{five_eye_ratio[4]:.2f}<hr>'
-
                         printTxt += f'五眼的完美比例是-> 1:1:1:1:1<br>'
-
-                        printTxt += f'您的落差為-> {five_eye_ratio_diff[0]:.2f}:{five_eye_ratio_diff[1]:.2f}:{five_eye_ratio_diff[2]:.2f}:{five_eye_ratio_diff[3]:.2f}:{five_eye_ratio_diff[4]:.2f}<hr>'
+                        printTxt += f'您的落差為-> {ratio_diff[0]:.2f}:{ratio_diff[1]:.2f}:{ratio_diff[2]:.2f}:{ratio_diff[3]:.2f}:{ratio_diff[4]:.2f}<hr>'
                         printTxt += f'您獲得的分數為-> {score:.2f}分'
 
                 # 臉部四角形比例
@@ -505,8 +511,14 @@ class FaceMeshDetector():
 
                     # print(f'臉部比例為-> 1:{face_ratio:.3f}')
                     # print('------------')
-
-                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'
+                    
+                    # 鑑別值
+                    k=1
+                    GR = 1.618
+                    score = (1-(k*abs(face_ratio-GR)/GR))*100
+                    
+                    printTxt += f'臉部比例為-> 1:{face_ratio:.3f}<br>'                    
+                    printTxt += f'您獲得的分數為-> {score:.2f}分'
 
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":

@@ -37,6 +37,7 @@ app = flask.Flask(__name__, '/')
 # 因此，你需要先做的就是在專案底下建置一個資料夾，並且命名為『templates』
 @app.route('/')
 def index():
+    # return render_template('Home.html')
     return render_template('Home.html')
     # return render_template('Test.html')
 
@@ -84,6 +85,9 @@ def video_feed(style, videoMode):
     elif videoMode == "照片":
         filePath = "app/static/images/Thelatestphotos.jpg"
         videoMode = False
+    elif videoMode == "照相":
+        return Response(streamlive(style),
+                    mimetype='multipart/x-mixed-replace; boundary=frame')
 
     drawFaceLms = True 
     drawID = False 
@@ -126,15 +130,13 @@ def getFaceData():
     data={ "臉部周長":flask.request.json["param"]**2}    
     return flask.jsonify(data)
 
-# stream live
-@app.route('/stream_live/<string:style>', methods=["GET"])
-def stream_live(style):          
-    # photograph = style
-    return Response(streamlive(style),
-                mimetype='multipart/x-mixed-replace; boundary=frame')
-    # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
-
-
+# # stream live
+# @app.route('/stream_live/<string:style>', methods=["GET"])
+# def stream_live(style):          
+#     # photograph = style
+#     return Response(streamlive(style),
+#                 mimetype='multipart/x-mixed-replace; boundary=frame')
+#     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
 
 # 連接AZURE的mysql
 @app.route('/try-mysql')

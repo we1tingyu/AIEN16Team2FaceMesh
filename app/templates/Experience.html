@@ -125,6 +125,7 @@
   {% endblock content %}
   {% block scripts %}
   <script>
+      // style = 按鈕名稱; videoMode = "影片" 或 "照片" 或 "照相"
       function Function_video_feed(style, videoMode) {
                 document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
 
@@ -149,7 +150,6 @@
                 }
                 // 照相功能
                 else if (videoMode == "照相") {
-                    document.getElementById("image1").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
                     $("#jsonOutput").html("拍照 ing");
                 }
             }

@@ -31,9 +31,6 @@
                     <path d="M10.5 8.5a2.5 2.5 0 1 1-5 0 2.5 2.5 0 0 1 5 0z"/>
                     <path d="M2 4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V6a2 2 0 0 0-2-2h-1.172a2 2 0 0 1-1.414-.586l-.828-.828A2 2 0 0 0 9.172 2H6.828a2 2 0 0 0-1.414.586l-.828.828A2 2 0 0 1 3.172 4H2zm.5 2a.5.5 0 1 1 0-1 .5.5 0 0 1 0 1zm9 2.5a3.5 3.5 0 1 1-7 0 3.5 3.5 0 0 1 7 0z"/>
                   </svg>  拍照</button>
-                  <!-- <td><img id="photo" src="images/camera-open.png" onclick="Function_stream_live('拍照')"></td> -->
-                  <!-- <td><img id="photo" src="images/camera-open.png" onclick="Function_stream_live('拍照')"></td> -->
-                  <!-- <td>拍照</td> -->
                 </tr>
               </table>
               <p>位置正確後會自動3秒拍照</p>
@@ -184,38 +181,19 @@
     <script>
 
 
-        // function Function_stream_live(style) {
-        //       document.getElementById("image1").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
-        //       document.getElementById("photo").src="images/camera-wait.png";
-        //     }
-        // function Function_video_feed(style, videoMode) {
-        //       document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
-        //       data1={ "param": style };
-        //         $.ajax({
-        //             type:"post",
-        //             url:"http://localhost:5000/getTxt",
-        //             contentType:"application/json",
-        //             data:JSON.stringify(data1),
-        //         }).done(function(data2){                
-        //           $("#jsonOutput").html(JSON.stringify(data2["回傳文字"]).replace("\"", "").replace("\"", ""));
-        //             // document.querySelector('#someDiv').innerHTML = JSON.stringify(data);
-        //         }).fail(function(err){
-        //             alert(err.responseText);
-        //         });
-        //     }
 
 
-            // style = 按鈕名稱; videoMode = "影片" 或 "照片"
+            // style = 按鈕名稱; videoMode = "影片" 或 "照片" 或 "照相"
             function Function_video_feed(style, videoMode) {
-                document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
-
                 // 影片
                 if (videoMode == "影片") {
+                    document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
                     $("#jsonOutput").html("播放影片 ing");
                 }
                 // 照片
                 else if (videoMode == "照片") {
                     // 處理回傳值
+                    document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
                     data1={ "param": style };
                     $.ajax({
                         type:"post",
@@ -230,7 +208,7 @@
                 }
                 // 照相功能
                 else if (videoMode == "照相") {
-                    document.getElementById("image1").src = "{{ url_for('stream_live', style='style') }}".replace("style", style);
+                    document.getElementById("image1").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode)
                     $("#jsonOutput").html("拍照 ing");
                 }
             }
