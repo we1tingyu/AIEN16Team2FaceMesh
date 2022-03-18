@@ -71,20 +71,20 @@
             </div>
           </div>
           <div class="col-md-8">
-            <button class="button-click" onclick="Function_video_feed('臉部特徵網格圖', '照片')">臉部特徵網格圖</button>
-            <button class="button-click" onclick="Function_video_feed('臉部外框', '照片')">臉部外框圖</button>
-            <button class="button-click" onclick="Function_video_feed('臉部面相算命特徵圖', '照片')">臉部五官特徵圖</button>
+            <button class="button-click" id="btn1" onclick="Function_video_feed('臉部特徵網格圖', '照片')">臉部特徵網格圖</button>
+            <button class="button-click" id="btn2" onclick="Function_video_feed('臉部外框', '照片')">臉部外框圖</button>
+            <button class="button-click" id="btn3" onclick="Function_video_feed('臉部面相算命特徵圖', '照片')">臉部五官特徵圖</button>
           <br/></p>
           <p>
-            <button class="button-click" onclick="Function_video_feed('三庭', '照片')">三庭</button>
-            <button class="button-click" onclick="Function_video_feed('臉部黃金比例', '照片')">黃金比例</button>
-            <button class="button-click" onclick="Function_video_feed('臉部四角形比例', '照片')">四角比例</button>
+            <button class="button-click" id="btn4" onclick="Function_video_feed('三庭', '照片')">三庭</button>
+            <button class="button-click" id="btn5" onclick="Function_video_feed('臉部黃金比例', '照片')">黃金比例</button>
+            <button class="button-click" id="btn6" onclick="Function_video_feed('臉部四角形比例', '照片')">四角比例</button>
           <br/></p>
           <p>
-            <button class="button-click" onclick="Function_video_feed('五眼', '照片')">五眼</button>
-            <button class="button-click" onclick="Function_video_feed('美人角', '照片')">美人角</button>
-            <button class="button-click" onclick="Function_video_feed('眉尾、眼尾和鼻翼連成一線', '照片')">三點線</button>
-            <button class="button-click" onclick="Function_video_feed('鼻子大小', '照片')">鼻子寬度</button>
+            <button class="button-click" id="btn7" onclick="Function_video_feed('五眼', '照片')">五眼</button>
+            <button class="button-click" id="btn8" onclick="Function_video_feed('美人角', '照片')">美人角</button>
+            <button class="button-click" id="btn9" onclick="Function_video_feed('眉尾、眼尾和鼻翼連成一線', '照片')">三點線</button>
+            <button class="button-click" id="btn10" onclick="Function_video_feed('鼻子大小', '照片')">鼻子寬度</button>
           </p>
           </div>
 
@@ -100,7 +100,10 @@
               <table class="table-roll">
                 <thead>
                     <tr>
-                        <th colspan="2" class="p">髮型妝容建議</th>
+                        <th colspan="2" class="p">髮型妝容建議</th>                       
+                    </tr>
+                    <tr>
+                      <td id="td1"></td>
                     </tr>
                 </thead>
                 <tbody>
@@ -212,6 +215,81 @@
                     $("#jsonOutput").html("拍照 ing");
                 }
             }
+
+            $("#btn1").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn1)
+                })
+            });
+
+            $("#btn2").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn2)
+                })
+            });
+
+            $("#btn3").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn3)
+                })
+            });
+
+            $("#btn4").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn4)
+                })
+            });
+
+            $("#btn5").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn5)
+                })
+            });
+
+            $("#btn6").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn6)
+                })
+            });
+
+            $("#btn7").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn7)
+                })
+            });
+
+            $("#btn8").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn8)
+                })
+            });
+
+            $("#btn9").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn9)
+                })
+            });
+
+            $("#btn10").click(function(){
+              $("#td1").html("")
+                $.getJSON("btn.json",function(data){
+                    $("#td1").html(data.btn10)
+                })
+            });
+            
+            
+
+
+        
     </script>
     {% endblock scripts %}
   </body>
