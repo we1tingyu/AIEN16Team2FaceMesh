@@ -1,7 +1,7 @@
 # import all necessary 3rd python packages 
 from copy import copy
 from flask import Flask, render_template, Response, request
-# import modules.mysql_connection
+import modules.mysql_connection
 
 from faceMeshProjectForFACE_OVAL import faceMeshDetection, FaceMeshDetector
 # from app3 import faceMeshDetection
@@ -10,6 +10,8 @@ from takePictureCountdown import streamlive
 # from takePicture0314_IP import streamlive
 
 import cv2
+
+from flask_table import Table, Col, LinkCol
 
 # from faceMeshProjectForFlask import faceMeshDetection_test
 #
@@ -38,7 +40,7 @@ app = flask.Flask(__name__, '/')
 @app.route('/')
 def index():
     # return render_template('Home.html')
-    return render_template('Home.html')
+    return render_template('Index.html')
     # return render_template('Test.html')
 
 #功能體驗
@@ -124,14 +126,18 @@ def getTxt():
     drawFortuneTelling = flask.request.json["param"]
 
     returnTxt=True
-    txt = "YAYAYA"
+    # returnComment: 回傳評論
+    returnComment=True
+    # returnComment=False
+
+    # txt = "YAYAYA"
     # txt = faceMeshDetection(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt)
-    txt = FaceMeshDetector(maxFaces=10).findFaceMesh(img.copy(), drawFaceLms=True, drawID=False, drawFortuneTelling=drawFortuneTelling, returnTxt=True)
+    txt, comment = FaceMeshDetector(maxFaces=10).findFaceMesh(img.copy(), drawFaceLms=True, drawID=False, drawFortuneTelling=drawFortuneTelling, returnTxt=returnTxt, returnComment=returnComment)
     # print(findFaceMesh(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt))
     # print(txt)
     # print(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt)
 
-    data={ "回傳文字":txt}    
+    data={ "回傳文字":txt, "回傳評論": comment}    
     return flask.jsonify(data)
 
 # 老師示範用 ajax 前後端傳送資料
@@ -150,12 +156,39 @@ def getFaceData():
 #     # mimetype 媒體類別 multipart/x-mixed-replace 資料傳輸格式
 
 # 連接AZURE的mysql
+# @app.route('/try-mysql')
+# def try_mysql():
+#     (cursor, cnx) = modules.mysql_connection.get_cursor()
+#     sql = ("SELECT * FROM new_table")
+#     cursor.execute(sql)
+#     return render_template('data_table.html', t_data=cursor.fetchall())
+
 @app.route('/try-mysql')
 def try_mysql():
     (cursor, cnx) = modules.mysql_connection.get_cursor()
     sql = ("SELECT * FROM new_table")
     cursor.execute(sql)
-    return render_template('data_table.html', t_data=cursor.fetchall())
+    # return render_template('data_table.html', t_data=cursor.fetchall())
+    rows = cursor.fetchall()
+    table = Results(rows)
+    table.border = True
+
+    param = 1
+    sql = (f"SELECT * FROM new_table where face_id = {param}")
+    cursor.execute(sql)
+    # rows = cursor.fetchall()
+    # table = Results(rows)
+    # table.border = True
+    t_data=cursor.fetchall()
+    print(t_data)
+    return render_template('data_table.html', table=table, t_data=t_data)
+
+class Results(Table):
+    # user_id = Col('Id', show=False)
+    face_id = Col('face_id')
+    face_name = Col('face_name')
+    # edit = LinkCol('Edit', 'edit_view', url_kwargs=dict(id='face_id'))
+    # delete = LinkCol('Delete', 'delete_user', url_kwargs=dict(id='face_id'))
 
 '''
 @app.route('/mysql')

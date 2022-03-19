@@ -1,11 +1,20 @@
 import mysql.connector
 
+# connect_data = {
+#     'host': 'localhost',
+#     'user': 'root',
+#     'passwd': '11112222',
+#     'database': 'aien16'
+# }
+
 connect_data = {
     'host': 'localhost',
     'user': 'root',
-    'passwd': '11112222',
-    'database': 'aien16'
+    'password': 'AIEN16',
+    'database': 'aien16',
+    'auth_plugin': 'mysql_native_password'
 }
+
 # connect_data = {
 #     'host': '127.0.0.1',
 #     'user': 'shinder',
