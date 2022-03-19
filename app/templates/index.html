@@ -93,6 +93,10 @@
                                             <p></p>
                                         </div>
                                         <hr>
+                                        <div id="jsonOutputComment" style="width:400px;display:table-cell">
+                                            <p></p>
+                                        </div>
+                                        <hr>
                                         <table class="table-roll">
                                             <thead>
                                                 <tr>
@@ -159,6 +163,7 @@
                 // 影片
                 if (videoMode == "影片") {
                     $("#jsonOutput").html("播放影片 ing");
+                    $("#jsonOutputComment").html("");
                 }
                 // 照片
                 else if (videoMode == "照片") {
@@ -171,6 +176,7 @@
                         data:JSON.stringify(data1),
                     }).done(function(data2){                
                         $("#jsonOutput").html(JSON.stringify(data2["回傳文字"]).replace("\"", "").replace("\"", ""));
+                        $("#jsonOutputComment").html(JSON.stringify(data2["回傳評論"]).replace("\"", "").replace("\"", ""));
                     }).fail(function(err){
                         alert(err.responseText);
                     });
@@ -178,6 +184,7 @@
                 // 照相功能
                 else if (videoMode == "照相") {
                     $("#jsonOutput").html("拍照 ing");
+                    $("#jsonOutputComment").html("");
                 }
             }
 
