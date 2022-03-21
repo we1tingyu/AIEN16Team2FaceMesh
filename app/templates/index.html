@@ -174,8 +174,12 @@
                         url:"http://localhost:5000/getTxt",
                         contentType:"application/json",
                         data:JSON.stringify(data1),
-                    }).done(function(data2){                
-                        $("#jsonOutput").html(JSON.parse(JSON.stringify(data2["回傳文字"])));
+                    }).done(function(data2){         
+                        var str = ""; 
+                        for (var i = 0; i<data2["回傳文字"].length; i++) {
+                            str+=data2["回傳文字"][i]+'<br>'
+                        }
+                        $("#jsonOutput").html(str)
                         $("#jsonOutputComment").html(JSON.parse(JSON.stringify(data2["回傳評論"])));
                         //JSON.parse 方法把會把一個JSON字串轉換成 JavaScript的數值或是物件。另外也可選擇使用reviver函數讓這些數值或是物件在被回傳之前做轉換。
                     }).fail(function(err){

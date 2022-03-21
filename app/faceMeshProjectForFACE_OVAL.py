@@ -273,7 +273,16 @@ class FaceMeshDetector():
                         # print(f'RIGHT_EYEBROW:{distance[0]:.2f}, LEFT_EYEBROW:{distance[1]:.2f}, RIGHT_EYE:{distance[2]:.2f}, LEFT_EYE{distance[3]:.2f}, NOSE_LENGTH:{distance[4]:.2f}, NOSE_WIDTH:{distance[5]:.2f}, FOREHEAD:{distance[6]:.2f}, PHILTRUM:{distance[7]:.2f}, MOUTH:{distance[8]:.2f}')
                         # print('------------')
 
-                        printTxt.append(f'RIGHT_EYEBROW:{distance[0]:.2f}, LEFT_EYEBROW:{distance[1]:.2f}, RIGHT_EYE:{distance[2]:.2f}, LEFT_EYE{distance[3]:.2f}, NOSE_LENGTH:{distance[4]:.2f}, NOSE_WIDTH:{distance[5]:.2f}, FOREHEAD:{distance[6]:.2f}, PHILTRUM:{distance[7]:.2f}, MOUTH:{distance[8]:.2f}')
+                        printTxt.append(f'右眉周長:{distance[0]:.2f}')
+                        printTxt.append(f'左眉周長:{distance[1]:.2f}')
+                        printTxt.append(f'右眼周長:{distance[2]:.2f}')
+                        printTxt.append(f'左眼周長:{distance[3]:.2f}')
+                        printTxt.append(f'鼻子長度:{distance[4]:.2f}')
+                        printTxt.append(f'鼻子寬度:{distance[5]:.2f}')
+                        printTxt.append(f'前額長度:{distance[6]:.2f}')
+                        printTxt.append(f'人中長度:{distance[7]:.2f}')
+                        printTxt.append(f'嘴巴大小:{distance[8]:.2f}')
+                        
 
                         if returnComment:
                             printComment.append("就是什麼都不告訴你啦")
