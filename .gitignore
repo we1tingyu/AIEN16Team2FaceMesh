@@ -175,3 +175,6 @@ dmypy.json
 
 # # 忽略測試照片
 /app/static/images/2022*.jpg
+
+#忽略mysql
+/app/modules/__pycache__/*
