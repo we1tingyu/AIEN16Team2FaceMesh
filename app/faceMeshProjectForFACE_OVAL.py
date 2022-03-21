@@ -117,7 +117,10 @@ class FaceMeshDetector():
         score=0
         sum=0  
         printTxt = []
+        comment_level = 0
         printComment = []
+        hair_makeup_comment_level = 1
+        printHairMakeupComment = []
         # multi_face_landmarks :臉上作完正規化的xyz座標
         if self.results.multi_face_landmarks:
             for faceLms in self.results.multi_face_landmarks:                
@@ -173,6 +176,7 @@ class FaceMeshDetector():
                     printTxt.append("什麼都不告訴你")
                     if returnComment:
                         printComment.append("什麼都不告訴你")
+                        printHairMakeupComment.append("什麼都不告訴你")
                     pass
                 
                 # 臉部外框
@@ -231,6 +235,7 @@ class FaceMeshDetector():
 
                     if returnComment:
                         printComment.append("還是什麼都不告訴你唷")
+                        printHairMakeupComment.append("還是什麼都不告訴你唷")
                 
                 
                 # 歪臉判定
@@ -300,6 +305,7 @@ class FaceMeshDetector():
 
                         if returnComment:
                             printComment.append("就是什麼都不告訴你啦")
+                            printHairMakeupComment.append("就是什麼都不告訴你啦")
 
                 # 三庭
                 elif drawFortuneTelling == "三庭":
@@ -354,6 +360,31 @@ class FaceMeshDetector():
                             button_name = drawFortuneTelling
                             comment_level = int(score / 20)
                             printComment.append(self.getComment(button_name, comment_level))
+
+                            # 取得 hair_makeup_comment
+                            if three_court_ratio[0] >= 1:
+                                # 上庭長
+                                hair_makeup_comment_level = 1
+                            elif three_court_ratio[0] < 1:
+                                # 上庭短
+                                hair_makeup_comment_level = 2
+                            printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
+
+                            if three_court_ratio[1] >= 1:
+                                # 中庭長
+                                hair_makeup_comment_level = 3
+                            elif three_court_ratio[1] < 1:
+                                # 中庭短
+                                hair_makeup_comment_level = 4
+                            printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
+
+                            if three_court_ratio[2] >= 1:
+                                # 下庭長
+                                hair_makeup_comment_level = 5
+                            elif three_court_ratio[2] < 1:
+                                # 下庭短
+                                hair_makeup_comment_level = 6
+                            printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
                 
                 # 五眼
                 elif drawFortuneTelling == "五眼":
@@ -406,6 +437,15 @@ class FaceMeshDetector():
                             comment_level = int(score / 20)
                             printComment.append(self.getComment(button_name, comment_level))
 
+                            # 取得 hair_makeup_comment
+                            if five_eye_ratio[2] >= (five_eye_ratio[1] + five_eye_ratio[3]) / 2:
+                                # 五眼間距寬
+                                hair_makeup_comment_level = 1
+                            elif five_eye_ratio[2] < (five_eye_ratio[1] + five_eye_ratio[3]) / 2:
+                                # 五眼間距窄
+                                hair_makeup_comment_level = 2
+                            printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
+
                 #美人角
                 elif drawFortuneTelling == "美人角":
                     for idx1,ff in enumerate(BEAUTY_CORNER):
@@ -444,6 +484,8 @@ class FaceMeshDetector():
                         button_name = drawFortuneTelling
                         comment_level = int(score / 20)
                         printComment.append(self.getComment(button_name, comment_level))
+                        hair_makeup_comment_level = 1
+                        printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
                 
                 # 臉部黃金比例
                 elif drawFortuneTelling == "臉部黃金比例":
@@ -478,6 +520,8 @@ class FaceMeshDetector():
                         button_name = drawFortuneTelling
                         comment_level = int(score / 20)
                         printComment.append(self.getComment(button_name, comment_level))
+                        hair_makeup_comment_level = 1
+                        printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
 
                 # 臉部四角形比例
                 elif drawFortuneTelling == "臉部四角形比例":
@@ -554,6 +598,8 @@ class FaceMeshDetector():
                         button_name = drawFortuneTelling
                         comment_level = int(score / 20)
                         printComment.append(self.getComment(button_name, comment_level))
+                        hair_makeup_comment_level = 1
+                        printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
 
                 # 眉尾、眼尾和鼻翼連成一線
                 elif drawFortuneTelling == "眉尾、眼尾和鼻翼連成一線":
@@ -641,6 +687,8 @@ class FaceMeshDetector():
                         button_name = drawFortuneTelling
                         comment_level = int(score / 20)
                         printComment.append(self.getComment(button_name, comment_level))
+                        hair_makeup_comment_level = 1
+                        printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
                     
                 # 鼻子大小
                 elif drawFortuneTelling == "鼻子大小":
@@ -705,9 +753,11 @@ class FaceMeshDetector():
                         button_name = drawFortuneTelling
                         comment_level = int(scoreGirl / 20)
                         printComment.append("若為女性-> " + self.getComment(button_name, comment_level))
+                        hair_makeup_comment_level = 1
+                        printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
 
                 if returnTxt:
-                    return printTxt, printComment
+                    return printTxt, printComment, printHairMakeupComment
 
                 face = []
                 for id, lm in enumerate(faceLms.landmark):   # use enumerate to get index and values 
@@ -732,6 +782,11 @@ class FaceMeshDetector():
         sqlComment = sqlQuery.sqlQueryComment(button_name, comment_level)
         # print(sqlComment[0]['comment'])
         return sqlComment[0]['comment']
+
+    # sql 查詢 hair_makeup_comment
+    def getHairMakeupComment(self, button_name, hair_makeup_level):
+        sqlComment = sqlQuery.sqlQueryHairMakeupComment(button_name, hair_makeup_level)
+        return sqlComment[0]['hair_makeup_comment']
     
     # 給四個座標點(起始點1, 終止點1, 起始點2, 終止點2)計算夾角
     def angle(self, startAddress1, endAddress1, startAddress2, endAddress2, ignore_clockwise_direction=True):
