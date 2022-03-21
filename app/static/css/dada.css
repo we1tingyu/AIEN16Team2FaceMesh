@@ -1,7 +1,7 @@
 
 .table-roll tbody {
   display:block;
-  height:300px;
+  height:350px;
   overflow-y:scroll;
 }
 
