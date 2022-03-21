@@ -231,6 +231,20 @@ class FaceMeshDetector():
 
                     if returnComment:
                         printComment.append("還是什麼都不告訴你唷")
+                
+                
+                # 歪臉判定
+                elif drawFortuneTelling == "歪臉判定":
+                    lm_Top = faceLms.landmark[top_ID]    
+                    x1, y1, z1 = lm_Top.x*iw, lm_Top.y*ih, lm_Top.z*ic
+                    lm_bot = faceLms.landmark[bottom_ID] 
+                    x2, y2, z2 = lm_bot.x*iw, lm_bot.y*ih, lm_bot.z*ic
+
+                    faceX = abs(x1-x2)
+
+                    if takePicture :
+                        return faceX
+
 
                 # 臉部面相算命特徵圖, 五官
                 elif drawFortuneTelling == "臉部面相算命特徵圖":

@@ -39,8 +39,8 @@ app = flask.Flask(__name__, '/')
 # 因此，你需要先做的就是在專案底下建置一個資料夾，並且命名為『templates』
 @app.route('/')
 def index():
-    # return render_template('Home.html')
-    return render_template('Index.html')
+    return render_template('Home.html')
+    # return render_template('Index.html')
     # return render_template('Test.html')
 
 #功能體驗
