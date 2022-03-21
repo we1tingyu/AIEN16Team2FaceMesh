@@ -106,8 +106,9 @@
                                             </thead>
                                             <tbody>
                                                 <tr>
-                                                    <td>123</td>
-                                                    <td>456</td>
+                                                    <td id="td1"></td>
+                                                    <!-- <td>123</td>
+                                                    <td>456</td> -->
                                                 </tr>    
                                             </tbody>
                                         </table>
@@ -182,6 +183,7 @@
                         $("#jsonOutput").html(str)
                         $("#jsonOutputComment").html(JSON.parse(JSON.stringify(data2["回傳評論"])));
                         //JSON.parse 方法把會把一個JSON字串轉換成 JavaScript的數值或是物件。另外也可選擇使用reviver函數讓這些數值或是物件在被回傳之前做轉換。
+                        $("#td1").html(JSON.parse(JSON.stringify(data2["回傳髮型妝容建議"])));
                     }).fail(function(err){
                         alert(err.responseText);
                     });

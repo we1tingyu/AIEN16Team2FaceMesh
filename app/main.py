@@ -39,8 +39,8 @@ app = flask.Flask(__name__, '/')
 # 因此，你需要先做的就是在專案底下建置一個資料夾，並且命名為『templates』
 @app.route('/')
 def index():
-    return render_template('Home.html')
-    # return render_template('Index.html')
+    # return render_template('Home.html')
+    return render_template('Index.html')
     # return render_template('Test.html')
 
 #功能體驗
@@ -132,12 +132,12 @@ def getTxt():
 
     # txt = "YAYAYA"
     # txt = faceMeshDetection(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt)
-    txt, comment = FaceMeshDetector(maxFaces=10).findFaceMesh(img.copy(), drawFaceLms=True, drawID=False, drawFortuneTelling=drawFortuneTelling, returnTxt=returnTxt, returnComment=returnComment)
+    txt, comment, hair_makeup_comment = FaceMeshDetector(maxFaces=10).findFaceMesh(img.copy(), drawFaceLms=True, drawID=False, drawFortuneTelling=drawFortuneTelling, returnTxt=returnTxt, returnComment=returnComment)
     # print(findFaceMesh(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt))
     # print(txt)
     # print(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling, returnTxt)
 
-    data={ "回傳文字":txt, "回傳評論": comment}    
+    data={ "回傳文字":txt, "回傳評論": comment, "回傳髮型妝容建議": hair_makeup_comment}
     return flask.jsonify(data)
 
 # 老師示範用 ajax 前後端傳送資料
