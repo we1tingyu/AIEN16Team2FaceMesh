@@ -1,13 +1,13 @@
 
 .table-roll tbody {
   display:block;
-  height:450px;
+  height:300px;
   overflow-y:scroll;
 }
 
-.table-roll thead, tbody tr {
+.table-roll thead tr {
   display:table;
-  width:60%;
+  width:100%;
   table-layout:fixed;
 }
 
