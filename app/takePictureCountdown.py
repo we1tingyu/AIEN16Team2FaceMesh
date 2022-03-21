@@ -47,13 +47,20 @@ def add_txt_to_image(img, txt='', position=(10, 40)):
 #取得臉周長，並輸出txt
 txt=''
 def get_txt(img):    
-    distance = FaceMeshDetector(maxFaces=10).findFaceMesh(
+    distance = FaceMeshDetector(maxFaces=1).findFaceMesh(
         img.copy(),
         drawFaceLms=True,
         drawID=False,
         drawFortuneTelling="臉部外框",
         takePicture=True)
     # print(distance)
+    FaceX = FaceMeshDetector(maxFaces=1).findFaceMesh(
+        img.copy(),
+        drawFaceLms=True,
+        drawID=False,
+        drawFortuneTelling="歪臉判定",
+        takePicture=True)
+    # print(angle)
     
     # 依主程式回傳之臉周長 判斷使用者與攝影機之間的距離
     if type(distance) is float:
@@ -64,7 +71,12 @@ def get_txt(img):
         elif distance > 900:
             txt = '幹你老蘇哩 靠太近啦!'
         else:
-            txt = '已符合測量條件,請按下拍照'
+            if FaceX >30 and FaceX <= 60:
+                txt = "臉部稍微歪斜 請將頭擺正"
+            elif  FaceX > 60 :
+                txt = "霍金叔叔 您回來啦!"
+            else : 
+                txt = '已符合測量條件,請按下拍照'
     else:
             txt = '人哩?'
     
