@@ -165,8 +165,8 @@ class FaceMeshDetector():
                 total_y = bottom_y - top_y
                 total_x = right_x - left_x
                 
-                if returnComment:
-                    printComment.append("<h2>評論:</h2>")
+                # if returnComment:
+                #     printComment.append("<h2>評論:</h2>")
 
                 # 臉部特徵網格圖, 什麼都不畫
                 if drawFortuneTelling == "臉部特徵網格圖":
@@ -326,11 +326,11 @@ class FaceMeshDetector():
                     if three_court_y:
                         # print(f'由上到下的 y 座標分別是 y1:{three_court_y[0]:.2f}, y2:{three_court_y[1]:.2f}, y3:{three_court_y[2]:.2f}, y4:{three_court_y[3]:.2f}')
 
-                        printTxt.append(f'由上到下的 y 座標分別是 y1:{three_court_y[0]:.2f}, y2:{three_court_y[1]:.2f}, y3:{three_court_y[2]:.2f}, y4:{three_court_y[3]:.2f}')
+                        printTxt.append(f'由上到下的 y 座標分別是 y1：{three_court_y[0]:.2f}，y2:{three_court_y[1]:.2f}， y3:{three_court_y[2]:.2f}，y4:{three_court_y[3]:.2f}')
 
                         # print(f'上到下的 y 距離:{total_y:.2f}')
 
-                        printTxt.append(f'上到下的 y 距離:{total_y:.2f}')
+                        printTxt.append(f'上到下的 y 距離：{total_y:.2f}')
 
                         for i in range(len(THREE_COURT) - 1):
                             y_distance = three_court_y[i+1] - three_court_y[i]

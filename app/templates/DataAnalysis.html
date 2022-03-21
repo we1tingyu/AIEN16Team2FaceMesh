@@ -96,7 +96,12 @@
           <div class="col-md-6">
             <div class="left-content">
               <h4>面部畫線評分</h4>
+              
               <p id="jsonOutput"></p>
+              <h4>評論</h4>
+              <p id="jsonOutputComment"></p>
+            </div>
+            </br>
               <table class="table-roll">
                 <thead>
                     <tr>
@@ -188,23 +193,30 @@
 
             // style = 按鈕名稱; videoMode = "影片" 或 "照片" 或 "照相"
             function Function_video_feed(style, videoMode) {
-                // 影片
+            document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);  
+              // 影片
                 if (videoMode == "影片") {
-                    document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
                     $("#jsonOutput").html("播放影片 ing");
+                    $("#jsonOutputComment").html("");
                 }
                 // 照片
                 else if (videoMode == "照片") {
                     // 處理回傳值
-                    document.getElementById("image2").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode);
                     data1={ "param": style };
                     $.ajax({
                         type:"post",
                         url:"http://localhost:5000/getTxt",
                         contentType:"application/json",
                         data:JSON.stringify(data1),
+
                     }).done(function(data2){                
-                        $("#jsonOutput").html(JSON.stringify(data2["回傳文字"]).replace("\"", "").replace("\"", ""));
+                        var str = ""; 
+                        for (var i = 0; i<data2["回傳文字"].length; i++) {
+                            str+=data2["回傳文字"][i]+'<br>'
+                        }
+                        $("#jsonOutput").html(str)
+                        $("#jsonOutputComment").html(JSON.parse(JSON.stringify(data2["回傳評論"])));
+                        //JSON.parse 方法把會把一個JSON字串轉換成 JavaScript的數值或是物件。另外也可選擇使用reviver函數讓這些數值或是物件在被回傳之前做轉換。
                     }).fail(function(err){
                         alert(err.responseText);
                     });
@@ -213,6 +225,7 @@
                 else if (videoMode == "照相") {
                     document.getElementById("image1").src = "{{ url_for('video_feed', style='style', videoMode='videoMode') }}".replace("style", style).replace("videoMode", videoMode)
                     $("#jsonOutput").html("拍照 ing");
+                    $("#jsonOutputComment").html("");
                 }
             }
 
