@@ -1,4 +1,5 @@
 # coding:utf-8
+# 需要先把輸出的中文字元轉換成Unicode編碼形式
 import cv2
 import time
 from datetime import datetime,timedelta 
@@ -17,7 +18,7 @@ from faceMeshProjectForFACE_OVAL import FaceMeshDetector
 
 
 # 將txt畫至img
-def add_txt_to_image(img, txt='', position=(10, 40)):
+def add_txt_to_image(img, txt='', xy=(10, 40)):
    
     # 只能畫英文到圖上
     # cv2.putText(影像, 文字, 座標, 字型, 大小, 顏色, 線條寬度, 線條種類)
@@ -25,18 +26,37 @@ def add_txt_to_image(img, txt='', position=(10, 40)):
 
     img_PIL = Image.fromarray(cv2.cvtColor(img.copy(), cv2.COLOR_BGR2RGB))
 
+    if txt == '請將臉部靠近鏡頭' : 
+        shape = [(xy[0]-3, xy[1]-1), (xy[0]+250, xy[1]+40)] 
+        wordColor = '#ffff2b'
+    elif txt == '乾你老蘇哩 靠太近啦!' :
+        shape = [(xy[0]-1, xy[1]-1), (xy[0]+300, xy[1]+40)] 
+        wordColor = '#fb0301'
+    elif txt == '臉部稍微歪斜 請擺正' :
+        shape = [(xy[0]-1, xy[1]-1), (xy[0]+300, xy[1]+40)] 
+        wordColor = '#ffff2b'
+    elif txt == '霍金叔叔 您回來啦!' :
+        shape = [(xy[0]-1, xy[1]-1), (xy[0]+275, xy[1]+40)] 
+        wordColor = '#fb0301'
+    elif txt == '人哩?' :
+        shape = [(xy[0]-1, xy[1]-1), (xy[0]+80, xy[1]+40)] 
+        wordColor = '#ffffff'
+    else :
+        shape = [(xy[0]-1, xy[1]-1), (xy[0]+210, xy[1]+40)] 
+        wordColor = '#74d56a'
+
+    
+    draw = ImageDraw.Draw(img_PIL)   
+    draw.rectangle(shape, fill ="#000000", outline ="#0136ae", width=2 ) 
+
+
     # font = ImageFont.load_default()
     font = ImageFont.truetype(
-        os.path.abspath(os.path.dirname(__file__)) +
-        '/static/fonts/JasonHandwriting4.ttf', 30)
+        os.path.abspath(os.path.dirname(__file__)) +'/static/fonts/JasonHandwriting4.ttf', 30)
     # font = ImageFont.truetype(r'C:\Users\Student\Desktop\git-facemesh\AIEN16Team2FaceMesh\app\static\fonts\JasonHandwriting4.ttf', 50)
-
-    # 輸出內容
-    # str = msgnew
-    # 需要先把輸出的中文字元轉換成Unicode編碼形式
-
-    draw = ImageDraw.Draw(img_PIL)
-    draw.text(position, txt, 'blue', font)
+      
+   
+    draw.text(xy, txt, wordColor , font)
     # 使用PIL中的save方法儲存圖片到本地
     # img_PIL.save('02.jpg', 'jpeg')
 
@@ -44,7 +64,7 @@ def add_txt_to_image(img, txt='', position=(10, 40)):
     return cv2.cvtColor(numpy.asarray(img_PIL), cv2.COLOR_RGB2BGR)
 
 
-#取得臉周長，並輸出txt
+#取得臉周長及歪斜，並輸出txt
 txt=''
 def get_txt(img):    
     distance = FaceMeshDetector(maxFaces=1).findFaceMesh(
@@ -69,10 +89,10 @@ def get_txt(img):
         if distance < 650:
             txt = '請將臉部靠近鏡頭'
         elif distance > 900:
-            txt = '幹你老蘇哩 靠太近啦!'
+            txt = '乾你老蘇哩 靠太近啦!'
         else:
             if FaceX >30 and FaceX <= 60:
-                txt = "臉部稍微歪斜 請將頭擺正"
+                txt = "臉部稍微歪斜 請擺正"
             elif  FaceX > 60 :
                 txt = "霍金叔叔 您回來啦!"
             else : 
@@ -152,7 +172,7 @@ def streamlive(camera_status):
             
             pTime = time.time()
             s_format = "於"+'{:02d}:{:02d}'.format(0, 3-int(pTime - cTime)) + "秒後拍照"
-            imgtxt=add_txt_to_image(img,s_format,position=(20,40))
+            imgtxt=add_txt_to_image(img,s_format,xy=(20,40))
 
             
             if  int(pTime - cTime) == 3:
