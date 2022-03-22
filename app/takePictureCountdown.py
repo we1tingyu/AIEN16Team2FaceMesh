@@ -27,7 +27,7 @@ def add_txt_to_image(img, txt='', xy=(10, 40)):
     img_PIL = Image.fromarray(cv2.cvtColor(img.copy(), cv2.COLOR_BGR2RGB))
 
     if txt == '請將臉部靠近鏡頭' : 
-        shape = [(xy[0]-1, xy[1]-1), (xy[0]+250, xy[1]+40)] 
+        shape = [(xy[0]-3, xy[1]-1), (xy[0]+250, xy[1]+40)] 
         wordColor = '#ffff2b'
     elif txt == '乾你老蘇哩 靠太近啦!' :
         shape = [(xy[0]-1, xy[1]-1), (xy[0]+300, xy[1]+40)] 
