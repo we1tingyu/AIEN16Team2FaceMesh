@@ -236,6 +236,9 @@ VALUES (4, 1, '<h2>上庭長</h2>
 注意打亮時，不可以從上到下全部提亮，這樣會看起來不自然，<br/>
 在鼻樑及鼻頭中間處要記得斷開～<br/>');
 
+INSERT INTO hair_makeup_table (button_id, hair_makeup_level, hair_makeup_comment)
+VALUES (11, 1, '四高三低'), (12, 1, '側臉線條');
+
 select * from hair_makeup_table;
 
 update hair_makeup_table set hair_makeup_comment = '
