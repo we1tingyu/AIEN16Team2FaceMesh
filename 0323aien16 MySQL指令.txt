@@ -6,6 +6,8 @@ CREATE TABLE `aien16`.`button_table` (
 INSERT INTO button_table (button_id, button_name)
 VALUES (1, '臉部特徵網格圖'), (2, '臉部外框'), (3, '臉部面相算命特徵圖'), (4, '三庭'), (5, '五眼'), 
 (6, '美人角'), (7, '臉部黃金比例'), (8, '臉部四角形比例'), (9, '眉尾、眼尾和鼻翼連成一線'), (10, '鼻子大小');
+INSERT INTO button_table (button_id, button_name)
+VALUES (11, '四高三低'), (12, '側臉線條');
 
 select * from button_table;
 
@@ -32,6 +34,11 @@ VALUES (9, 5, '眉尾、眼尾和鼻翼連成一線超完美'), (9, 4, '眉尾�
 INSERT INTO comment_table (button_id, comment_level, comment)
 VALUES (10, 5, '鼻子大小超完美'), (10, 4, '鼻子大小蠻不錯的'), (10, 3, '鼻子大小還可以啦'), (10, 2, '鼻子大小不太行'), (10, 1, '鼻子大小見不得人'), (10, 0, '鼻子大小沒救了');
 
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (11, 5, '四高三低超完美'), (11, 4, '四高三低蠻不錯的'), (11, 3, '四高三低還可以啦'), (11, 2, '四高三低不太行'), (11, 1, '四高三低見不得人'), (11, 0, '四高三低沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (12, 5, '側臉線條超完美'), (12, 4, '側臉線條蠻不錯的'), (12, 3, '側臉線條還可以啦'), (12, 2, '側臉線條不太行'), (12, 1, '側臉線條見不得人'), (12, 0, '側臉線條沒救了');
+
 -- 
 
 select * from comment_table;
@@ -46,4 +53,6 @@ select * from button_table
 where button_name = '三庭';
 
 update comment_table set button_id = 4 where button_id = 3 and comment_level = 5;
+
+
 
