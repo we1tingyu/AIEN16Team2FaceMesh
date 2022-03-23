@@ -9,6 +9,7 @@
 #
 
 import cv2
+from cv2 import sqrt
 import mediapipe as mp
 import time
 import math
@@ -25,11 +26,19 @@ import sqlQuery
 lock = threading.Lock()
 
 
-BLUE_XXX = (255, 106 , 90)
+BLUE_XXX = (255, 106, 90)
 BLACK = (0, 0, 0)
-GREEN = (0, 106 , 90)
+# GREEN = (0, 106, 90)
+GREEN = (0, 255, 0)
 RED = (0, 0, 255)
 BLUE = (255, 0, 0)
+
+YELLOW = (0, 255 , 255)
+LIGHT_BLUE = (255, 255, 0)
+PINK = (255, 0, 255)
+ORANGE = (0, 128, 255)
+PURPLE = (128, 0, 128)
+RAINBOW = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE]
 
 # COLOR 可以由前端按按鈕切換
 DEFAULT_COLOR = BLUE
@@ -103,19 +112,31 @@ class FaceMeshDetector():
         left_ID = EDGE[2]
         right_ID = EDGE[3]
 
+        # 三庭
         THREE_COURT=facialFeatures.THREE_COURT
-
-
         three_court_y = []
         three_court_ratio = []
 
+        # 五眼
         FIVE_EYE=facialFeatures.FIVE_EYE
         five_eye_x = []
         five_eye_ratio = []
 
+        # 四高三低
+        FOUR_HIGH_THREE_LOW = facialFeatures.FOUR_HIGH_THREE_LOW
+
+        # 側臉線條
+        SIDE_FACE_LINE = facialFeatures.SIDE_FACE_LINE
+
         ratio_diff = []
         score=0
         sum=0  
+        x_list = []
+        y_list = []
+        z_list = []
+        z_diff = []
+        tempTxt = ""
+
         printTxt = []
         comment_level = 0
         printComment = []
@@ -159,7 +180,7 @@ class FaceMeshDetector():
                         right_x = x1
                         right_ID = ID
 
-                print(f'left_x:{left_x}, left_ID:{left_ID}, right_x:{right_x}, right_ID:{right_ID}, ')
+                # print(f'left_x:{left_x}, left_ID:{left_ID}, right_x:{right_x}, right_ID:{right_ID}, ')
                 
                 # 計算髮際線的座標, 用原本臉長 * 1 / 0.87 倍當做實際臉長
                 top_y = bottom_y - (bottom_y - top_y) * (1 / 0.87)
@@ -448,25 +469,24 @@ class FaceMeshDetector():
 
                 #美人角
                 elif drawFortuneTelling == "美人角":
-                    for idx1,ff in enumerate(BEAUTY_CORNER):
-                        for idx2,value in enumerate(BEAUTY_CORNER[idx1]):
-                            startID, endID = value
-                           
-                            lm_start = faceLms.landmark[startID]
-                            x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
-                            # 起點的 2D int 座標 (給 cv2 用)
-                            startAddress2D = int(x1), int(y1)
-                            lm_end = faceLms.landmark[endID]
-                            x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
-                            # 終點的 2D int 座標 (給 cv2 用)
-                            endAddress2D = int(x2), int(y2)
-                            # draw specific line user defined (只畫線, 不算距離)
-                            self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
-                            
-                            # 起點的 3D float 座標
-                            startAddressForAngle.append([x1, y1])
-                            # 終點的 3D float 座標
-                            endAddressForAngle.append([x2, y2])
+                    for idx1,value in enumerate(BEAUTY_CORNER):
+                        startID, endID = value
+                        
+                        lm_start = faceLms.landmark[startID]
+                        x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
+                        # 起點的 2D int 座標 (給 cv2 用)
+                        startAddress2D = int(x1), int(y1)
+                        lm_end = faceLms.landmark[endID]
+                        x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
+                        # 終點的 2D int 座標 (給 cv2 用)
+                        endAddress2D = int(x2), int(y2)
+                        # draw specific line user defined (只畫線, 不算距離)
+                        self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
+                        
+                        # 起點的 3D float 座標
+                        startAddressForAngle.append([x1, y1])
+                        # 終點的 3D float 座標
+                        endAddressForAngle.append([x2, y2])
 
                     # 計算夾角
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
@@ -756,6 +776,128 @@ class FaceMeshDetector():
                         hair_makeup_comment_level = 1
                         printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
 
+                # 四高三低
+                elif drawFortuneTelling == "四高三低":
+                    for idx1,value in enumerate(FOUR_HIGH_THREE_LOW):
+                        # for idx2,value in enumerate(FOUR_HIGH_THREE_LOW[(idx1 + 1) % len(FOUR_HIGH_THREE_LOW)]):
+
+                        ID = value
+                        lm = faceLms.landmark[ID]
+
+
+                        # startID, endID = FOUR_HIGH_THREE_LOW[idx1], FOUR_HIGH_THREE_LOW[(idx1 + 1) % len(FOUR_HIGH_THREE_LOW)]
+                        # lm_start = faceLms.landmark[startID]
+                        x_list.append(lm.x*iw)
+                        y_list.append(lm.y*ih)
+                        z_list.append(lm.z*ic)
+
+                    for idx1,value in enumerate(FOUR_HIGH_THREE_LOW):
+                        if idx1 < len(FOUR_HIGH_THREE_LOW) - 1:
+                            # 起點的 2D int 座標 (給 cv2 用)
+                            startAddress2D = int(x_list[idx1]), int(y_list[idx1])
+                            # 終點的 2D int 座標 (給 cv2 用)
+                            # endAddress2D = int(x_list[(idx1 + 1) % len(FOUR_HIGH_THREE_LOW)]), int(y_list[(idx1 + 1) % len(FOUR_HIGH_THREE_LOW)])
+                            endAddress2D = int(x_list[idx1 + 1]), int(y_list[idx1 + 1])
+                            # draw specific line user defined (只畫線, 不算距離)
+                            self.drawSpecificLine(img, startAddress2D, endAddress2D, RAINBOW[idx1])
+
+                    for idx1,value in enumerate(z_list):
+                        print(f'z:{value:.2f}')
+                        if idx1 < len(z_list) - 1:
+                            z_diff.append(z_list[idx1 + 1] - z_list[idx1])
+                            print(f'z_diff:{z_diff[idx1]:.2f}')
+
+                    # z_diff = []
+                    # z_diff = [1,-1,1,-1,1,-1]
+                    # for idx1,value in enumerate(z_diff):
+                    #     print(value)
+
+                    for idx1,value in enumerate(z_list):
+                        # 0
+                        if idx1 == 0:
+                            if z_diff[idx1] >= 0:
+                                score += 100 / 7
+                                tempTxt += "高"
+                            else:
+                                tempTxt += "低"
+                        # 6
+                        elif idx1 == len(z_diff):
+                            if z_diff[idx1 - 1] <= 0:
+                                score += 100 / 7
+                                tempTxt += "高"
+                            else:
+                                tempTxt += "低"
+                        # 2, 4
+                        elif idx1 % 2 == 0:
+                            if z_diff[idx1] - z_diff[idx1 - 1] >= 0:
+                                score += 100 / 7
+                                tempTxt += "高"
+                            else:
+                                tempTxt += "低"
+                        # 1, 3, 5
+                        elif idx1 % 2 == 1:
+                            if z_diff[idx1] - z_diff[idx1 - 1] >= 0:
+                                tempTxt += "高"
+                            else:
+                                tempTxt += "低"
+                                score += 100 / 7
+                    
+                    print(tempTxt)
+                    print(score)
+                    printTxt.append(f'完美的四高三低分別是-> 高低高低高低高')
+                    printTxt.append(f'您的分別是-> {tempTxt}')
+
+                    printTxt.append(f'您獲得的分數為-> {score:.2f}分')
+                    # printTxt.append(f'------------')
+                    if returnComment:
+                        # 取得 comment
+                        button_name = drawFortuneTelling
+                        comment_level = int(score / 20)
+                        printComment.append(self.getComment(button_name, comment_level))
+                        hair_makeup_comment_level = 1
+                        printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
+
+                # 側臉線條
+                elif drawFortuneTelling == "側臉線條":
+                    # SIDE_FACE_LINE
+                    for idx1,value in enumerate(SIDE_FACE_LINE):
+                        startID, endID = value
+                        
+                        lm_start = faceLms.landmark[startID]
+                        x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
+                        # 起點的 2D int 座標 (給 cv2 用)
+                        startAddress2D = int(x1), int(y1)
+                        lm_end = faceLms.landmark[endID]
+                        x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
+                        # 終點的 2D int 座標 (給 cv2 用)
+                        endAddress2D = int(x2), int(y2)
+                        # draw specific line user defined (只畫線, 不算距離)
+                        self.drawSpecificLine(img, startAddress2D, endAddress2D, RAINBOW[idx1])
+                        
+                        # 起點的 3D float 座標
+                        startAddressForAngle.append([x1, y1, z1])
+                        # 終點的 3D float 座標
+                        endAddressForAngle.append([x2, y2, z2])
+
+                    # 計算夾角
+                    ang1 = self.angle3D(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
+                    # print(f"側臉線條角度是{ang1}°")
+
+                    score = (1 - (abs(ang1-180) / 180)) * 100
+
+                    printTxt.append(f"側臉線條角度是-> {ang1}°")
+                    printTxt.append(f'側臉線條的完美角度是-> 180°')
+                    printTxt.append(f'您的落差為-> {abs(ang1-180)}°')
+                    printTxt.append(f'您獲得的分數為-> {score:.2f}分')
+
+                    if returnComment:
+                        # 取得 comment
+                        button_name = drawFortuneTelling
+                        comment_level = int(score / 20)
+                        printComment.append(self.getComment(button_name, comment_level))
+                        hair_makeup_comment_level = 1
+                        printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
+
                 if returnTxt:
                     return printTxt, printComment, printHairMakeupComment
 
@@ -816,6 +958,29 @@ class FaceMeshDetector():
             # included_angle 為正數表示向量1到向量2順時鐘旋轉的角度, 負數表示向量1到向量2逆時鐘旋轉的角度
             included_angle = -included_angle
         return included_angle
+
+    # 給四個座標點(起始點1, 終止點1, 起始點2, 終止點2)計算夾角
+    def angle3D(self, startAddress1, endAddress1, startAddress2, endAddress2, ignore_clockwise_direction=True):
+        dx1 = endAddress1[0] - startAddress1[0]
+        dy1 = endAddress1[1] - startAddress1[1]
+        dz1 = endAddress1[2] - startAddress1[2]
+        dx2 = endAddress2[0] - startAddress2[0]
+        dy2 = endAddress2[1] - startAddress2[1]
+        dz2 = endAddress2[2] - startAddress2[2]
+
+        # a_dot_b = a * b * cos(θ)
+        a_dot_b = dx1 * dx2 + dy1 * dy2 + dz1 * dz2
+        a_length = (dx1*dx1 + dy1*dy1 + dz1*dz1) ** 0.5
+        b_length = (dx2*dx2 + dy2*dy2 + dz2*dz2) ** 0.5
+
+        # 向量1和向量2的夾角 θ 為(-π < θ ≤ π)之間
+        angle = math.acos(a_dot_b / (a_length * b_length))
+        print(a_dot_b / (a_length * b_length))
+        print(angle)
+        angle = int(angle * 180/math.pi)
+        print(angle)
+
+        return angle
 
     # Euclaidean Distance
     def euclaideanDistance(self, startPoint, endPoint):
