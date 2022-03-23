@@ -20,6 +20,21 @@ def sqlQueryHairMakeupComment(button_name, hair_makeup_level):
     t_data=cursor.fetchall()
     return t_data
 
+def sqlQueryMember(account_number = '', password = ''):
+    (cursor, cnx) = modules.mysql_connection.get_cursor()
+    if len(password) != 0:
+        sql = (f"select * from member_table where account_number = '{account_number}' and password = '{password}';")
+    elif len(account_number) != 0:
+        sql = (f"select * from member_table where account_number = '{account_number}';")
+    else:
+        return False
+    cursor.execute(sql)
+    t_data=cursor.fetchall()
+    if len(t_data) != 0:
+        return True
+    else:
+        return False
+
 # def sqlQueryTest(param, table_name):
 #     (cursor, cnx) = modules.mysql_connection.get_cursor()
 #     # param = 1

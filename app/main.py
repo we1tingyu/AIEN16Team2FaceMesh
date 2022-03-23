@@ -1,6 +1,6 @@
 # import all necessary 3rd python packages 
 from copy import copy
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request, url_for, redirect, flash
 import modules.mysql_connection
 
 from faceMeshProjectForFACE_OVAL import faceMeshDetection, FaceMeshDetector
@@ -10,8 +10,12 @@ from takePictureCountdown import streamlive
 # from takePicture0314_IP import streamlive
 
 import cv2
+import sqlQuery
 
 from flask_table import Table, Col, LinkCol
+
+from flask_login import LoginManager, UserMixin, login_user, logout_user, login_required, current_user
+import configparser
 
 # from faceMeshProjectForFlask import faceMeshDetection_test
 #
@@ -26,6 +30,88 @@ import flask
 app = flask.Flask(__name__, '/')
 # CORS(app)
 
+### login
+# config 初始化
+config = configparser.ConfigParser()
+config.read('config.ini')
+
+# app.secret_key = config.get('flask', 'secret_key')
+app.secret_key = 'dd06be55a06c03312b2ab109b5f8f6ab'
+
+login_manager = LoginManager()
+login_manager.init_app(app)
+login_manager.session_protection = "strong"
+login_manager.login_view = 'login'
+# login_manager.login_message = '請證明你並非來自黑暗草泥馬界'
+login_manager.login_message = 'YAYAYA'
+
+class User(UserMixin):
+    pass
+
+@login_manager.user_loader
+def user_loader(使用者):
+    # if 使用者 not in users:
+    if 使用者 is None or sqlQueryMember(使用者, ''):
+        return
+
+    user = User()
+    user.id = 使用者
+    return user
+
+@login_manager.request_loader
+def request_loader(request):
+    使用者 = request.form.get('user_id')
+    # if 使用者 not in users:
+    if 使用者 is None or sqlQueryMember(使用者, ''):
+        return
+
+    user = User()
+    user.id = 使用者
+
+    # DO NOT ever store passwords in plaintext and always compare password
+    # hashes using constant-time comparison!
+    # user.is_authenticated = request.form['password'] == users[使用者]['password']
+    user.is_authenticated = sqlQueryMember(使用者, request.form['password'])
+
+    return user
+
+# users = {'Me': {'password': 'myself'}, '123': {'password': '456'}}
+
+# sql 查詢 member, 回傳 True or False
+def sqlQueryMember(account_number, password):
+    if account_number is None:
+        return False
+    memberExist = sqlQuery.sqlQueryMember(account_number, password)
+    print(memberExist)
+    # return True
+    return memberExist
+
+@app.route('/login', methods=['GET', 'POST'])
+def login():
+    if request.method == 'GET':
+        return render_template("login.html")
+    
+    使用者 = request.form['user_id']
+    # if (使用者 in users) and (request.form['password'] == users[使用者]['password']):
+    if sqlQueryMember(使用者, request.form['password']):
+        user = User()
+        user.id = 使用者
+        login_user(user)
+        # flash(f'{使用者}！歡迎加入草泥馬訓練家的行列！')
+        flash(f'{使用者}！YAYAYA！')
+        return redirect(url_for('index'))
+
+    flash('登入失敗了...')
+    return render_template('login.html')
+
+@app.route('/logout')
+def logout():
+    使用者 = current_user.get_id()
+    logout_user()
+    flash(f'{使用者}！歡迎下次再來！')
+    return render_template('login.html')
+### login 結束
+
 # 裝飾器是告訴 Flask，哪個 URL 應該觸發我們的函式。
 # 斜線代表的就是網站的根目錄，可以疊加。
 # 例如: 新增一個 /hello 的位址
@@ -38,9 +124,10 @@ app = flask.Flask(__name__, '/')
 # 當return render_template('html文件')的時候，flask會先到專案資料夾『templates』去尋找相對應的html文件，
 # 因此，你需要先做的就是在專案底下建置一個資料夾，並且命名為『templates』
 @app.route('/')
+# @login_required
 def index():
-    # return render_template('Home.html')
-    return render_template('Index.html')
+    return render_template('Home.html')
+    # return render_template('Index.html')
     # return render_template('Test.html')
 
 #功能體驗
@@ -50,6 +137,7 @@ def Experience():
 
 #數據分析
 @app.route('/DataAnalysis')
+# @login_required
 def DataAnalysis():
     return render_template('DataAnalysis.html')  
 
