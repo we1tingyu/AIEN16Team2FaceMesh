@@ -25,31 +25,36 @@
             <div class="content-bg content-bg--green">          
                 <div id="content_wuc_InputError" class="message message--error margin-b-3 js-validationSummary" tabindex="-1"></div>
                 <div class="form">
+                    <form method="post" action="/signup">
                     <p class="form-note" aria-hidden="true">
                         <strong class="form-required">*</strong>必填欄位
                     </p>
                     <fieldset class="margin-b-2">
                         <legend class="form-heading">會員帳號</legend>
                         <div class="margin-b-4">
-                            <label for="content_txt_email" class="form-label">
+                            <label for="user_id" class="form-label">
                                 設定帳號
                                 <strong class="form-required" aria-hidden="true">*</strong></label>
-                            <input name="ctl00$content$txt_email" type="text" maxlength="40" id="content_txt_email" class="form-inputText" aria-invalid="false" required="" data-pattern="" data-restrict="" data-required="請輸入您的Email。" aria-describedby="note-0">
+                            <!-- <input name="ctl00$content$txt_email" type="text" maxlength="40" id="content_txt_email" class="form-inputText" aria-invalid="false" required="" data-pattern="" data-restrict="" data-required="請輸入您的Email。" aria-describedby="note-0"> -->
+                            <input type="text" id="user_id" name="user_id" class="form-inputText" value="" aria-invalid="false" maxlength="45" required="" data-required="您所輸入的會員帳號不完整，請再試一次。" aria-describedby="note-0">
                         </div>
                         <div class="margin-b-4">
-                            <label for="content_txt_pwd" class="form-label">
+                            <label for="password" class="form-label">
                                 設定密碼
                                 <strong class="form-required" aria-hidden="true">*</strong></label>
-                            <input name="ctl00$content$txt_pwd" type="password" maxlength="30" id="content_txt_pwd" class="form-inputText" aria-invalid="false" required="" data-required="請輸入您的密碼。" aria-describedby="note-1">
+                            <!-- <input name="ctl00$content$txt_pwd" type="password" maxlength="30" id="content_txt_pwd" class="form-inputText" aria-invalid="false" required="" data-required="請輸入您的密碼。" aria-describedby="note-1"> -->
+                            <input type="password" id="password" name="password" class="form-inputText" aria-invalid="false" maxlength="40" required="" data-required="請輸入您的密碼。">
                         </div>
                         <div class="margin-b-4">
                             <label for="content_txt_repwd" class="form-label">
                                 確認密碼
                                 <strong class="form-required" aria-hidden="true">*</strong></label>
-                            <input name="ctl00$content$txt_repwd" type="password" maxlength="32" id="content_txt_repwd" class="form-inputText" aria-invalid="false">
+                            <!-- <input name="ctl00$content$txt_repwd" type="password" maxlength="32" id="content_txt_repwd" class="form-inputText" aria-invalid="false" required=""> -->
+                            <input type="password" id="content_txt_repwd" name="password" class="form-inputText" aria-invalid="false" maxlength="40" required="" data-required="請輸入您的密碼。" onkeyup="validate()">
+                            <span id="checkPassword"></span>
                         </div>
                     </fieldset>
-                    <fieldset class="margin-b-2">
+                    <!-- <fieldset class="margin-b-2">
                         <legend class="form-heading">個人資料</legend>
                         <div class="margin-b-4">
                             <label for="content_txt_lename" class="form-label">
@@ -471,10 +476,13 @@
                             </label>
                             <input name="ctl00$content$txt_lename" type="text" maxlength="30" id="content_txt_lename" class="form-inputText text-upperCase" aria-invalid="false" required="" data-required="請輸入英文姓名！" aria-describedby="note-2">
                         </div>
-                    </fieldset>
+                    </fieldset> -->
                     <div class="form-btnBlock">
-                        <button onclick="DataPreChk()" type="button" class="btn btn--lg btn--green">註冊</button>
+                        <!-- <button type="submit" class="btn btn--lg btn--green">註冊</button> -->
+                        <input type="submit" class="btn btn--lg btn--green" value="註冊" id="submit"/>
+                        <input type="reset" class="btn btn--lg btn--green" value="重置"/>
                     </div>
+                    </form>
                 </div>
 			</div>
 		</div>
@@ -499,4 +507,20 @@
           </div>
 	</main>
     {% endblock content %}
+    {% block scripts %}
+    <script>
+        function validate() {
+            var pw1 = document.getElementById("password").value;
+            var pw2 = document.getElementById("content_txt_repwd").value;
+            if(pw1 == pw2) {
+            document.getElementById("checkPassword").innerHTML="<font color='green'>兩次密碼相同</font>";
+            document.getElementById("submit").disabled = false;
+            }
+            else {
+            document.getElementById("checkPassword").innerHTML="<font color='red'>兩次密碼不相同</font>";
+            document.getElementById("submit").disabled = true;
+            }
+        }
+    </script>
+    {% endblock scripts %}
       

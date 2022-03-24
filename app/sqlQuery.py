@@ -20,16 +20,37 @@ def sqlQueryHairMakeupComment(button_name, hair_makeup_level):
     t_data=cursor.fetchall()
     return t_data
 
-def sqlQueryMember(account_number = '', password = ''):
+def sqlQueryMember(user_id = '', password = ''):
     (cursor, cnx) = modules.mysql_connection.get_cursor()
     if len(password) != 0:
-        sql = (f"select * from member_table where account_number = '{account_number}' and password = '{password}';")
-    elif len(account_number) != 0:
-        sql = (f"select * from member_table where account_number = '{account_number}';")
+        sql = (f"select * from members_table where user_id = '{user_id}' and password = '{password}';")
+    elif len(user_id) != 0:
+        sql = (f"select * from members_table where user_id = '{user_id}';")
     else:
         return False
     cursor.execute(sql)
     t_data=cursor.fetchall()
+    if len(t_data) != 0:
+        return True
+    else:
+        return False
+
+def sqlInsertMember(user_id = '', password = ''):
+    (cursor, cnx) = modules.mysql_connection.get_cursor()
+    # if len(password) != 0:
+    #     sql = (f"select * from members_table where user_id = '{user_id}' and password = '{password}';")
+    # elif len(user_id) != 0:
+    #     sql = (f"select * from members_table where user_id = '{user_id}';")
+    # else:
+    #     return False
+    sql = (f"insert into members_table (user_id, password) values ('{user_id}', '{password}');")
+    print('-------')
+    print(sql)
+    print('-------------')
+    cursor.execute(sql)
+    t_data=cursor.fetchall()
+    print(t_data)
+    print('-------')
     if len(t_data) != 0:
         return True
     else:

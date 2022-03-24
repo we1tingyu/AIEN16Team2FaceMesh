@@ -78,10 +78,19 @@ def request_loader(request):
 # users = {'Me': {'password': 'myself'}, '123': {'password': '456'}}
 
 # sql 查詢 member, 回傳 True or False
-def sqlQueryMember(account_number, password):
-    if account_number is None:
+def sqlQueryMember(user_id, password):
+    if user_id is None:
         return False
-    memberExist = sqlQuery.sqlQueryMember(account_number, password)
+    memberExist = sqlQuery.sqlQueryMember(user_id, password)
+    print(memberExist)
+    # return True
+    return memberExist
+
+# sql 查詢 member, 回傳 True or False
+def sqlInsertMember(user_id, password):
+    if user_id is None:
+        return False
+    memberExist = sqlQuery.sqlInsertMember(user_id, password)
     print(memberExist)
     # return True
     return memberExist
@@ -111,6 +120,36 @@ def logout():
     flash(f'{使用者}！歡迎下次再來！')
     return render_template('login.html')
 ### login 結束
+
+### signup
+@app.route('/signup', methods=['GET', 'POST'])
+def signup():
+    if request.method == 'GET':
+        return render_template("signup.html")
+    
+    使用者 = request.form['user_id']
+    # if (使用者 in users) and (request.form['password'] == users[使用者]['password']):
+    if sqlQueryMember(使用者, request.form['password']):
+        user = User()
+        user.id = 使用者
+        login_user(user)
+        # flash(f'{使用者}！歡迎加入草泥馬訓練家的行列！')
+        # flash(f'{使用者}！YAYAYA！')
+        print('帳號已存在')
+        return redirect(url_for('signup'))
+
+    # if (使用者 in users) and (request.form['password'] == users[使用者]['password']):
+    if sqlInsertMember(使用者, request.form['password']):
+        user = User()
+        user.id = 使用者
+        login_user(user)
+        # flash(f'{使用者}！歡迎加入草泥馬訓練家的行列！')
+        # flash(f'{使用者}！YAYAYA！')
+        return redirect(url_for('index'))
+
+    flash('註冊失敗了...')
+    return render_template('signup.html')
+### signup 結束
 
 # 裝飾器是告訴 Flask，哪個 URL 應該觸發我們的函式。
 # 斜線代表的就是網站的根目錄，可以疊加。
