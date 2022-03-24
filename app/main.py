@@ -1,6 +1,7 @@
 # import all necessary 3rd python packages 
 from copy import copy
-from flask import Flask, render_template, Response, request
+from flask import Flask, render_template, Response, request,redirect,url_for
+from pytube import YouTube
 import modules.mysql_connection
 
 from faceMeshProjectForFACE_OVAL import faceMeshDetection, FaceMeshDetector
@@ -46,6 +47,15 @@ def index():
 #功能體驗
 @app.route('/Experience')
 def Experience():
+    # if request.method == 'POST':
+    #     url = request.form['url']
+    #     yt = YouTube(url)
+    #     print("開始下載影片")
+    #     yt.streams.get_highest_resolution().download('./videos')
+    #     print("影片下載完成")
+    #     filename=yt.title
+    #     return redirect(url_for('video_feed', style='五眼', videoMode='影片'))
+
     return render_template('Experience.html')
 
 #數據分析
@@ -72,6 +82,20 @@ def Signin():
 @app.route('/Signup')
 def Signup():
     return render_template('Signup.html')
+
+@app.route('/submit', methods=['POST'])
+def submit():
+    if request.method == 'POST':
+        url = request.form['url']
+        yt = YouTube(url)
+        print("開始下載影片")
+        yt.streams.get_highest_resolution().download('./videos')
+        print("影片下載完成")
+        filename=yt.title
+
+    return redirect(url_for('Experience'))     
+ # return render_template('Experience',filename=filename)
+
 
 # feed a video stream as a source
 # 前端的 video_feed 加上 style 參數, 傳到 drawFortuneTelling, 表示要畫哪一種圖; 加上 videoMode 參數, 傳到 videoMode, 表示"影片"或"照片"
