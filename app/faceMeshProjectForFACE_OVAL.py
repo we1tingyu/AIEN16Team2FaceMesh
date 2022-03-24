@@ -373,7 +373,7 @@ class FaceMeshDetector():
 
                         printTxt.append(f'三庭(上到下)比例為-> {three_court_ratio[0]:.2f}:{three_court_ratio[1]:.2f}:{three_court_ratio[2]:.2f}')
                         printTxt.append(f'三庭的完美比例是-> 1:1:1')
-                        printTxt.append(f'您的落差為-> {ratio_diff[0]:.2f}:{ratio_diff[1]:.2f}:{ratio_diff[2]:.2f}')
+                        printTxt.append(f'您的落差為-> {ratio_diff[0]:.2f}:{ratio_diff[1]:.2f}:{ratio_diff[2]:.2f}<hr>')
                         printTxt.append(f'您獲得的分數為-> {score:.2f}分')
 
                         if returnComment:
@@ -449,7 +449,7 @@ class FaceMeshDetector():
 
                         printTxt.append(f'五眼(左到右)比例為-> {five_eye_ratio[0]:.2f}:{five_eye_ratio[1]:.2f}:{five_eye_ratio[2]:.2f}:{five_eye_ratio[3]:.2f}:{five_eye_ratio[4]:.2f}')
                         printTxt.append(f'五眼的完美比例是-> 1:1:1:1:1')
-                        printTxt.append(f'您的落差為-> {ratio_diff[0]:.2f}:{ratio_diff[1]:.2f}:{ratio_diff[2]:.2f}:{ratio_diff[3]:.2f}:{ratio_diff[4]:.2f}')
+                        printTxt.append(f'您的落差為-> {ratio_diff[0]:.2f}:{ratio_diff[1]:.2f}:{ratio_diff[2]:.2f}:{ratio_diff[3]:.2f}:{ratio_diff[4]:.2f}<hr>')
                         printTxt.append(f'您獲得的分數為-> {score:.2f}分')
                         
                         if returnComment:
@@ -496,7 +496,7 @@ class FaceMeshDetector():
 
                     printTxt.append(f"美人角角度是-> {ang1}°")
                     printTxt.append(f'美人角的完美角度是-> 45°')
-                    printTxt.append(f'您的落差為-> {abs(ang1-45)}°')
+                    printTxt.append(f'您的落差為-> {abs(ang1-45)}°<hr>')
                     printTxt.append(f'您獲得的分數為-> {score:.2f}分')
 
                     if returnComment:
@@ -532,7 +532,7 @@ class FaceMeshDetector():
                     
                     score = (1-(k*abs(face_ratio-GR)/GR))*100
                     
-                    printTxt.append(f'臉部比例為-> 1:{face_ratio:.3f}')
+                    printTxt.append(f'臉部比例為-> 1:{face_ratio:.3f}<hr>')
                     printTxt.append(f'您獲得的分數為-> {score:.2f}分')
 
                     if returnComment:
@@ -603,7 +603,7 @@ class FaceMeshDetector():
                     # print('------------')
 
                     printTxt.append(f'臉部四角形長寬分別為: {(x2 - x1):.2f}, {(y_average_bottom - y_average_top):.2f}')
-                    printTxt.append(f'臉部四角形比例為: {four_square_ratio:.2f}')
+                    printTxt.append(f'臉部四角形比例為: {four_square_ratio:.2f}<hr>')
                     
                     # 鑑別值
                     k=1
@@ -687,7 +687,7 @@ class FaceMeshDetector():
                     # print(f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)")
                     # print('------------')
 
-                    printTxt.append(f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)")
+                    printTxt.append(f"右眉尾、右眼尾和右鼻翼夾角角度是{180-ang4}° (若為 180° 表示連成一直線, 大於 180° 表示眉毛較長, 小於 180° 表示眉毛較短)<hr>")
                     
                     ThreePointsLineL= 180-ang3
                     ThreePointsLineR= 180-ang4
@@ -761,15 +761,15 @@ class FaceMeshDetector():
                     
                     
                     printTxt.append(f'眼頭寬度佔臉部寬度比例為: {head_of_eye_ratio:.2f}')
-                    printTxt.append(f'兩者比例為: {NoseWide:.2f}')
-                    printTxt.append(f'若為男性您獲得的分數為-> {scoreBoy:.2f}分')
+                    printTxt.append(f'兩者比例為: {NoseWide:.2f}<hr>')
+                    printTxt.append(f'若為男性您獲得的分數為-> {scoreBoy:.2f}分<br>')
                     printTxt.append(f'若為女性您獲得的分數為-> {scoreGirl:.2f}分')
 
                     if returnComment:
                         # 取得 comment
                         button_name = drawFortuneTelling
                         comment_level = int(scoreBoy / 20)
-                        printComment.append("若為男性-> " + self.getComment(button_name, comment_level))
+                        printComment.append("若為男性-> " + self.getComment(button_name, comment_level)+'<br>')
                         button_name = drawFortuneTelling
                         comment_level = int(scoreGirl / 20)
                         printComment.append("若為女性-> " + self.getComment(button_name, comment_level))
@@ -845,7 +845,7 @@ class FaceMeshDetector():
                     print(tempTxt)
                     print(score)
                     printTxt.append(f'完美的四高三低分別是-> 高低高低高低高')
-                    printTxt.append(f'您的分別是-> {tempTxt}')
+                    printTxt.append(f'您的分別是-> {tempTxt}<hr>')
 
                     printTxt.append(f'您獲得的分數為-> {score:.2f}分')
                     # printTxt.append(f'------------')
@@ -887,7 +887,7 @@ class FaceMeshDetector():
 
                     printTxt.append(f"側臉線條角度是-> {ang1}°")
                     printTxt.append(f'側臉線條的完美角度是-> 180°')
-                    printTxt.append(f'您的落差為-> {abs(ang1-180)}°')
+                    printTxt.append(f'您的落差為-> {abs(ang1-180)}°<hr>')
                     printTxt.append(f'您獲得的分數為-> {score:.2f}分')
 
                     if returnComment:
