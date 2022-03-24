@@ -51,8 +51,8 @@ class User(UserMixin):
 @login_manager.user_loader
 def user_loader(使用者):
     # if 使用者 not in users:
-    if 使用者 is None or sqlQueryMember(使用者, ''):
-        return
+    # if 使用者 is None or sqlQueryMember(使用者, ''):
+        # return
 
     user = User()
     user.id = 使用者
@@ -137,7 +137,7 @@ def Experience():
 
 #數據分析
 @app.route('/DataAnalysis')
-# @login_required
+@login_required
 def DataAnalysis():
     return render_template('DataAnalysis.html')  
 
