@@ -83,18 +83,7 @@ def Signin():
 def Signup():
     return render_template('Signup.html')
 
-@app.route('/submit', methods=['POST'])
-def submit():
-    if request.method == 'POST':
-        url = request.form['url']
-        yt = YouTube(url)
-        print("開始下載影片")
-        yt.streams.get_highest_resolution().download('./videos')
-        print("影片下載完成")
-        filename=yt.title
 
-    return redirect(url_for('Experience'))     
- # return render_template('Experience',filename=filename)
 
 
 # feed a video stream as a source
