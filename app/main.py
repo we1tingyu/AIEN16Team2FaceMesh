@@ -48,6 +48,7 @@ login_manager.login_message = 'YAYAYA'
 class User(UserMixin):
     pass
 
+# @login_manager.user_loader : 限制非會員無法進入該路由
 @login_manager.user_loader
 def user_loader(使用者):
     # if 使用者 not in users:
