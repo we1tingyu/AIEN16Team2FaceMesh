@@ -1,0 +1,362 @@
+CREATE TABLE `aien16`.`button_table` (
+  `button_id` INT NOT NULL,
+  `button_name` VARCHAR(45) NULL,
+  PRIMARY KEY (`button_id`));
+
+INSERT INTO button_table (button_id, button_name)
+VALUES (1, '臉部特徵網格圖'), (2, '臉部外框'), (3, '臉部面相算命特徵圖'), (4, '三庭'), (5, '五眼'), 
+(6, '美人角'), (7, '臉部黃金比例'), (8, '臉部四角形比例'), (9, '眉尾、眼尾和鼻翼連成一線'), (10, '鼻子大小');
+INSERT INTO button_table (button_id, button_name)
+VALUES (11, '四高三低'), (12, '側臉線條');
+
+select * from button_table;
+
+
+
+CREATE TABLE `aien16`.`comment_table` (
+  `button_id` INT NOT NULL,
+  `comment_level` INT NOT NULL,
+  `comment` VARCHAR(45) NULL,
+  PRIMARY KEY (`button_id`, `comment_level`));
+
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (4, 5, '三庭超完美'), (4, 4, '三庭蠻不錯的'), (4, 3, '三庭還可以啦'), (4, 2, '三庭不太行'), (4, 1, '三庭見不得人'), (4, 0, '三庭沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (5, 5, '五眼超完美'), (5, 4, '五眼蠻不錯的'), (5, 3, '五眼還可以啦'), (5, 2, '五眼不太行'), (5, 1, '五眼見不得人'), (5, 0, '五眼沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (6, 5, '美人角超完美'), (6, 4, '美人角蠻不錯的'), (6, 3, '美人角還可以啦'), (6, 2, '美人角不太行'), (6, 1, '美人角見不得人'), (6, 0, '美人角沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (7, 5, '臉部黃金比例超完美'), (7, 4, '臉部黃金比例蠻不錯的'), (7, 3, '臉部黃金比例還可以啦'), (7, 2, '臉部黃金比例不太行'), (7, 1, '臉部黃金比例見不得人'), (7, 0, '臉部黃金比例沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (8, 5, '臉部四角形比例超完美'), (8, 4, '臉部四角形比例蠻不錯的'), (8, 3, '臉部四角形比例還可以啦'), (8, 2, '臉部四角形比例不太行'), (8, 1, '臉部四角形比例見不得人'), (8, 0, '臉部四角形比例沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (9, 5, '眉尾、眼尾和鼻翼連成一線超完美'), (9, 4, '眉尾、眼尾和鼻翼連成一線蠻不錯的'), (9, 3, '眉尾、眼尾和鼻翼連成一線還可以啦'), (9, 2, '眉尾、眼尾和鼻翼連成一線不太行'), (9, 1, '眉尾、眼尾和鼻翼連成一線見不得人'), (9, 0, '眉尾、眼尾和鼻翼連成一線沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (10, 5, '鼻子大小超完美'), (10, 4, '鼻子大小蠻不錯的'), (10, 3, '鼻子大小還可以啦'), (10, 2, '鼻子大小不太行'), (10, 1, '鼻子大小見不得人'), (10, 0, '鼻子大小沒救了');
+
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (11, 5, '四高三低超完美'), (11, 4, '四高三低蠻不錯的'), (11, 3, '四高三低還可以啦'), (11, 2, '四高三低不太行'), (11, 1, '四高三低見不得人'), (11, 0, '四高三低沒救了');
+INSERT INTO comment_table (button_id, comment_level, comment)
+VALUES (12, 5, '側臉線條超完美'), (12, 4, '側臉線條蠻不錯的'), (12, 3, '側臉線條還可以啦'), (12, 2, '側臉線條不太行'), (12, 1, '側臉線條見不得人'), (12, 0, '側臉線條沒救了');
+
+UPDATE `comment_table` SET `comment` = '三庭普通水平' WHERE `comment_table`.`button_id` = 4 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '三庭稍微比較差' WHERE `comment_table`.`button_id` = 4 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '三庭不太好' WHERE `comment_table`.`button_id` = 4 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '三庭努力的空間還有很大' WHERE `comment_table`.`button_id` = 4 AND `comment_table`.`comment_level` = 0;
+
+
+UPDATE `comment_table` SET `comment` = '五眼普通水平' WHERE `comment_table`.`button_id` = 5 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '五眼稍微比較差' WHERE `comment_table`.`button_id` = 5 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '五眼不太好' WHERE `comment_table`.`button_id` = 5 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '五眼努力的空間還有很大' WHERE `comment_table`.`button_id` = 5 AND `comment_table`.`comment_level` = 0;
+
+UPDATE `comment_table` SET `comment` = '美人角普通水平' WHERE `comment_table`.`button_id` = 6 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '美人角稍微比較差' WHERE `comment_table`.`button_id` = 6 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '美人角不太好' WHERE `comment_table`.`button_id` = 6 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '美人角努力的空間還有很大' WHERE `comment_table`.`button_id` = 6 AND `comment_table`.`comment_level` = 0;
+
+UPDATE `comment_table` SET `comment` = '臉部黃金比例普通水平' WHERE `comment_table`.`button_id` = 7 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '臉部黃金比例稍微比較差' WHERE `comment_table`.`button_id` = 7 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '臉部黃金比例不太好' WHERE `comment_table`.`button_id` = 7 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '臉部黃金比例努力的空間還有很大' WHERE `comment_table`.`button_id` = 7 AND `comment_table`.`comment_level` = 0;
+
+UPDATE `comment_table` SET `comment` = '臉部四角形比例普通水平' WHERE `comment_table`.`button_id` = 8 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '臉部四角形比例稍微比較差' WHERE `comment_table`.`button_id` = 8 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '臉部四角形比例不太好' WHERE `comment_table`.`button_id` = 8 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '臉部四角形比例努力的空間還有很大' WHERE `comment_table`.`button_id` = 8 AND `comment_table`.`comment_level` = 0;
+
+UPDATE `comment_table` SET `comment` = '眉尾、眼尾和鼻翼比例普通水平' WHERE `comment_table`.`button_id` = 9 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '眉尾、眼尾和鼻翼比例稍微比較差' WHERE `comment_table`.`button_id` = 9 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '眉尾、眼尾和鼻翼比例不太好' WHERE `comment_table`.`button_id` = 9 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '眉尾、眼尾和鼻翼比例努力的空間還有很大' WHERE `comment_table`.`button_id` = 9 AND `comment_table`.`comment_level` = 0;
+
+UPDATE `comment_table` SET `comment` = '鼻子大小比例普通水平' WHERE `comment_table`.`button_id` = 10 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '鼻子大小比例稍微比較差' WHERE `comment_table`.`button_id` = 10 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '鼻子大小比例不太好' WHERE `comment_table`.`button_id` = 10 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '鼻子大小比例努力的空間還有很大' WHERE `comment_table`.`button_id` = 10 AND `comment_table`.`comment_level` = 0;
+
+UPDATE `comment_table` SET `comment` = '四高三低比例普通水平' WHERE `comment_table`.`button_id` = 11 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '四高三低比例稍微比較差' WHERE `comment_table`.`button_id` = 11 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '四高三低比例不太好' WHERE `comment_table`.`button_id` = 11 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '四高三低比例努力的空間還有很大' WHERE `comment_table`.`button_id` = 11 AND `comment_table`.`comment_level` = 0;
+
+UPDATE `comment_table` SET `comment` = '側臉線條比例普通水平' WHERE `comment_table`.`button_id` = 12 AND `comment_table`.`comment_level` = 3;
+UPDATE `comment_table` SET `comment` = '側臉線條比例稍微比較差' WHERE `comment_table`.`button_id` = 12 AND `comment_table`.`comment_level` = 2;
+UPDATE `comment_table` SET `comment` = '側臉線條比例不太好' WHERE `comment_table`.`button_id` = 12 AND `comment_table`.`comment_level` = 1;
+UPDATE `comment_table` SET `comment` = '側臉線條比例努力的空間還有很大' WHERE `comment_table`.`button_id` = 12 AND `comment_table`.`comment_level` = 0;
+
+SELECT * FROM `comment_table`
+
+
+
+
+CREATE TABLE `aien16`.`hair_makeup_table` (
+  `button_id` INT NOT NULL,
+  `hair_makeup_level` INT NOT NULL,
+  `hair_makeup_comment` TEXT(65535) NULL DEFAULT NULL,
+  PRIMARY KEY (`button_id`, `hair_makeup_level`));
+
+INSERT INTO hair_makeup_table (button_id, hair_makeup_level, hair_makeup_comment)
+VALUES (4, 1, '<h2>上庭長</h2>
+上庭長，也就是我們通常說的額頭太高或者髮際線靠後。<br/>
+<h4>髮型建議 : </h4>
+1.瀏海<br/>
+上庭長的人，要做的就是隱藏髮際線，讓人看不到你真實的上庭長度。<br/>
+對於這種情況，最有效的修飾方法就是留瀏海。<br/>
+推薦 : 空氣瀏海、娃娃瀏海、八字瀏海等<br/>
+2.側分<br/>
+兩側的髮際線高度一定是低於中間的，所以也能在視覺上拉低髮際線。<br/>
+但是側分的話也要注意，要在旁邊留出一些小碎髮，不能讓頭髮緊貼頭皮。<br/>
+在視覺上可以讓額頭高度有截斷感，一樣有修飾額頭髮際線距離的效果<br/>
+<h4>妝容建議 : </h4>
+1.降低髮際線<br/>
+現在有專門的髮際線粉，或是使用與髮色接近的眉粉啞光眼影都可以起到修飾效果。<br/>
+沿著髮際線打上一圈陰影，接近髮際線根部的位置可以稍微深一些，往外自然過渡。<br/>
+但髮際線粉有一個弊端就是它的修飾效果有限，如果你的髮際線與偏離標準太多，<br/>
+髮際線粉塗太多會非常假：只有顏色，沒有毛流。<br/>
+所以基本的解決方法是配合留出碎發，會顯得真實很多。<br/>
+我們可以用到透明眉膠，用眉膠把碎髮向下梳理，<br/>
+就可以輕鬆定型，更垂順逼真。
+如果毛流感還是不夠，我們甚至可以用液體眉筆在髮際線畫出毛流。<br/>
+2.打亮額頭<br/>
+高光提亮額間中部，橫向打高光，你的額頭看起來就會變短。<br/>'), (4, 2, '<h2>上庭短</h2>
+<h4>髮型建議 : </h4>
+1.中分或是側分<br/>
+沒有瀏海的短額頭女生，最簡單的方法就是在額頭最高的地方中分。<br/>
+側分的話用一點小心機，可以將靠近額頭的頭髮往上吹，等到定型後再往下放，<br/>
+可以在視覺效果上，讓額頭變高！<br/>
+2.挑高頭頂<br/>
+綁馬尾把頭髮扎很緊，扯頭皮一樣的緊，再把頭頂挑高，讓頭頂蓬鬆會好很多。<br/>
+散下頭髮的時候，可以先把頭髮向後梳理，再讓頭髮自然垂落，<br/>
+儘可能地露出更多的額頭，不要讓頭髮遮擋住額頭。<br/>
+<h4>妝容建議 : </h4>
+1.額頭陰影<br/>
+在額頭兩側畫陰影，從視覺上收窄額頭。<br/>
+注意用量不要太多，靠近髮際線根部的位置可以稍微深一些，往外自然過渡。<br/>
+高光縱向提亮額頭中間，可以盡量往上打一點。<br/>
+2.修改眉型<br/>
+修剪眉毛上邊緣的雜毛、適當地降低眉頭，同樣可以起到拉長上庭的效果。<br/>
+而平眉毛能讓上庭不那麼短，畫好眉眼讓注意力不在放在上庭。<br/>'), (4, 3, '<h2>中庭長</h2>
+<h4>髮型建議 : </h4>
+1.捲髮 > 直髮<br/>
+要調節中庭的長度的先調節臉的寬度，當臉看上去更寬時中庭看上去就不那麼長了。<br/>
+就這一點而言，捲髮比起直發會更適合中庭長的人。<br/>
+通過髮型使臉的兩邊變蓬鬆，增加了臉的橫向面積，從而弱化了中庭過長的觀感。<br/>
+2.眉下瀏海<br/>
+眉下瀏海也能很好地緩解這個問題，當瀏海的位置在眉毛下面時，<br/>
+能夠遮擋一部分眉眼，從而減少中庭長度。<br/>
+如果眉眼好看的話，就留輕薄的瀏海，如果鼻子好看的話，就留厚的瀏海。<br/>
+<h4>妝容建議 : </h4>
+中庭這片區域裡包含的眉毛、眼睛、鼻子，都是重要因素。<br/>
+1.模糊鼻子的長度<br/>
+通常畫鼻影的時候也會掃一下山根，但對長中庭的女生來說，<br/>
+強調山根鼻子就有直通眉心的感覺，顯得更長了。<br/>
+更好的辦法是山根兩側不上陰影，儘量淡化。<br/>
+聰明的辦法是不要連貫地使用高光。
+減淡鼻樑高光，同時畫成感嘆號的形狀。<br/>
+如果不好把握的話，就在上完高光後，<br/>
+用陰影刷在鼻頭上方的位置掃幾下，也會有同樣的效果。<br/>
+2.縮短眉眼距離<br/>
+一是利用好眼妝，用眼影來填補眉眼之間的留白。<br/>
+並且增加上眼皮的高度。加長加翹睫毛，適當加粗眼線。<br/>
+擔心這樣的眼妝顯髒的話，可以用單色眼影，<br/>
+填充好內眼線，外眼線畫眼尾後半段<br/>
+二是淡化眉毛，模糊界限。<br/>
+對長中庭來說，最好是避開濃眉。<br/>
+三是適當改變眉峰，從挑眉變成偏平眉。<br/>
+並且在眉毛下方加粗，減少眉尾與眼睛之間的留白<br/>
+3.增加眼影上下範圍<br/>
+在畫眼影的時候，可以將眼影特別往上下暈染、<br/>
+讓整個暈染範圍偏圓，打造成圓形眼的感覺，<br/>
+在眼影的底色上選擇偏膚色調的顏色，<br/>
+畫滿整個眼窩部位、也帶到整哦下眼瞼，<br/>
+接著中間色暈染位置也偏高、特別注意不要忽略下眼瞼部位，<br/>
+透過圓潤的五官可以弱化臉型帶來的成熟感。 <br/>
+4.集中臥蠶，往下延伸<br/>
+臥蠶可以以淺膚色調的眼影或是臥蠶筆局部畫在下眼瞼眼頭到眼中，<br/>
+輕輕畫出一點點即可、不用貪多，想要更突顯臥蠶的話，<br/>
+也可以在臥蠶下方以最淺的陰影色畫出一條細緻的陰影線條，讓臥蠶更明顯。<br/>'), (4, 4, '<h2>中庭短</h2>
+<h4>髮型建議 : </h4>
+1.側分<br/>
+側分能夠顯得臉更加瘦長，臉窄了之後中庭看上去自然也就更長了。<br/>
+<h4>妝容建議 : </h4>
+可以通過調整眉形、眼妝鼻影修飾等化妝手法來調整優化面部比例。<br/>
+其中，眉毛在我們的五官里面是最可以變化的，<br/>
+平直的眉毛會讓臉顯得更寬，也不會讓中庭有延伸感。<br/>
+建議畫眉毛的時候，把眉峰位置提起來，視覺上可以有效拉長中庭。<br/>
+眼妝方面，加強上眼影的刻畫、強調上睫毛、畫上揚眼線，<br/>
+同時弱化下睫毛，視覺上會讓中庭有延伸感。<br/>'), (4, 5, '<h2>下庭長</h2>
+<h4>髮型建議 : </h4>
+1.露出上庭中和<br/>
+一般來說，如果你只有下庭長，上庭和中庭沒有明顯的長的話，<br/>
+最好不留劉海，可以露出全部的額頭來將視覺重心轉移到上半張臉。<br/>
+2.捲髮 > 直髮<br/>
+短髮和捲髮也會較適合下庭長的人呦～<br/>
+因為短髮、捲髮可以增加橫向線條，分散注意力！<br/>
+要中和下庭長的話，還可以選擇增加橫向面積，讓下巴看上去更寬一點。<br/>
+<h4>妝容建議 : </h4>
+1.縮短人中<br/>
+將人中上方打上陰影，視覺上也有縮短人中的感覺。<br/>
+將上嘴唇加厚，可以用唇蜜模糊唇峰，並且增加唇珠的體積感。<br/>
+在上唇用唇線，增加上唇厚度。<br/>
+增加嘴唇上緣的高光，增加上唇的立體感，也能擴大上唇的面積。<br/>
+2.收短下巴<br/>
+可以選擇下巴下緣打陰影或腮紅，高光位置更靠上。<br/>
+由於長下巴往往伴隨著過翹的問題，所以下巴太翹的人就不要再打高光。<br/>
+下巴腮紅比較通透，可以避免陰影過重造成髒、或者像鬍子的問題。<br/>'), (4, 6, '<h2>下庭短</h2>
+<h4>髮型建議 : </h4>
+1.直髮 > 捲髮<br/>
+下庭短的人不那麼適合捲髮，尤其是短款的捲髮。<br/>
+留短捲髮反而將本身就短的臉往兩邊擴展了，從而使得下庭看上去更短。<br/>
+長直髮會更加適合，縱向的直髮拉長了臉部線條，下巴看上去自然就不那麼短了。<br/>
+2.長度不能正好在下巴附近<br/>
+這個跟小腿粗不能穿剛好卡在小腿的裙子是一個道理，<br/>
+這樣會造成視線停留，反而突出了這個問題。<br/>
+<h4>妝容建議 : </h4>
+1.拉長人中<br/>
+人中可以畫長一些，用高光畫在人中，並加深人中陰影。<br/>
+連貫的長條形高光可以增加人中的延伸感。<br/>
+壓低上唇，口紅上唇往裡描畫，或是使用咬唇模糊上唇邊緣。<br/>
+咬唇會讓嘴唇變薄，對於厚唇更友好，<br/>
+如果只縮短上唇可以只在上唇使用咬唇妝弱化上唇邊界感。<br/>
+如果鼻尖過長，可根據上文方法增加鼻尖陰影縮短鼻尖。<br/>
+2.拉長下巴<br/>
+高光位置更靠下，增加視覺延伸。<br/>
+下嘴唇下方陰影弱化，使下巴位置更開闊。<br/>
+同時有下巴後縮問題的人也能減輕後縮感。<br/>'), 
+(5, 1, '<h2>五眼間距寬</h2>
+<h4>妝容建議 : </h4>
+1.加深眼窩至鼻樑修容<br/>
+在眼窩、鼻樑中段及鼻頭上修容陰影色，<br/>
+記得不要直挺挺的畫在鼻樑兩側，而是要分段式修容，<br/>
+這樣線條才不會看起來太生硬，看起來像歌仔戲。<br/>
+2.眼線開眼頭<br/>
+至於畫眼線的部分其實也有小撇步！<br/>
+大家都會想著眼線要往後，但其實向後拉長的眼線，<br/>
+反而會讓眼妝看起來太刻薄銳利，<br/>
+寬眼距更應該著重在「開內眼角」及「加強下眼線」以橫向加縱向放大雙眼。<br/>
+3.眼影提亮位置後移<br/>
+就連眼影提亮色也藏有玄機，彩妝師建議「眼尾眼線」不要拉長，<br/>
+而是改用亮片色後移的方式，讓眼型自然延伸不突兀，<br/>
+一次解決浮腫、寬眼距兩大問題。<br/>
+4.延伸眉毛<br/>
+美容圈盛傳一句話「眉毛決定臉部80%的印象」！<br/>
+因此想改變眼距寬問題，先從眉毛長度開始下手準沒錯。<br/>
+眉毛是寬眼距妝容關鍵！短粗的眉毛會讓臉看起來更圓、更寬。<br/>
+畫眉毛時，可以讓眉頭稍微多向前暈染一些，眉峰弧度稍微明顯。<br/>
+既能透過眉毛調整眼距，視覺上五官自然內縮變精緻，還能達到瘦小臉的效果唷～<br/>
+5.畫上下睫毛<br/>
+睫毛刷得好，眯眯小眼也能放大10倍！<br/>
+特別注意的是，我們刷睫毛容易忽略去刷「下睫毛」，<br/>
+但下睫毛刷得翹開花，眼睛的放大、精緻效果才會超明顯唷！<br/>'), (5, 2, '<h2>五眼間距窄</h2>
+<h4>妝容建議 : </h4>
+1.眉毛、眼線短一些<br/>
+如果畫上右圖的柔和、略短眉型，給人的感覺就相對溫柔許多。<br/>
+另外，為呼應眉毛，建議可以選擇「無辜圓眼線」，<br/>
+避開鋒利的拉長眼尾，避免給人太強勢、不好相處的感覺。<br/>
+2.眼影<br/>
+縮小眼影面積，讓眼妝範圍接近「圓型」，<br/>
+兩眼的距離也會被自然拉開。<br/>
+眼影可起淺色畫裡面,深色畫加重後面，<br/>
+也可以再往外畫，這樣眼睛的感覺就會向外擴張。<br/>
+3.鼻影調整<br/>
+畫鼻影時，要特別記得不論是陰暗面還是打亮色位置，<br/>
+都「不要一條線畫到底」。透過分段式的修容鼻影，<br/>
+才會讓鼻子看起來自然挺拔，避免很假、妝髒唷！<br/>'), 
+(6, 1, '<h2>美人角</h2>
+從眼角與嘴角延伸拉出兩條直線<br/>
+直線交叉的角度為45度就是標準的美人<br/>
+可以利用拉長眼線使視覺上看起來較自然<br/>'), 
+(7, 1, '臉部黃金比例'), 
+(8, 1, '臉部四角形比例'), 
+(9, 1, '<h2>眉毛妝容教學</h2>
+<h4>三點定位法：</h4>
+畫眉首先要確定自己的眉頭,眉峰及眉尾的位置<br/>
+眉頭：通過鼻翼外側處向上垂直延伸<br/>
+眉峰：鼻翼外緣處與瞳孔外側延長線上<br/>
+眉尾：鼻翼外緣處與眼尾交匯處延伸<br/>
+（貼心tips：眉峰一定要高於眉頭，眉尾則不宜低於眉頭）<br/>
+<h4>畫眉小提醒</h4>
+1.畫眉之前一定要修理眉毛周邊的雜毛，<br/>
+畫野生眉不用修不過也要用螺旋梳整體眉毛的朝向斜向上梳<br/>
+2.畫眉的時候整體眉形向上揚提升氣質，<br/>
+不然很容易一不小心變成八字眉的噢<br/>
+3.新手寶寶畫眉 儘量選三角頭的眉筆，<br/>
+細的那頭可以勾勒清晰的眉線、粗頭給眉毛填色<br/>
+4.眉毛顏色儘量和發色一致，這樣顯得更加自然有氣質哦<br/>
+5.眉筆一定要選流暢性佳的眉筆，不然勾勒弧度會很生硬不自然<br/>'), 
+(10, 1, '<h2>鼻子妝容</h2>
+<h4>寬鼻翼鼻影畫法 :</h4>
+眉毛到鼻樑的眼窩三角區陰影加重！<br/>
+山根兩側鼻影展寬，鼻樑兩側陰影加重，<br/>
+這裡要特別注意鼻翼兩側的陰影不要太重，<br/>
+這樣做不但不會縮小鼻翼，反而會讓視覺焦點都在鼻翼！<br/>
+記得鼻頭底部畫個小V字型的，會顯得鼻頭更精緻～<br/>
+最後使用打亮提亮山根、鼻梁及鼻尖處！<br/>
+<h4>蒜頭鼻鼻影畫法 :</h4>
+蒜頭鼻的女孩都是鼻頭較為圓及鼻翼寬！<br/>
+首先一樣先將眉毛到鼻樑的眼窩三角區加重陰影，<br/>
+鼻頭加上兩條內凹曲線陰影，這樣可以讓鼻頭顯得尖一些～<br/>
+接著加上鼻間底部V字型陰影，鼻尖就會神奇地跑出來了！<br/>
+接著將打亮上在山根、鼻梁及鼻尖處，<br/>
+鼻頭的打亮建議面積小一點，否則會看起又更圓潤了。<br/>
+<h4>鷹鉤鼻鼻影畫法 :</h4>
+有這種鼻型的人通常鼻子都很挺，<br/>
+但是鼻尖會出現倒勾的形狀，並且山根處會有一處突起。<br/>
+將眉毛到鼻樑的眼窩三角區及鼻尖底部加上陰影，<br/>
+鼻尖處要記得稍微暈染開，才不會顯髒喔！<br/>
+打亮的位置在山根及鼻尖處，但要記得山根上的突起要避開～<br/>
+<h4>短鼻子鼻影畫法 :</h4>
+除了眼窩三角區外，要特別將陰影打在眉毛連接至鼻尖的位置！<br/>
+千萬要記得下手不要太重，不然會很像在演歌仔戲～<br/>
+打亮位置可以從眉心就開始畫，連接到鼻頭與鼻樑得交界處，<br/>
+鼻尖當然也不要放過！教大家一個小秘訣，<br/>
+短鼻子在打亮時，可以將面積所小，<br/>
+盡量畫的細長，這樣視覺上鼻子就會看起來更長～<br/>
+<h4>長鼻子鼻影畫法 :</h4>
+長鼻子的女孩們要注意，在打鼻影時，<br/>
+不可從上到下的直直畫一條線，這樣會讓鼻子看起來更長！<br/>
+首先一樣將眼窩三角區的陰影加重，與眉毛銜接處要暈染開來，<br/>
+鼻子底部加種陰影，鼻子中間打上一條橫向陰影～<br/>
+加上了這條陰影後，鼻子就會明顯縮短了！<br/>
+打亮只需要打在眼窩三角處的山根位置及鼻頭，<br/>
+這樣可以提升鼻子挺度還可以讓鼻子變短～<br/>
+<h4>常規鼻影畫法 :</h4>
+將眼窩三角區的陰影加重，與眉毛銜接處要暈染開來～<br/>
+鼻樑陰影連接到鼻頭，並將鼻頭底部畫上V字型陰影，會顯得鼻子更翹！<br/>
+接著將使用打亮，提亮山根、鼻梁及鼻頭，<br/>
+注意打亮時，不可以從上到下全部提亮，這樣會看起來不自然，<br/>
+在鼻樑及鼻頭中間處要記得斷開～<br/>');
+
+INSERT INTO hair_makeup_table (button_id, hair_makeup_level, hair_makeup_comment)
+VALUES (11, 1, '四高三低'), (12, 1, '側臉線條');
+
+
+update hair_makeup_table set hair_makeup_comment = '
+XXX
+' 
+where button_id = 0 and hair_makeup_level = 0;
+
+-- select * from button_table;
+
+-- select * from hair_makeup_table;
+
+select hair_makeup_comment from hair_makeup_table
+where button_id = 5 and hair_makeup_level = 1;
+
+select A.hair_makeup_comment from hair_makeup_table A join button_table B on A.button_id = B.button_id 
+where A.hair_makeup_level = 6 and B.button_name = '三庭';
+
+
+SELECT * FROM `hair_makeup_table`
+UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>黃金比例</h2>\r\n除了臉長之外，臉寬也是衡量的標準之一！</br>\r\n而臉部長寬比的黃金公式就是臉部寬度為臉部長度的0.618倍（如圖，A：B=1：0.618），</br>\r\n小於這個數字的話代表臉部過長，大於此數字則代表臉部偏圓、偏寬。</br>\r\n以身高165公分為例，一般標準臉長為19.5–22公分，</br>\r\n臉寬則應為12–13.6公分；但如果是黃金比例臉，\r\n</br>\r\n臉長為18-19.5公分，臉寬則應為11.1–12公分。\r\n</br>\r\n超模比例的臉寬甚至小於11.1公分。' WHERE `hair_makeup_table`.`button_id` = 7 AND `hair_makeup_table`.`hair_makeup_level` = 1;
+SELECT * FROM `hair_makeup_table`
+UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>臉部四角形比例</h2>\r\n表情的四角型比例，指的是眼角、嘴角延伸出的四角形，</br>\r\n長與寬之間的比例。首先連接眼角和嘴角，</br>\r\n就會畫出一個四角形，接著將長邊除以寬邊，</br>\r\n如果出來的數值越高，代表與美女的距離越接近。</br>\r\n一般人的平均數值約1.41，</br>\r\n而美女代表奧黛麗赫本的數值，則高達1.49。' WHERE `hair_makeup_table`.`button_id` = 8 AND `hair_makeup_table`.`hair_makeup_level` = 1;
+SELECT * FROM `hair_makeup_table`
+UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>側臉線條</h2>\r\n<h4>修容技巧：下顎線修容</h4>\r\n首先先針對下顎線進行修容，修容色調建議以偏灰的陰影色為主，有些修容色調偏紅、其實不太適合亞洲膚色，容易顯的不自然。\r\n</br>\r\n另外常見的方式就是掃在臉頰及下顎處，一大片的方式其實非常不自然，化妝師建議新手盡量避免這種方式。</br>\r\n最推薦的修容部位，就是在兩側的「下顎骨」位置，這個位置的修容可以自然的修飾臉型及下顎腺，且非常自然。</br>\r\n掃上修容之後就可以慢慢刷開，讓修容更加自然，下顎線修容就完成。\r\n</br>' WHERE `hair_makeup_table`.`button_id` = 12 AND `hair_makeup_table`.`hair_makeup_level` = 1;
+SELECT * FROM `hair_makeup_table`
+UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>四高三低</h2>\r\n<h4>臉部五官立體化</h4>\r\n「四高」指的是：額頭要高，鼻尖要高，上唇唇珠要高，下巴尖端也要高。\r\n</br>\r\n「三低」指的是：額頭與鼻樑的交接處要低，鼻柱跟人中交接處要低，下唇與下巴交接處要低。\r\n</br>\r\n亦菲與范冰冰比，在「三庭五眼」上打個平手，比例都接近1：1：1。但是「四高三低」上，</br>\r\n范冰冰更勝一籌，劉亦菲面部起伏柔和，不像范冰冰那麼立體，</br>\r\n所以范爺的氣質更霸氣一點，劉亦菲更溫柔一點。' WHERE `hair_makeup_table`.`button_id` = 11 AND `hair_makeup_table`.`hair_makeup_level` = 1;
+
+
+select * from hair_makeup_table;
+
