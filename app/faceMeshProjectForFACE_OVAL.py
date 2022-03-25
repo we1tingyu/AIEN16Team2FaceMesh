@@ -817,10 +817,10 @@ class FaceMeshDetector():
                             self.drawSpecificLine(img, startAddress2D, endAddress2D, RAINBOW[idx1])
 
                     for idx1,value in enumerate(z_list):
-                        print(f'z:{value:.2f}')
+                        # print(f'z:{value:.2f}')
                         if idx1 < len(z_list) - 1:
                             z_diff.append(z_list[idx1 + 1] - z_list[idx1])
-                            print(f'z_diff:{z_diff[idx1]:.2f}')
+                            # print(f'z_diff:{z_diff[idx1]:.2f}')
 
                     # z_diff = []
                     # z_diff = [1,-1,1,-1,1,-1]
@@ -857,8 +857,8 @@ class FaceMeshDetector():
                                 tempTxt += "低"
                                 score += 100 / 7
                     
-                    print(tempTxt)
-                    print(score)
+                    # print(tempTxt)
+                    # print(score)
                     printTxt.append(f'完美的四高三低分別是-> 高低高低高低高')
                     printTxt.append(f'您的分別是-> {tempTxt}<hr>')
 
