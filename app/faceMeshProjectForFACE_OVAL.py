@@ -475,11 +475,11 @@ class FaceMeshDetector():
                         lm_start = faceLms.landmark[startID]
                         x1, y1, z1 = lm_start.x*iw, lm_start.y*ih, lm_start.z*ic
                         # 起點的 2D int 座標 (給 cv2 用)
-                        startAddress2D = int(x1), int(y1)
+                        # startAddress2D = int(x1), int(y1)
                         lm_end = faceLms.landmark[endID]
                         x2, y2, z2 = lm_end.x*iw, lm_end.y*ih, lm_end.z*ic
                         # 終點的 2D int 座標 (給 cv2 用)
-                        endAddress2D = int(x2), int(y2)
+                        # endAddress2D = int(x2), int(y2)
                         # draw specific line user defined (只畫線, 不算距離)
                         # self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
                         
