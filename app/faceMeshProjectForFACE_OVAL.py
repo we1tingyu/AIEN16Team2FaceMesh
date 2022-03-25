@@ -481,12 +481,27 @@ class FaceMeshDetector():
                         # 終點的 2D int 座標 (給 cv2 用)
                         endAddress2D = int(x2), int(y2)
                         # draw specific line user defined (只畫線, 不算距離)
-                        self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
+                        # self.drawSpecificLine(img, startAddress2D, endAddress2D, BLACK)
                         
                         # 起點的 3D float 座標
                         startAddressForAngle.append([x1, y1])
                         # 終點的 3D float 座標
                         endAddressForAngle.append([x2, y2])
+
+                    # 畫線
+                    [x, y] = self.cross_point([startAddressForAngle[0][0], startAddressForAngle[0][1], endAddressForAngle[0][0], endAddressForAngle[0][1]], [startAddressForAngle[1][0], startAddressForAngle[1][1], endAddressForAngle[1][0], endAddressForAngle[1][1]])
+
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(startAddressForAngle[0][0]), int(startAddressForAngle[0][1])
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x), int(y)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
+
+                    # 起點的 2D int 座標 (給 cv2 用)
+                    startAddress2D = int(startAddressForAngle[1][0]), int(startAddressForAngle[1][1])
+                    # 終點的 2D int 座標 (給 cv2 用)
+                    endAddress2D = int(x), int(y)
+                    self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN)
 
                     # 計算夾角
                     ang1 = self.angle(startAddressForAngle[0], endAddressForAngle[0], startAddressForAngle[1], endAddressForAngle[1])
@@ -930,6 +945,50 @@ class FaceMeshDetector():
         sqlComment = sqlQuery.sqlQueryHairMakeupComment(button_name, hair_makeup_level)
         return sqlComment[0]['hair_makeup_comment']
     
+    def cross_point(self, line1, line2):#計算交點函數
+        x1=line1[0]#取四點座標
+        y1=line1[1]
+        x2=line1[2]
+        y2=line1[3]
+        
+        x3=line2[0]
+        y3=line2[1]
+        x4=line2[2]
+        y4=line2[3]
+        
+        # 判斷 L1 是否為垂直線
+        if (x2-x1)==0:
+            k1=None
+            b1=0
+        else:
+            k1=(y2-y1)*1.0/(x2-x1)
+            b1=y1*1.0-x1*k1*1.0
+        # 判斷 L2 是否為垂直線
+        if (x4-x3)==0:
+            k2=None
+            b2=0
+        else:
+            k2=(y4-y3)*1.0/(x4-x3)
+            b2=y3*1.0-x3*k2*1.0
+
+        # 斜率相同 -> L1 和 L2 無交集或重疊
+        if k1==k2:
+            x=None
+            y=None
+        # L1 為垂直線
+        elif k1==None:
+            x=x1
+            y=k2*x*1.0+b2*1.0
+        # L2 為垂直線
+        elif k2==None:
+            x=x3
+            y=k1*x*1.0+b1*1.0
+        # L1 和 L2 不為垂直線
+        else:
+            x=(b2-b1)*1.0/(k1-k2)
+            y=k1*x*1.0+b1*1.0
+        return [x, y]
+
     # 給四個座標點(起始點1, 終止點1, 起始點2, 終止點2)計算夾角
     def angle(self, startAddress1, endAddress1, startAddress2, endAddress2, ignore_clockwise_direction=True):
         dx1 = endAddress1[0] - startAddress1[0]
@@ -1000,7 +1059,7 @@ class FaceMeshDetector():
     def drawSpecificLine(self, img, startAddress, endAddress, color=DEFAULT_COLOR):
         # address for begin point and destination point
         self.startAddress = startAddress
-        self.endAddress= endAddress        
+        self.endAddress= endAddress
         # using cv2.line to draw line 畫出指定點到點的線
         cv2.line(img, self.startAddress, self.endAddress, color, 3)
 
