@@ -348,13 +348,9 @@ select A.hair_makeup_comment from hair_makeup_table A join button_table B on A.b
 where A.hair_makeup_level = 6 and B.button_name = '三庭';
 
 
-SELECT * FROM `hair_makeup_table`
 UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>黃金比例</h2>\r\n除了臉長之外，臉寬也是衡量的標準之一！</br>\r\n而臉部長寬比的黃金公式就是臉部寬度為臉部長度的0.618倍（如圖，A：B=1：0.618），</br>\r\n小於這個數字的話代表臉部過長，大於此數字則代表臉部偏圓、偏寬。</br>\r\n以身高165公分為例，一般標準臉長為19.5–22公分，</br>\r\n臉寬則應為12–13.6公分；但如果是黃金比例臉，\r\n</br>\r\n臉長為18-19.5公分，臉寬則應為11.1–12公分。\r\n</br>\r\n超模比例的臉寬甚至小於11.1公分。' WHERE `hair_makeup_table`.`button_id` = 7 AND `hair_makeup_table`.`hair_makeup_level` = 1;
-SELECT * FROM `hair_makeup_table`
 UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>臉部四角形比例</h2>\r\n表情的四角型比例，指的是眼角、嘴角延伸出的四角形，</br>\r\n長與寬之間的比例。首先連接眼角和嘴角，</br>\r\n就會畫出一個四角形，接著將長邊除以寬邊，</br>\r\n如果出來的數值越高，代表與美女的距離越接近。</br>\r\n一般人的平均數值約1.41，</br>\r\n而美女代表奧黛麗赫本的數值，則高達1.49。' WHERE `hair_makeup_table`.`button_id` = 8 AND `hair_makeup_table`.`hair_makeup_level` = 1;
-SELECT * FROM `hair_makeup_table`
 UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>側臉線條</h2>\r\n<h4>修容技巧：下顎線修容</h4>\r\n首先先針對下顎線進行修容，修容色調建議以偏灰的陰影色為主，有些修容色調偏紅、其實不太適合亞洲膚色，容易顯的不自然。\r\n</br>\r\n另外常見的方式就是掃在臉頰及下顎處，一大片的方式其實非常不自然，化妝師建議新手盡量避免這種方式。</br>\r\n最推薦的修容部位，就是在兩側的「下顎骨」位置，這個位置的修容可以自然的修飾臉型及下顎腺，且非常自然。</br>\r\n掃上修容之後就可以慢慢刷開，讓修容更加自然，下顎線修容就完成。\r\n</br>' WHERE `hair_makeup_table`.`button_id` = 12 AND `hair_makeup_table`.`hair_makeup_level` = 1;
-SELECT * FROM `hair_makeup_table`
 UPDATE `hair_makeup_table` SET `hair_makeup_comment` = '<h2>四高三低</h2>\r\n<h4>臉部五官立體化</h4>\r\n「四高」指的是：額頭要高，鼻尖要高，上唇唇珠要高，下巴尖端也要高。\r\n</br>\r\n「三低」指的是：額頭與鼻樑的交接處要低，鼻柱跟人中交接處要低，下唇與下巴交接處要低。\r\n</br>\r\n亦菲與范冰冰比，在「三庭五眼」上打個平手，比例都接近1：1：1。但是「四高三低」上，</br>\r\n范冰冰更勝一籌，劉亦菲面部起伏柔和，不像范冰冰那麼立體，</br>\r\n所以范爺的氣質更霸氣一點，劉亦菲更溫柔一點。' WHERE `hair_makeup_table`.`button_id` = 11 AND `hair_makeup_table`.`hair_makeup_level` = 1;
 
 
