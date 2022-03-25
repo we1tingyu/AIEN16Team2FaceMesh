@@ -30,6 +30,20 @@ import flask
 app = flask.Flask(__name__, '/')
 # CORS(app)
 
+# FILEPATH = "app/static/images/Thelatestphotos.jpg"
+# 大餅臉
+FILEPATH = "app/static/images/Thelatestphotos.jpg"
+# AngelaBaby
+# FILEPATH = "app/static/Thelatestphotos7.jpg"
+# 四高三低
+# FILEPATH = "app/static/Thelatestphotos8.jpg"
+# "完美大帥哥
+# FILEPATH = "app/static/handsome.jpg"
+# 小夫(側臉線條失敗)
+# FILEPATH = "app/static/Thelatestphotos11.jpg"
+# 側臉線條
+# FILEPATH = "app/static/Thelatestphotos12.jpg"
+
 ### login
 # config 初始化
 config = configparser.ConfigParser()
@@ -223,19 +237,7 @@ def video_feed(style, videoMode):
         filePath = "./videos/1-720p.mp4"
         videoMode = True
     elif videoMode == "照片":
-        # filePath = "app/static/images/Thelatestphotos.jpg"
-        # 大餅臉
-        filePath = "app/static/images/Thelatestphotos.jpg"
-        # AngelaBaby
-        # filePath = "app/static/Thelatestphotos7.jpg"
-        # 四高三低
-        # filePath = "app/static/Thelatestphotos8.jpg"
-        # "完美大帥哥
-        # filePath = "app/static/handsome.jpg"
-        # 小夫(側臉線條失敗)
-        # filePath = "app/static/Thelatestphotos11.jpg"
-        # 側臉線條
-        # filePath = "app/static/Thelatestphotos12.jpg"
+        filePath = FILEPATH
 
         videoMode = False
     elif videoMode == "照相":
@@ -261,7 +263,7 @@ def getTxt():
     videoMode = False
     # videoMode = True
     # 路徑
-    filePath = "app/static/images/Thelatestphotos.jpg"
+    filePath = FILEPATH
     img = cv2.imread(filePath)
     # filePath = "./videos/1-720p.mp4"
 
