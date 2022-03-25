@@ -531,8 +531,8 @@ class FaceMeshDetector():
                         hair_makeup_comment_level = 1
                         printHairMakeupComment.append(self.getHairMakeupComment(button_name, hair_makeup_comment_level))
                 
-                # 臉部黃金比例
-                elif drawFortuneTelling == "臉部黃金比例":
+                # 臉部長寬比例
+                elif drawFortuneTelling == "臉部長寬比例":
                     # 起點的 2D int 座標 (給 cv2 用)
                     startAddress2D = int(left_x), int(top_y)
                     # 終點的 2D int 座標 (給 cv2 用)
@@ -551,12 +551,12 @@ class FaceMeshDetector():
 
                     # 鑑別值
                     k=1
-                    # 調整黃金比例
+                    # 調整臉部長寬比例
                     GR = 1.618
                     
                     score = (1-(k*abs(face_ratio-GR)/GR))*100
                     
-                    printTxt.append(f'臉部比例為-> 1:{face_ratio:.3f}<hr>')
+                    printTxt.append(f'臉部長寬比例為-> 1:{face_ratio:.3f}<hr>')
                     printTxt.append(f'您獲得的分數為-> {score:.2f}分')
 
                     if returnComment:

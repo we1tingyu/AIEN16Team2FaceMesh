@@ -5,7 +5,7 @@ CREATE TABLE `aien16`.`button_table` (
 
 INSERT INTO button_table (button_id, button_name)
 VALUES (1, '臉部特徵網格圖'), (2, '臉部外框'), (3, '臉部面相算命特徵圖'), (4, '三庭'), (5, '五眼'), 
-(6, '美人角'), (7, '臉部黃金比例'), (8, '臉部四角形比例'), (9, '眉尾、眼尾和鼻翼連成一線'), (10, '鼻子大小');
+(6, '美人角'), (7, '臉部長寬比例'), (8, '臉部四角形比例'), (9, '眉尾、眼尾和鼻翼連成一線'), (10, '鼻子大小');
 INSERT INTO button_table (button_id, button_name)
 VALUES (11, '四高三低'), (12, '側臉線條');
 
@@ -26,7 +26,7 @@ VALUES (5, 5, '五眼超完美'), (5, 4, '五眼蠻不錯的'), (5, 3, '五眼�
 INSERT INTO comment_table (button_id, comment_level, comment)
 VALUES (6, 5, '美人角超完美'), (6, 4, '美人角蠻不錯的'), (6, 3, '美人角還可以啦'), (6, 2, '美人角不太行'), (6, 1, '美人角見不得人'), (6, 0, '美人角沒救了');
 INSERT INTO comment_table (button_id, comment_level, comment)
-VALUES (7, 5, '臉部黃金比例超完美'), (7, 4, '臉部黃金比例蠻不錯的'), (7, 3, '臉部黃金比例還可以啦'), (7, 2, '臉部黃金比例不太行'), (7, 1, '臉部黃金比例見不得人'), (7, 0, '臉部黃金比例沒救了');
+VALUES (7, 5, '臉部長寬比例超完美'), (7, 4, '臉部長寬比例蠻不錯的'), (7, 3, '臉部長寬比例還可以啦'), (7, 2, '臉部長寬比例不太行'), (7, 1, '臉部長寬比例見不得人'), (7, 0, '臉部長寬比例沒救了');
 INSERT INTO comment_table (button_id, comment_level, comment)
 VALUES (8, 5, '臉部四角形比例超完美'), (8, 4, '臉部四角形比例蠻不錯的'), (8, 3, '臉部四角形比例還可以啦'), (8, 2, '臉部四角形比例不太行'), (8, 1, '臉部四角形比例見不得人'), (8, 0, '臉部四角形比例沒救了');
 INSERT INTO comment_table (button_id, comment_level, comment)
