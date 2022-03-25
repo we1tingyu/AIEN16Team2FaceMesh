@@ -323,7 +323,7 @@ class FaceMeshDetector():
                         printTxt.append(f'左眼周長:{distance[3]:.2f}')
                         printTxt.append(f'<span style="color:red;">鼻子長度:{distance[4]:.2f}</span>')
                         printTxt.append(f'<span style="color:orange;">鼻子寬度:{distance[5]:.2f}</span>')
-                        printTxt.append(f'<span style="color:yellow;">前額長度:{distance[6]:.2f}</span>')
+                        printTxt.append(f'<span style="color:rgb(200,200,0);">前額長度:{distance[6]:.2f}</span>')
                         printTxt.append(f'<span style="color:green;">人中長度:{distance[7]:.2f}</span>')
                         printTxt.append(f'嘴巴大小:{distance[8]:.2f}')
                         

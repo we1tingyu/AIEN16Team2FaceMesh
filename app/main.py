@@ -242,7 +242,11 @@ def video_feed(style, videoMode):
         return Response(streamlive(style),
                     mimetype='multipart/x-mixed-replace; boundary=frame')
 
-    drawFaceLms = True 
+    if style == '臉部特徵網格圖':
+        drawFaceLms = True
+    else:
+        drawFaceLms = False
+        
     drawID = False 
     drawFortuneTelling = style
     return Response(faceMeshDetection(videoMode, filePath, drawFaceLms, drawID, drawFortuneTelling),
