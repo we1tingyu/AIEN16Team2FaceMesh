@@ -14,6 +14,8 @@ END_OF_EYEBROW = [70, 300]
 HEAD_OF_EYE = [133, 362]
 # 眼尾
 END_OF_EYE = [33, 263]
+# END_OF_EYE = [130, 359]
+# END_OF_EYE = [226, 446]
 # 鼻翼
 ALAE_OF_NOSE = [129, 358]
 # 唇角
