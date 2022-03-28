@@ -43,6 +43,10 @@ FILEPATH = "app/static/images/Thelatestphotos.jpg"
 # FILEPATH = "app/static/Thelatestphotos11.jpg"
 # 側臉線條
 # FILEPATH = "app/static/Thelatestphotos12.jpg"
+# 三庭
+# FILEPATH = "app/static/Thelatestphotos13.jpg"
+# 五眼
+# FILEPATH = "app/static/Thelatestphotos14.jpg"
 
 ### login
 # config 初始化
