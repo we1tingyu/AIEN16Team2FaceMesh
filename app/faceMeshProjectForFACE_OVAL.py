@@ -42,6 +42,7 @@ RAINBOW = [RED, ORANGE, YELLOW, GREEN, BLUE, PURPLE]
 
 # COLOR 可以由前端按按鈕切換
 DEFAULT_COLOR = BLUE
+# drawDot: 畫點不畫線, 預設為 False -> 畫線不畫點
 drawDot = False
 
 class FaceMeshDetector():
@@ -823,7 +824,10 @@ class FaceMeshDetector():
                             # endAddress2D = int(x_list[(idx1 + 1) % len(FOUR_HIGH_THREE_LOW)]), int(y_list[(idx1 + 1) % len(FOUR_HIGH_THREE_LOW)])
                             endAddress2D = int(x_list[idx1 + 1]), int(y_list[idx1 + 1])
                             # draw specific line user defined (只畫線, 不算距離)
-                            self.drawSpecificLine(img, startAddress2D, endAddress2D, RAINBOW[idx1], drawDot = drawDot)
+                            if idx1 % 2 == 0:
+                                self.drawSpecificLine(img, startAddress2D, endAddress2D, RED, drawDot = drawDot, drawEndpoint = False)
+                            else: 
+                                self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN, drawDot = drawDot, drawEndpoint = False)
 
                     for idx1,value in enumerate(z_list):
                         # print(f'z:{value:.2f}')
@@ -1065,10 +1069,11 @@ class FaceMeshDetector():
         return distance
     
     # draw specific line user defined
-    def drawSpecificLine(self, img, startAddress, endAddress, color=DEFAULT_COLOR, drawDot=False):
+    def drawSpecificLine(self, img, startAddress, endAddress, color=DEFAULT_COLOR, drawDot=False, drawEndpoint=True):
         if drawDot:
-            cv2.circle(img, startAddress, 5, RED, 10)
-            cv2.circle(img, endAddress, 5, RED, 10)
+            cv2.circle(img, startAddress, 5, color, 10)
+            if drawEndpoint:
+                cv2.circle(img, endAddress, 5, color, 10)
             return
         # address for begin point and destination point
         self.startAddress = startAddress
