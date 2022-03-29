@@ -172,6 +172,7 @@ CREATE TABLE `members_table` (
 
 INSERT INTO `members_table` (`user_id`, `password`) VALUES
 ('123', '456'),
+('aien1602', 'aien1602'),
 ('xxx', 'yyy');
 
 --
