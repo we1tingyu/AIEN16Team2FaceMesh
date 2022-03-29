@@ -41,10 +41,22 @@
  * 放進人臉影片並命名1-720p.mp4
  * 安裝requirements.txt的相依性套件
  * 匯入 aien16.sql 到MySQL
+ * 修改modules/mysql_connection.py
+ ```
+ connect_data = {
+    'host': 'localhost',
+    'user': 'root',
+    'password': 'AIEN16',
+    'database': 'aien16',
+    'auth_plugin': 'mysql_native_password'
+}
+ ```
  * 匯出 requirements.txt的指令 `$ pip freeze > requirements.txt`
  * ` $ start.bat `
  
- # mediapipe faceid
+ # preview
+ ![image](https://i.imgur.com/akUORVY.jpg)
+ ![image](https://i.imgur.com/oBs8SUd.jpg)
  ![image](https://i.imgur.com/5PvuFlq.png)
 
 
