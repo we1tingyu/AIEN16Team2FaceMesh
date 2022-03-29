@@ -41,6 +41,7 @@
  * 放進人臉影片並命名1-720p.mp4
  * 安裝requirements.txt的相依性套件
  * 匯入 aien16.sql 到MySQL
+ * 匯出 requirements.txt的指令 `$ pip freeze > requirements.txt`
  * ` $ start.bat `
  
  # mediapipe faceid
