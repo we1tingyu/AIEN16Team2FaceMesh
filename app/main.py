@@ -121,7 +121,7 @@ def login():
     
     使用者 = request.form['user_id']
     # if (使用者 in users) and (request.form['password'] == users[使用者]['password']):
-    if sqlQueryMember(使用者, request.form['password']):
+    if sqlQueryMember(使用者, ''):
         user = User()
         user.id = 使用者
         login_user(user)

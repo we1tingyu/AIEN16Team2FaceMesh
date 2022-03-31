@@ -48,13 +48,15 @@ def sqlInsertMember(user_id = '', password = ''):
     print(sql)
     print('-------------')
     cursor.execute(sql)
-    t_data=cursor.fetchall()
-    print(t_data)
-    print('-------')
-    if len(t_data) != 0:
-        return True
-    else:
-        return False
+    cnx.commit()
+    # t_data=cursor.fetchall()
+    # print(f"t_data={t_data}")
+    # print('-------')
+    # if len(t_data) != 0:
+        # return True
+    # else:
+        # return False
+    return True
 
 # def sqlQueryTest(param, table_name):
 #     (cursor, cnx) = modules.mysql_connection.get_cursor()
