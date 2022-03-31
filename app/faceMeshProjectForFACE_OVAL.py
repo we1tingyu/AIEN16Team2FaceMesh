@@ -828,6 +828,9 @@ class FaceMeshDetector():
                                 self.drawSpecificLine(img, startAddress2D, endAddress2D, RED, drawDot = drawDot, drawEndpoint = False)
                             else: 
                                 self.drawSpecificLine(img, startAddress2D, endAddress2D, GREEN, drawDot = drawDot, drawEndpoint = False)
+                        # 畫最後一點
+                        if drawDot:
+                            self.drawSpecificLine(img, endAddress2D, endAddress2D, RED, drawDot = drawDot, drawEndpoint = False)
 
                     for idx1,value in enumerate(z_list):
                         # print(f'z:{value:.2f}')
